@@ -18,6 +18,8 @@ Fooriend (food+friend)
 ## App description
 
 ## UI sketches for main screen
+在rmd文件+图片需要把图片上传进github里 网址换一下
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/1.png" height="350" alt="1"/>
 
 ## Questions about our app
 ### Q1 What problem does the application help the users address?
