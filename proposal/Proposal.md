@@ -25,9 +25,9 @@ Fooriend (food+friend)
 #### Q1 What problem does the application help the users address?
 Share their favorite recipes from anywhere in the world.
 Meet more friends who have the same or similar taste of the food.
+Easy to find recipes from different countries you're interested in.
 Ask a local for the recipe of your memorable foreign dish
 
-### Q2 What three current apps on the app store would be your closest competitors?
 #### Q2 What three current apps on the app store would be your closest competitors?
 - Tasty: Recipes, cooking videos
 - Yummly Recipes & Cooking Tools
