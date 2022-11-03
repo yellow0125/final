@@ -5,7 +5,7 @@
 - **Group**: 3
 - **Members**:
   - Cuiting Huang <huang.cui@northeastern.edu>
-  - Xilan Wu 
+  - Xilan Wu <wu.xiaol@northeastern.edu>
   - Yichao Wu 
 
 
@@ -45,10 +45,25 @@ We are more focus on meeting more friends have the same taste of food.
 - easy to save recipes
 
 #### Q5 What is innovative about your app idea? What will be particularly surprising or elegant about the concept?
+In current market, there are either social media app or cooking teaching app. Our Foofriend is an unique
+app combine both social & cooking features. In this app, people can make friends who have similar taste 
+or can share their own receipts to become a cheif KOL. 
+As a social media app, we focus only in cooking. As a receipt sharing app, we have social features.
 
 #### Q6 What about your app will keep people engaged using it for a long time, even once the novelty wears off?
+- Eating is one of the basic desire from human. 
+- We would make policies to encourage our user share their new receipts in a certain frequency, which 
+would enlarge our content and keep attracking our users
+- Because of social feature, our user need check from time to time to see if any message/ updates.
 
 #### Q7 What are the top potential weaknesses of your application idea and how will you address them?
+- Not all people are foodie, so the population of our target user is a question. To solve this problem,
+we can increase our attractness for the target user and increase their stickness to our app.
+- As a social media app, the initial marketing of our app is important. We need consider how to 
+attract people to user our app, how to make good content as soon as possible to retain our customer.
+To solve this problem, we can make content encouraging policy and reward our user if they share
+their receipts in our app.
+
 
 #### Q8 Will you be able to design, build, and test this app before the end of the semester?
-
+-Yes. There are very mature apps for both social media and cooking that we can refer to.
