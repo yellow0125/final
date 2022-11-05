@@ -22,15 +22,9 @@ Someone who wants to share/discuss/optimize their recipes with other cooking-lov
 Fooriend is an easy-to-use and smart recipe sharing app. You can share your recipes here and also find new recipes of different cuisines from all of the world. You can also leave your comment to others' recipes and get advice from other users, which helps you make friends by cooking and sharing!
 
 ## UI sketches for main screen
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/1.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/2.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/3.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/4.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/5.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/6.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/7.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/8.jpg" height="350" alt="1"/>
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/9.jpg" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/proposal/UIpic/u%20(1).jpg" height="450" alt="1"/>
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/proposal/UIpic/u%20(2).jpg" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/proposal/UIpic/u%20(3).jpg" height="350" alt="1"/>
 
 ## Questions about our app
 #### Q1 What problem does the application help the users address?
