@@ -22,8 +22,15 @@ Someone who wants to share/discuss/optimize their recipes with other cooking-lov
 Fooriend is an easy-to-use and smart recipe sharing app. You can share your recipes here and also find new recipes of different cuisines from all of the world. You can also leave your comment to others' recipes and get advice from other users, which helps you make friends by cooking and sharing!
 
 ## UI sketches for main screen
-<img src="[https://github.com/yellow0125/expense-tracker-app/blob/implement/img/1.png](https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/1.jpg)" height="350" alt="1"/>
-<img src="[https://github.com/yellow0125/expense-tracker-app/blob/implement/img/1.png](https://github.com/yellow0125/recipes-sharing-social-media/blob/proposal/UIpic/2.jpg)" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/1.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/2.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/3.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/4.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/5.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/6.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/7.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/8.png" height="350" alt="1"/>
+<img src="https://github.com/yellow0125/expense-tracker-app/blob/implement/img/9.png" height="350" alt="1"/>
 
 ## Questions about our app
 #### Q1 What problem does the application help the users address?
