@@ -6,16 +6,20 @@
 - **Members**:
   - Cuiting Huang <huang.cui@northeastern.edu>
   - Xilan Wu <wu.xiaol@northeastern.edu>
-  - Yichao Wu 
+  - Yichao Wu <wu.yicha@northeastern.edu>
 
 
 ## App name
 Fooriend (food+friend)
 ## Slogan
+Cook Better, Share More!
 
 ## Target Users
+Someone who is interested in cooking, including from cookie to professional cook, from different countries, cultures.
+Someone who wants to share/discuss/optimize their recipes with other cooking-lover in the network, make friends by cooking and explore different foods worldwide.
 
 ## App description
+Fooriend is an easy-to-use and smart recipe sharing app. You can share your recipes here and also find new recipes of different cuisines from all of the world. You can also leave your comment to others' recipes and get advice from other users, which helps you make friends by cooking and sharing!
 
 ## UI sketches for main screen
 在rmd文件+图片需要把图片上传进github里 网址换一下
@@ -45,9 +49,9 @@ We are more focus on meeting more friends have the same taste of food.
 - easy to save recipes
 
 #### Q5 What is innovative about your app idea? What will be particularly surprising or elegant about the concept?
-In current market, there are either social media app or cooking teaching app. Our Foofriend is an unique
+In current market, there are either social media app or cooking teaching app. Our Fooriend is an unique
 app combine both social & cooking features. In this app, people can make friends who have similar taste 
-or can share their own receipts to become a cheif KOL. 
+or can share their own receipts to become a chef KOL. 
 As a social media app, we focus only in cooking. As a receipt sharing app, we have social features.
 
 #### Q6 What about your app will keep people engaged using it for a long time, even once the novelty wears off?
