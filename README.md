@@ -34,7 +34,7 @@ In the first week, we plan to do these work below:
 ### 1. Login and Register page
 - allow users to register and login
 - if the user is not login, they can only see these two page, and can do nothing.
-<img src="" height="300" alt="loginpage"/>
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
 
 ## Install dependencies
 In order to install, clone this repository and run:
