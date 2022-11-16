@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Button, Text, TextInput, View, Image } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import { container, form } from '../../constants/Style';
 
 import { auth } from "../../firebase/firebase-setup"
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import MainButton from '../UI/MainButton';
+import Color from '../../constants/Color';
 
 require('firebase/firestore');
 
@@ -44,6 +46,7 @@ export default function Register({ navigation }) {
 
   return (
     <View style={container.center}>
+      <Image source={require('../../assets/logo.png')} style={form.image} />
       <View style={container.formCenter}>
         <TextInput
           style={form.textInput}
@@ -70,15 +73,14 @@ export default function Register({ navigation }) {
           value={confirmpassword}
           placeholder="Confirm Password"
         />
-
-        <Button
+        <MainButton
           style={form.button}
-          onPress={() => handleRegister()}
-          title="Register"
-        />
+          onPress={handleRegister}>Register
+        </MainButton>
         <View style={form.bottomButton} >
           <Text
-            onPress={() => navigation.replace("Login")} >
+            onPress={() => navigation.replace("Login")}
+            style={{ color: Color.White }}>
             Already have an account? SignIn.
           </Text>
         </View>

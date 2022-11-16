@@ -5,6 +5,7 @@ import { auth } from "./firebase/firebase-setup";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
+import Color from "./constants/Color";
 
 
 
@@ -27,8 +28,8 @@ export default function App() {
     return (
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: "#995099" },
-          headerTintColor: "#fff",
+          headerStyle: { backgroundColor: Color.BgDarkGreen },
+          headerTintColor: Color.White,
           headerTitleAlign: "center",
         }}
       >

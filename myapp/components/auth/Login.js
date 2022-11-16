@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View, Alert } from 'react-native';
+import { Button, Text, TextInput, View, Alert, Image } from 'react-native';
 import { container, form } from '../../constants/Style';
 import { auth } from "../../firebase/firebase-setup"
 import { signInWithEmailAndPassword } from "firebase/auth";
+import MainButton from '../UI/MainButton';
+import Color from '../../constants/Color';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(null);
@@ -11,7 +13,6 @@ export default function Login({ navigation }) {
   const handleLogin = async () => {
     try {
       const userCred = await signInWithEmailAndPassword(auth, email, password);
-      // console.log(userCred);
     } catch (err) {
       Alert.alert(err.message);
       console.log(err.message);
@@ -20,13 +21,15 @@ export default function Login({ navigation }) {
 
   return (
     <View style={container.center}>
+      <Image source={require('../../assets/logo.png')} style={form.image} />
       <View style={container.formCenter}>
+
         <TextInput
           style={form.textInput}
           placeholder="email"
           onChangeText={(newEmail) => setEmail(newEmail)}
           value={email}
-        keyboardType="email-address"
+          keyboardType="email-address"
         />
         <TextInput
           style={form.textInput}
@@ -35,23 +38,18 @@ export default function Login({ navigation }) {
           onChangeText={(newPassword) => setPassword(newPassword)}
           value={password}
         />
-
-        <Button
+        <MainButton
           style={form.button}
-          onPress={handleLogin}
-          title="Sign In"
-        />
+          onPress={handleLogin}>Sign In
+        </MainButton>
         <View style={form.bottomButton} >
-        <Text
-          title="Register"
-          onPress={() => navigation.replace("Register")} >
-          Don't have an account? SignUp.
-        </Text>
-        {/* <Button
-          title="Don't have an account? SignUp."
-          onPress={() => navigation.replace("Register")}
-        /> */}
-      </View>
+          <Text
+            title="Register"
+            onPress={() => navigation.replace("Register")}
+            style={{ color: Color.White }} >
+            Don't have an account? SignUp.
+          </Text>
+        </View>
       </View>
     </View>
   )

@@ -1,5 +1,6 @@
 
 import { StyleSheet } from 'react-native'
+import Color from './Color'
 const container = StyleSheet.create({
     container: {
         flex: 1,
@@ -17,6 +18,7 @@ const container = StyleSheet.create({
     },
     center: {
         flex: 1,
+        backgroundColor: Color.BgDarkGreen
     },
     horizontal: {
         flexDirection: 'row',
@@ -97,20 +99,31 @@ const form = StyleSheet.create({
         borderRadius: 8
     },
     bottomButton: {
-        alignSelf:'center',
+        alignSelf: 'center',
         alignContent: 'center',
-        borderTopColor: 'gray',
-        borderBottomWidth: 0.5,
+        borderColor: Color.White,
+        borderBottomWidth: 1,
         padding: 10,
         textAlign: 'center',
-        marginTop:20
+        marginTop: 20,
+
     },
     roundImage: {
         width: 100,
         height: 100,
         borderRadius: 100 / 2
+    },
+    button: {
+        marginTop: 5,
+    },
+    image: {
+        alignSelf: 'center',
+        width: 300,
+        height: 120,
+        marginTop: 80,
+        marginBottom: -120
     }
 
 })
 
-export { container, form}    
+export { container, form }    
