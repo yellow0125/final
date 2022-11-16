@@ -4,9 +4,9 @@ The React Native - Firebase Project Mobile App
 
 - **Group**: 3
 - **Members**:
-- 🧙🏻‍♀️ Cuiting Huang <huang.cui@northeastern.edu>
-- 🧙‍♂️ Xilan Wu <wu.xiaol@northeastern.edu>
-- 🧙🏻‍♀️ Yichao Wu <wu.yicha@northeastern.edu>
+  - 🧙🏻‍♀️ Cuiting Huang <huang.cui@northeastern.edu>
+  - 🧙‍♂️ Xilan Wu <wu.xiaol@northeastern.edu>
+  - 🧙🏻‍♀️ Yichao Wu <wu.yicha@northeastern.edu>
 
 ## Iterations
 
