@@ -97,11 +97,13 @@ const form = StyleSheet.create({
         borderRadius: 8
     },
     bottomButton: {
+        alignSelf:'center',
         alignContent: 'center',
         borderTopColor: 'gray',
-        borderTopWidth: 1,
+        borderBottomWidth: 0.5,
         padding: 10,
         textAlign: 'center',
+        marginTop:20
     },
     roundImage: {
         width: 100,

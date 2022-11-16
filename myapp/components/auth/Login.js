@@ -41,15 +41,17 @@ export default function Login({ navigation }) {
           onPress={handleLogin}
           title="Sign In"
         />
-      </View>
-
-
-      <View style={form.bottomButton} >
+        <View style={form.bottomButton} >
         <Text
           title="Register"
           onPress={() => navigation.replace("Register")} >
           Don't have an account? SignUp.
         </Text>
+        {/* <Button
+          title="Don't have an account? SignUp."
+          onPress={() => navigation.replace("Register")}
+        /> */}
+      </View>
       </View>
     </View>
   )

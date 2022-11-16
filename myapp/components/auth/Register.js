@@ -76,14 +76,15 @@ export default function Register({ navigation }) {
           onPress={() => handleRegister()}
           title="Register"
         />
+        <View style={form.bottomButton} >
+          <Text
+            onPress={() => navigation.replace("Login")} >
+            Already have an account? SignIn.
+          </Text>
+        </View>
       </View>
 
-      <View style={form.bottomButton} >
-        <Text
-          onPress={() => navigation.replace("Login")} >
-          Already have an account? SignIn.
-        </Text>
-      </View>
+
       <Snackbar
         visible={isValid.boolSnack}
         duration={2000}
