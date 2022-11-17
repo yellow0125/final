@@ -6,6 +6,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import Color from "./constants/Color";
+import { View, Text } from "react-native";
 
 
 
@@ -17,7 +18,8 @@ export default function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsUserAuthenticated(true);
+        // setIsUserAuthenticated(true);
+        setIsUserAuthenticated(false)
       } else {
         setIsUserAuthenticated(false);
       }
@@ -42,9 +44,12 @@ export default function App() {
 
   const AppStack = () => {
     return (
-      <Stack.Navigator>
-        empty
-      </Stack.Navigator>
+      // <Stack.Navigator>
+      //   empty
+      // </Stack.Navigator>
+      <View>
+        <Text>Logined</Text>
+      </View>
     );
   };
 
