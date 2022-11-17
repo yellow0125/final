@@ -6,7 +6,7 @@ import { container, form } from '../../constants/Style';
 import { auth } from "../../firebase/firebase-setup"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import MainButton from '../UI/MainButton';
-import Color from '../../constants/Color';
+import Colors from '../../constants/Colors';
 
 require('firebase/firestore');
 
@@ -80,7 +80,7 @@ export default function Register({ navigation }) {
         <View style={form.bottomButton} >
           <Text
             onPress={() => navigation.replace("Login")}
-            style={{ color: Color.White }}>
+            style={{ color: Colors.White }}>
             Already have an account? SignIn.
           </Text>
         </View>
