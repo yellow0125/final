@@ -1,4 +1,4 @@
-import { collection, addDoc, deleteDoc, doc, updateDoc, setDoc } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, updateDoc, setDoc, getDoc } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup";
 
 export const createUserToDB = async(data) => {

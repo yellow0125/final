@@ -6,9 +6,14 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import Color from "./constants/Color";
-import { View, Text } from "react-native";
+import { Provider } from "react-redux";
+import {applyMiddleware, legacy_createStore as createStore} from 'redux';
+import rootReducer from './redux/reducers'
+import thunk from "redux-thunk";
+import {Text, View} from 'react-native'
 
-
+const store = createStore(rootReducer, applyMiddleware(thunk));
+import Main from "./components/Main";
 
 
 const Stack = createNativeStackNavigator()
@@ -18,8 +23,7 @@ export default function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // setIsUserAuthenticated(true);
-        setIsUserAuthenticated(false)
+        setIsUserAuthenticated(true);
       } else {
         setIsUserAuthenticated(false);
       }
@@ -47,10 +51,10 @@ export default function App() {
       // <Stack.Navigator>
       //   empty
       // </Stack.Navigator>
-      <View>
-        <Text>Logined</Text>
-      </View>
-    );
+      <Provider store={store} >
+        <Main />
+      </Provider>
+      );
   };
 
 
