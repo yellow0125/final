@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { auth } from "./firebase/firebase-setup";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -12,6 +11,7 @@ import {applyMiddleware, legacy_createStore as createStore} from 'redux';
 import rootReducer from './redux/reducers'
 import thunk from "redux-thunk";
 import Main from "./components/Main";
+import Colors from "./constants/Colors";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
@@ -47,19 +47,18 @@ export default function App() {
 
   const AppStack = () => {
     return (
-      <Provider store={store} >
-        <Main />
-       </Provider>
+      <Provider store={store}>
+        <Stack.Navigator initialRouteName="Main">
+          <Stack.Screen name="Main" component={Main} options={{headerShown:false}}/>
+        </Stack.Navigator>
+      </Provider>
     );
   };
-
-
 
   return (
     <NavigationContainer>
       {isUserAuthenticated ? AppStack() : AuthStack()}
     </NavigationContainer>
-
   );
 }
 
