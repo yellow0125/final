@@ -16,23 +16,24 @@ import Profile from "../screens/Profile";
 const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchUser();
   }
-  
-    render() {
-      return (
-        <Tab.Navigator
+
+  render() {
+    return (
+      <Tab.Navigator
         screenOptions={({ navigation, route }) => {
           return {
             headerStyle: { backgroundColor: Colors.BgDarkGreen },
             headerTintColor: 'white',
             tabBarStyle: { backgroundColor: Colors.BgDarkGreen },
-            tabBarActiveTintColor: 'white',
+            tabBarInactiveTintColor: Colors.White,
+            tabBarActiveTintColor: Colors.BgLighterYellow,
             headerTitleAlign: 'center',
-            headerRight: () => {
-              return <MainButton onPress={() => navigation.navigate('Profile')} >Username</MainButton>
-            }
+            // headerRight: () => {
+            //   return <MainButton onPress={() => navigation.navigate('Profile')} >Username</MainButton>
+            // }
           }
         }}
       >
@@ -45,36 +46,37 @@ export class Main extends Component {
         <Tab.Screen name="All" component={AllRecipes}
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="list" size={size} color={color} />,
-            headerTitle: "All",
+            headerTitle: "All Recipes",
           }}
         />
         <Tab.Screen name="Add" component={AddRecipes}
           options={{
             tabBarIcon: ({ color, size }) => <Ionicons name="add-circle" size={size} color={color} />,
-            // headerTitle: "Important Expenses",
+            headerTitle: "Add your Recipes",
           }}
         />
         <Tab.Screen name="Collected" component={CollectedRecipes}
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="heart" size={size} color={color} />,
-            headerTitle: "Collected",
+            headerTitle: "Your Favorite Recipes",
           }}
         />
         <Tab.Screen name="Profile" component={Profile}
           options={{
             tabBarIcon: ({ color, size }) => <FontAwesome name="user" size={size} color={color} />,
-            headerTitle: "Me",
+            headerTitle: "My Profile",
           }}
         />
       </Tab.Navigator>
-      )
-    }
+    )
+  }
 }
 
 const mapStateToProps = (store) => ({
-    currentUser: store.userState.currentUser
+  currentUser: store.userState.currentUser
 })
 const mapDispatchProps = (dispatch) => bindActionCreators({
-    fetchUser}, dispatch);
+  fetchUser
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);
