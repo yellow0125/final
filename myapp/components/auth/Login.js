@@ -4,7 +4,7 @@ import { container, form } from '../../constants/Style';
 import { auth } from "../../firebase/firebase-setup"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import MainButton from '../UI/MainButton';
-import Color from '../../constants/Color';
+import Colors from '../../constants/Colors';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(null);
@@ -46,7 +46,7 @@ export default function Login({ navigation }) {
           <Text
             title="Register"
             onPress={() => navigation.replace("Register")}
-            style={{ color: Color.White }} >
+            style={{ color: Colors.White }} >
             Don't have an account? SignUp.
           </Text>
         </View>

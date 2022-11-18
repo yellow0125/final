@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
-import Color from '../../constants/Color';
+import Color from '../../constants/Colors';
 import React from 'react'
 
 export default function Loading() {

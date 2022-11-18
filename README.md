@@ -31,6 +31,11 @@ In the first week, we plan to do these work below:
 2. implement the Redux to allow freely access the states of users in component
 
 ### Yichao Wu
+#### 11/17/2022 All screens without features
+1. Implement all screens of this app, including LocationsRecripes, AllRecipes, AddRecipes, CollectedRecipes and Profile.
+2. Implement the navigation based on bottom tab.
+3. create more UI components
+
 
 
 ## Structure of the App
