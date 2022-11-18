@@ -12,6 +12,7 @@ import {applyMiddleware, legacy_createStore as createStore} from 'redux';
 import rootReducer from './redux/reducers'
 import thunk from "redux-thunk";
 import Main from "./components/Main";
+import Colors from "./constants/Colors";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
@@ -39,7 +40,6 @@ export default function App() {
         }}
       >
         <Stack.Screen name="Login" component={Login} />
-
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     );
