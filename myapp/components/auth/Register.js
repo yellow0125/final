@@ -37,6 +37,7 @@ export default function Register({ navigation }) {
         password,
         username
       );
+      createUserToDB({username, email})
     } catch (err) {
       setIsValid({ bool: true, boolSnack: true, message: "Something went wrong" })
       console.log(err);
