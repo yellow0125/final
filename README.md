@@ -30,6 +30,11 @@ In the first week, we plan to do these work below:
 1. implement creating new user to database function
 2. implement the Redux to allow freely access the states of users in component
 
+####11/18/2022 Implemented Camera and Image Picker
+1. implement Camera function, allowing user take picture fliping camere
+2. implement Image picker function, allowing user select photo from gallery
+3. implement camera//gallery request function
+
 ### Yichao Wu
 #### 11/17/2022 All screens without features
 1. Implement all screens of this app, including LocationsRecripes, AllRecipes, AddRecipes, CollectedRecipes and Profile.
