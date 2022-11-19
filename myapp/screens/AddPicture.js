@@ -1,10 +1,7 @@
-import { StyleSheet, Text, View, Alert, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import React, { useState, useEffect } from "react";
-
 import MainButton from '../components/UI/MainButton';
-import Colors from '../constants/Colors';
 import {container, form} from '../constants/Style';
-
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 

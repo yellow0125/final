@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'react-native'
-import Color from './Colors'
+import Colors from './Colors'
 const container = StyleSheet.create({
     container: {
         flex: 1,
@@ -18,7 +18,7 @@ const container = StyleSheet.create({
     },
     center: {
         flex: 1,
-        backgroundColor: Color.BgDarkGreen
+        backgroundColor: Colors.BgDarkGreen
     },
     horizontal: {
         flexDirection: 'row',
@@ -86,7 +86,13 @@ const container = StyleSheet.create({
         alignItems: 'flex-end',
         textAlign: 'right',
         alignSelf: 'flex-start'
-    }
+    },
+    containerAdd: {
+        flex: 1,
+        backgroundColor: Colors.White,
+        paddingTop: 30,
+    },
+
 })
 
 const form = StyleSheet.create({
@@ -101,7 +107,7 @@ const form = StyleSheet.create({
     bottomButton: {
         alignSelf: 'center',
         alignContent: 'center',
-        borderColor: Color.White,
+        borderColor: Colors.White,
         borderBottomWidth: 1,
         padding: 10,
         textAlign: 'center',

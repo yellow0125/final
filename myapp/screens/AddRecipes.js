@@ -28,7 +28,7 @@ export default function AddRecipes({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={container.containerAdd}>
             <Text style={styles.title}>Share Your Recipe Here</Text>
             <Column>
                 <Input label="Title" value={title} f_onChange={setTitle} />
@@ -43,8 +43,8 @@ export default function AddRecipes({ navigation }) {
                 </MainButton>
             )}
             <Row style={styles.buttonsContainer}>
-                <MainButton style={styles.buttons} onPress={resetHandler}>Reset</MainButton>
-                <MainButton style={styles.buttons} onPress={submitHandler}>Submit</MainButton>
+                <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
+                <MainButton style={styles.buttons} onPress={submitHandler} mode='light'>Submit</MainButton>
             </Row>
         </View>
 
@@ -52,12 +52,6 @@ export default function AddRecipes({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-
-    container: {
-        flex: 1,
-        backgroundColor: Colors.White,
-        paddingTop: 30,
-    },
     title: {
         textAlign: 'center',
         color: Colors.BgDarkGreen,

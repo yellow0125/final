@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 14,
-        color: "black",
+        color: Colors.Black,
         marginBottom: 4,
         textAlign: "left",
         // alignItems:"left",
     },
     input: {
         borderWidth: 1,
-        borderColor: 'black',
+        borderColor: Colors.Black,
         borderRadius: 4,
         backgroundColor: Colors.inputpurple,
         padding: 6,

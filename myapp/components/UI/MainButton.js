@@ -10,9 +10,9 @@ export default function MainButton({ children, onPress, mode, style }) {
         android_ripple={{ color: Colors.Grey, foreground: true }}
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}
-        >
-        <View style={[styles.button, (mode === 'negative') ? styles.flat : null]}>
-          <Text style={[styles.buttonText, (mode === 'negative') ? styles.flatText : null]}>{children}</Text>
+      >
+        <View style={[styles.button, (mode === 'negative') ? styles.flat : null, (mode === 'light') ? styles.lightButton : null]}>
+          <Text style={[styles.buttonText, (mode === 'negative') ? styles.flatText : null, (mode === 'light') ? styles.lightButtonText : null]}>{children}</Text>
         </View>
       </Pressable>
     </View>
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: Colors.TextGreen,
     textAlign: 'center',
-    fontWeight:'bold',
-    fontSize:16,
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   flatText: {
     color: Colors.Grey,
@@ -41,6 +41,14 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.75,
     borderRadius: 4,
-  }
+  },
+  lightButton: {
+    borderRadius: 5,
+    backgroundColor: Colors.BgDarkGreen,
+  },
+  lightButtonText: {
+    color: Colors.White,
+
+  },
 
 });
