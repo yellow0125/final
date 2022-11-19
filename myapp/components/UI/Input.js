@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native'
-
 import Colors from '../../constants/Colors';
 
 export default function CustomInput({ label, value, f_onChange, mode }) {
