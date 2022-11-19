@@ -49,7 +49,12 @@ export default function App() {
   const AppStack = () => {
     return (
       <Provider store={store}>
-        <Stack.Navigator initialRouteName="Main">
+        <Stack.Navigator         
+          screenOptions={{
+            headerStyle: { backgroundColor: Colors.BgDarkGreen },
+            headerTintColor: Colors.White,
+            headerTitleAlign: "center",
+          }}initialRouteName="Main">
           <Stack.Screen name="Main" component={Main} options={{headerShown:false}}/>
           <Stack.Screen name="Camera" component={AddPicture} />
         </Stack.Navigator>

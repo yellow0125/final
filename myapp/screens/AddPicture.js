@@ -2,15 +2,11 @@ import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import React, { useState, useEffect } from "react";
 
 import MainButton from '../components/UI/MainButton';
-import Row from '../components/UI/Row';
-import Input from '../components/UI/Input';
-import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import {container, form} from '../constants/Style';
 
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import Main from '../components/Main';
 
 export default function AddPicture({ navigation }) {
     const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
@@ -52,37 +48,27 @@ export default function AddPicture({ navigation }) {
       };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.cameraContainer}>
-        <Camera
-          ref={ref => setCamera(ref)}
-          style={styles.fixedRatio}
-          type={type}
-          ratio={'1:1'} />
-      </View>
-      <MainButton
-        onPress={() => {
-          setType(
-            type === Camera.Constants.Type.back
-              ? Camera.Constants.Type.front
-              : Camera.Constants.Type.back
-          );
-        }}>Change Camera</MainButton>
-    <MainButton style={form.button} onPress={() => takeImageHandler()}>Take Picture</MainButton>
-    <MainButton style={form.button} onPress={() => pickImageHandler()}>Pick Image From Gallery</MainButton>
-      {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
+    <View style={container.center}>
+        <View style={container.camera}>
+            <Camera
+            ref={ref => setCamera(ref)}
+            style={{flex:1, aspectRatio: 1}}
+            type={type}
+            ratio={'1:1'} />
+            </View>
+        <View style={container.formCenter}>
+            <MainButton style={form.button}
+                onPress={() => {
+                setType(
+                    type === Camera.Constants.Type.back
+                    ? Camera.Constants.Type.front
+                    : Camera.Constants.Type.back
+                );
+                }}>Change Camera</MainButton>
+            <MainButton style={form.button} onPress={() => takeImageHandler()}>Take Picture</MainButton>
+            <MainButton style={form.button} onPress={() => pickImageHandler()}>Pick Image From Gallery</MainButton>
+        </View>
+        {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-    cameraContainer: {
-      flex: 1,
-      flexDirection: 'row'
-    },
-    fixedRatio: {
-      flex: 1,
-      aspectRatio: 1
-    }
-  
-  })
