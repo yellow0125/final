@@ -11,6 +11,7 @@ import {applyMiddleware, legacy_createStore as createStore} from 'redux';
 import rootReducer from './redux/reducers'
 import thunk from "redux-thunk";
 import Main from "./components/Main";
+import AddPicture from "./screens/AddPicture";
 import Colors from "./constants/Colors";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -50,6 +51,7 @@ export default function App() {
       <Provider store={store}>
         <Stack.Navigator initialRouteName="Main">
           <Stack.Screen name="Main" component={Main} options={{headerShown:false}}/>
+          <Stack.Screen name="Camera" component={AddPicture} />
         </Stack.Navigator>
       </Provider>
     );
