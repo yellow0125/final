@@ -122,6 +122,16 @@ const form = StyleSheet.create({
         height: 120,
         marginTop: 80,
         marginBottom: -120
+    },
+    uploadedImage: {
+        marginLeft:30,
+        width:200,
+        height:150,
+    },
+    pictureButton: {
+        width: 100,
+        height: 100,
+        borderRadius: 100 / 2
     }
 
 })

@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View, Alert } from 'react-native';
-import { useState } from "react";
-import { writeToDB } from '../firebase/firestore';
+import { StyleSheet, Text, View, Alert, Image } from 'react-native';
+import React, { useState, useEffect } from "react";
 
 import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
 import Input from '../components/UI/Input';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
-
+import {container, form} from '../constants/Style';
 
 export default function AddRecipes({ navigation }) {
     const [title, setTitle] = useState('');
     const [decription, setDescription] = useState('');
+    const [image, setImage] = useState('');
+
 
     function submitHandler() {
         Alert.alert("Test", "Are you sure to submit your recipe?", [
@@ -33,10 +34,18 @@ export default function AddRecipes({ navigation }) {
                 <Input label="Description" value={decription} f_onChange={setDescription} />
             </Column>
 
+            <MainButton style={styles.buttons} onPress={()=>navigation.navigate("Camera")}>Add Picture</MainButton>
+            {image ? (
+                <Image source={{ uri: image }} style={form.uploadedImage } />
+            ) : (
+                <Text style={form.uploadedImage}> No image yet!</Text>
+            )}
+
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler}>Reset</MainButton>
                 <MainButton style={styles.buttons} onPress={submitHandler}>Submit</MainButton>
             </Row>
+
         </View>
 
     );
@@ -64,4 +73,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 8,
         minWidth: 100,
     },
+    text: {
+        marginLeft: 18,
+    }
 });

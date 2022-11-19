@@ -7,6 +7,7 @@ import { async } from "@firebase/util";
 export const fetchUser =() => async(dispatch) => {
     const docRef = doc(firestore, "Users", auth.currentUser.uid);
     const docSnap = await getDoc(docRef)
+    
     if (docSnap.exists()) {
         console.log("docSnap exists: ", docSnap.data())
         dispatch({type: USER_STATE_CHANGE, currentUser: docSnap.data()})
