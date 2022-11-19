@@ -10,6 +10,7 @@ import {container, form} from '../constants/Style';
 
 export default function AddRecipes({ navigation }) {
     const [title, setTitle] = useState('');
+    const [tags, setTags] = useState('');
     const [decription, setDescription] = useState('');
     const [image, setImage] = useState('');
 
@@ -31,16 +32,14 @@ export default function AddRecipes({ navigation }) {
             <Text style={styles.title}>Share Your Recipe Here</Text>
             <Column>
                 <Input label="Title" value={title} f_onChange={setTitle} />
-                <Input label="Description" value={decription} f_onChange={setDescription} />
+                <Input label="Tags" value={tags} f_onChange={setTags} />
+                <Input label="Description" value={decription} f_onChange={setDescription} mode="long"/>
             </Column>
-
-            <MainButton style={styles.buttons} onPress={()=>navigation.navigate("Camera")}>Add Picture</MainButton>
             {image ? (
                 <Image source={{ uri: image }} style={form.uploadedImage } />
             ) : (
-                <Text style={form.uploadedImage}> No image yet!</Text>
+                <MainButton style={styles.buttons} onPress={()=>navigation.navigate("Camera")}>Add a Picture</MainButton>
             )}
-
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler}>Reset</MainButton>
                 <MainButton style={styles.buttons} onPress={submitHandler}>Submit</MainButton>
