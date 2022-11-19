@@ -20,15 +20,15 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsUserAuthenticated(true);
-      } else {
-        setIsUserAuthenticated(false);
-      }
-    });
-  });
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setIsUserAuthenticated(true);
+  //     } else {
+  //       setIsUserAuthenticated(false);
+  //     }
+  //   });
+  // });
 
   const AuthStack = () => {
     return (
@@ -40,7 +40,6 @@ export default function App() {
         }}
       >
         <Stack.Screen name="Login" component={Login} />
-
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     );
