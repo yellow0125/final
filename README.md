@@ -24,13 +24,16 @@ In the first week, we plan to do these work below:
 2. design the logo of our app <Fooriend> displaying in these two page
 3. implement the navigation between login and register page, when user is not **Authenticated**
 4. create color and style constants files
+#### 11/19/2022 Login and Register
+1. modify layout and styles of add recipes screen
+2. modify main button mode style, offer more styles
 
 ### Xiaolan Wu
 #### 11/17/2022 Saving data Using Firebase and Redux
 1. implement creating new user to database function
 2. implement the Redux to allow freely access the states of users in component
 
-####11/18/2022 Implemented Camera and Image Picker
+#### 11/18/2022 Implemented Camera and Image Picker
 1. implement Camera function, allowing user take picture fliping camere
 2. implement Image picker function, allowing user select photo from gallery
 3. implement camera//gallery request function

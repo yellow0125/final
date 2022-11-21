@@ -1,17 +1,18 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Color from '../../constants/Colors';
+import Colors from '../../constants/Colors';
+
 
 export default function MainButton({ children, onPress, mode, style }) {
   return (
     <View style={style}>
       <Pressable
-        android_ripple={{ color: Color.Grey, foreground: true }}
+        android_ripple={{ color: Colors.Grey, foreground: true }}
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}
-        >
-        <View style={[styles.button, (mode === 'negative') ? styles.flat : null]}>
-          <Text style={[styles.buttonText, (mode === 'negative') ? styles.flatText : null]}>{children}</Text>
+      >
+        <View style={[styles.button, (mode === 'negative') ? styles.flat : null, (mode === 'light') ? styles.lightButton : null]}>
+          <Text style={[styles.buttonText, (mode === 'negative') ? styles.flatText : null, (mode === 'light') ? styles.lightButtonText : null]}>{children}</Text>
         </View>
       </Pressable>
     </View>
@@ -22,24 +23,32 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    backgroundColor: Color.BgLighterYellow,
+    backgroundColor: Colors.BgLighterYellow,
     minWidth: 80,
   },
   flat: {
-    backgroundColor: Color.transparent
+    backgroundColor: Colors.transparent
   },
   buttonText: {
-    color: Color.TextGreen,
+    color: Colors.TextGreen,
     textAlign: 'center',
-    fontWeight:'bold',
-    fontSize:16,
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   flatText: {
-    color: Color.White,
+    color: Colors.Grey,
   },
   pressed: {
     opacity: 0.75,
     borderRadius: 4,
-  }
+  },
+  lightButton: {
+    borderRadius: 5,
+    backgroundColor: Colors.BgDarkGreen,
+  },
+  lightButtonText: {
+    color: Colors.White,
+
+  },
 
 });
