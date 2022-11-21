@@ -1,23 +1,16 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { firestore } from '../firebase/firebase-setup';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { View, Text } from 'react-native';
+import MainButton from '../components/UI/MainButton';
+import { signOut } from "firebase/auth";
+import { firestore, auth, storage } from '../firebase/firebase-setup';
 
-import Colors from '../constants/Colors';
-
-export default function Profile({ navigation }) {
+export default function Profile() {
 
     return (
-        <View style={styles.container}>
-            <Text>Here is user's Profile!</Text>
+        <View>
+            <Text>{auth.currentUser.email}</Text>
+            <Text>{auth.currentUser.uid}</Text>
+            <MainButton onPress={() => signOut(auth)} >Sign Out</MainButton>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.lightpurple,
-        alignItems: 'center',
-    },
-});

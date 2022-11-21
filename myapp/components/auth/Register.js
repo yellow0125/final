@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View, Image } from 'react-native';
+import { Text, TextInput, View, Image } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import { container, form } from '../../constants/Style';
 
@@ -7,7 +7,7 @@ import { auth } from "../../firebase/firebase-setup"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import MainButton from '../UI/MainButton';
 import Colors from '../../constants/Colors';
-
+import { createUserToDB } from "../../firebase/firestore";
 require('firebase/firestore');
 
 export default function Register({ navigation }) {
@@ -37,7 +37,7 @@ export default function Register({ navigation }) {
         password,
         username
       );
-      createUserToDB({username, email})
+      createUserToDB({ username, email })
     } catch (err) {
       setIsValid({ bool: true, boolSnack: true, message: "Something went wrong" })
       console.log(err);

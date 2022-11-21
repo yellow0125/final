@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUser } from '../redux/actions/index';
+// import { fetchUser } from '../redux/actions/index';
 import MainButton from '../components/UI/MainButton';
 import Colors from "../constants/Colors";
 
@@ -16,9 +16,9 @@ import Profile from "../screens/Profile";
 const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
+  // componentDidMount() {
+  //   this.props.fetchUser();
+  // }
 
   render() {
     return (
@@ -76,7 +76,8 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser
 })
 const mapDispatchProps = (dispatch) => bindActionCreators({
-  fetchUser
+  
 }, dispatch);
+
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);
