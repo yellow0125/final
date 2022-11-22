@@ -18,8 +18,10 @@ const container = StyleSheet.create({
     },
     center: {
         flex: 1,
+        backgroundColor:Colors.BgDarkGreen
        
     },
+ 
     horizontal: {
         flexDirection: 'row',
         display: 'flex',

@@ -25,10 +25,6 @@ export const createUserToDB = async (data) => {
             location: "click edit to add your location",
 
         });
-        // const docRef = await addDoc(collection(firestore, "Users"), {
-        //     username: data.username,
-        //     email: data.email,
-        // });
         console.log("Create User in db sucessfully. Users' data is: ", data)
     } catch (error) {
         console.log("Error when writing into db", error)

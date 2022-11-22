@@ -11,14 +11,6 @@ import { getUser } from '../firebase/firestore';
 export default function Profile({navigation}) {
     const [userData, setUserData] = useState([]);
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const docRef = doc(firestore, "Users", auth.currentUser.uid);
-    //         const docSnap = await getDoc(docRef);
-    //         setUserData(docSnap.data());
-    //     })();
-    // }, []);
-
     useEffect(() => {
         const unsubscribe = onSnapshot(
             doc(firestore, "users", auth.currentUser.uid), (doc) => {
