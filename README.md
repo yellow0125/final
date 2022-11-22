@@ -46,6 +46,10 @@ In the first week, we plan to do these work below:
 2. Implement the navigation based on bottom tab.
 3. create more UI components
 
+#### 11/21/2022 Implemented uploading Image to firebase
+1. implemente a new screen to preview and upload Image to firebase
+2. implement a picker to select location of recipe
+
 
 
 ## Structure of the App

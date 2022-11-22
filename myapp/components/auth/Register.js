@@ -5,6 +5,7 @@ import { container, form } from '../../constants/Style';
 
 import { auth } from "../../firebase/firebase-setup"
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserToDB } from '../../firebase/firestore';
 import MainButton from '../UI/MainButton';
 import Colors from '../../constants/Colors';
 import { createUserToDB } from "../../firebase/firestore";

@@ -12,13 +12,14 @@ import rootReducer from './redux/reducers'
 import thunk from "redux-thunk";
 import Main from "./components/Main";
 import AddPicture from "./screens/AddPicture";
+import SavePicture from "./screens/SavePicture";
 import Colors from "./constants/Colors";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -55,7 +56,8 @@ export default function App() {
             headerTitleAlign: "center",
           }}initialRouteName="Main">
           <Stack.Screen name="Main" component={Main} options={{headerShown:false}}/>
-          <Stack.Screen name="Camera" component={AddPicture} />
+          <Stack.Screen name="Camera" component={AddPicture} navigation={this.navigation} />
+          <Stack.Screen name="Save" component={SavePicture} />
         </Stack.Navigator>
       </Provider>
     );
