@@ -49,10 +49,10 @@ export class Main extends Component {
             headerTitle: "All Recipes",
           }}
         />
-        <Tab.Screen name="Add" component={AddRecipes}
+        <Tab.Screen name="AddRecipe" component={AddRecipes}
           options={{
             tabBarIcon: ({ color, size }) => <Ionicons name="add-circle" size={size} color={color} />,
-            headerTitle: "Add your Recipes",
+            headerTitle: "Share Your Recipe Here",
           }}
         />
         <Tab.Screen name="Collected" component={CollectedRecipes}
