@@ -50,6 +50,9 @@ In the first week, we plan to do these work below:
 1. implemente a new screen to preview and upload Image to firebase
 2. implement a picker to select location of recipe
 
+#### 11/22/2022 Implemented editProfile
+1. implemente a new screen to edit profile information and update datebase
+2. modify firestore and add functions to support CRUD operations.
 
 
 ## Structure of the App
