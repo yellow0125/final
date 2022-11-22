@@ -8,7 +8,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { createUserToDB } from '../../firebase/firestore';
 import MainButton from '../UI/MainButton';
 import Colors from '../../constants/Colors';
-import { createUserToDB } from "../../firebase/firestore";
 require('firebase/firestore');
 
 export default function Register({ navigation }) {
