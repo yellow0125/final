@@ -13,3 +13,22 @@ export const createUserToDB = async(data) => {
         console.log("Error when writing into db", error)
     }
 }
+
+export async function writeToDB(goal) {
+    try {
+        const docRef = await addDoc(collection(firestore, "goals"), {
+            ...goal,
+            user: auth.currentUser.uid,
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export async function deleteFromDB(key) {
+    try {
+        await deleteDoc(doc(firestore, "goals", key));
+    } catch (err) {
+        console.log(err);
+    }
+}

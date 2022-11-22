@@ -5,6 +5,7 @@ import { container, form } from '../../constants/Style';
 
 import { auth } from "../../firebase/firebase-setup"
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserToDB } from '../../firebase/firestore';
 import MainButton from '../UI/MainButton';
 import Colors from '../../constants/Colors';
 
@@ -37,6 +38,7 @@ export default function Register({ navigation }) {
         password,
         username
       );
+      console.log(userCred);
       createUserToDB({username, email})
     } catch (err) {
       setIsValid({ bool: true, boolSnack: true, message: "Something went wrong" })

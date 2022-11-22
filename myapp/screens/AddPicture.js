@@ -38,9 +38,9 @@ export default function AddPicture({ navigation }) {
           quality: 1,
         });
         console.log(result);
-    
-        if (!result.cancelled) {
-          setImage(result.uri);
+
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
         }
       };
 
@@ -64,6 +64,8 @@ export default function AddPicture({ navigation }) {
                 }}>Change Camera</MainButton>
             <MainButton style={form.button} onPress={() => takeImageHandler()}>Take Picture</MainButton>
             <MainButton style={form.button} onPress={() => pickImageHandler()}>Pick Image From Gallery</MainButton>
+            {/* <MainButton style={form.button} onPress={() => pickImageHandler()}>Save</MainButton> */}
+            <MainButton style={form.button} onPress={() => navigation.navigate("Save", {image})}>Save</MainButton>
         </View>
         {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
     </View>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { firestore } from '../firebase/firebase-setup';
 import { collection, onSnapshot } from 'firebase/firestore';
+import { auth } from "../firebase/firebase-setup";
 
 import Colors from '../constants/Colors';
 
@@ -9,7 +10,8 @@ export default function Profile({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text>Here is user's Profile!</Text>
+            <Text>{auth.currentUser.email}</Text>
+            <Text>{auth.currentUser.uid}</Text>
         </View>
     );
 }
