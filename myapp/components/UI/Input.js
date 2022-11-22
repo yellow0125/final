@@ -8,7 +8,11 @@ export default function CustomInput({ label, value, f_onChange, mode }) {
 
         <View style={styles.container}>
             <Text style={styles.label}>{label}</Text>
-            <TextInput style={[styles.input, (mode === 'long') ? styles.inputL : null]} value={value} />
+            <TextInput
+                style={[styles.input, (mode === 'long') ? styles.inputL : null]} 
+                // onChangeText={(newText) => { setText(newText) }}
+                onChangeText={f_onChange}
+                value={value} />
         </View>
 
     );

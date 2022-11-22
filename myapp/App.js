@@ -20,7 +20,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -60,6 +60,7 @@ export default function App() {
           <Stack.Screen name="Camera" component={AddPicture} navigation={this.navigation} />
           <Stack.Screen name="Save" component={SavePicture} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
+
         </Stack.Navigator>
       </Provider>
     );

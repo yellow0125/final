@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     minWidth: 80,
   },
   flat: {
-    backgroundColor: Colors.transparent
+    backgroundColor: Colors.LightGrey
   },
   buttonText: {
     color: Colors.TextGreen,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   flatText: {
-    color: Colors.Grey,
+    color: Colors.White,
   },
   pressed: {
     opacity: 0.75,

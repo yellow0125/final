@@ -1,73 +1,81 @@
 import { View, Image } from 'react-native';
 import React, { useState, useEffect } from "react";
 import MainButton from '../components/UI/MainButton';
-import {container, form} from '../constants/Style';
+import { container, form } from '../constants/Style';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function AddPicture({ navigation }) {
-    const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
-    const [hasCameraPermission, setHasCameraPermission] = useState(null);
-    const [camera, setCamera] = useState(null);
-    const [image, setImage] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
+export default function AddPicture({ navigation, route }) {
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [camera, setCamera] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
 
-    useEffect(() => {
-        (async () => {
-          const cameraStatus  = await Camera.requestCameraPermissionsAsync();
-          setHasCameraPermission(cameraStatus.status === 'granted');
-    
-          const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
-          setHasGalleryPermission(galleryStatus.status === 'granted');
-        })();
-      }, []);
+  const [permissionInfo, requestPermisson] = ImagePicker.useCameraPermissions();
+  const [image, setImage] = useState(null);
+  const verifyPermission = async () => {
+    if (permissionInfo.granted) {
+      return true;
+    }
+    const requestPermissionResponse = await requestPermisson();
+    return requestPermissionResponse.granted;
+  };
 
-      const takeImageHandler = async () => {
-        if (camera) {
-          const data = await camera.takePictureAsync(null);
-          setImage(data.uri);
-          console.log("take picture")
-        }
+  useEffect(() => {
+    (async () => {
+      const cameraStatus = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(cameraStatus.status === 'granted');
+
+      const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setHasGalleryPermission(galleryStatus.status === 'granted');
+    })();
+  }, []);
+
+  const takeImageHandler = async () => {
+    try {
+      const hasPermission = await verifyPermission();
+      if (!hasPermission) {
+        return;
       }
+      const result = await camera.takePictureAsync();
+      setImage(result.uri);
+      route.params.imageHandler(result.uri)
+    } catch (err) {
+      console.log("Image taking error ", err);
+    }
+  };
 
-      const pickImageHandler = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-        });
-        console.log(result);
+  const pickImageHandler = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-        if (!result.canceled) {
-          setImage(result.assets[0].uri);
-        }
-      };
+    // console.log(result);
+    setImage(result.assets[0].uri);
+    route.params.imageHandler(result.assets[0].uri)
+  };
 
   return (
     <View style={container.center}>
+      {image ? (<Image source={{ uri: image }} style={{ width: '100%', height: 400 }} />) : (
         <View style={container.camera}>
-            <Camera
+          <Camera
             ref={ref => setCamera(ref)}
-            style={{flex:1, aspectRatio: 1}}
+            style={{ height: 400, aspectRatio: 1 }}
             type={type}
             ratio={'1:1'} />
-            </View>
-        <View style={container.formCenter}>
-            <MainButton style={form.button}
-                onPress={() => {
-                setType(
-                    type === Camera.Constants.Type.back
-                    ? Camera.Constants.Type.front
-                    : Camera.Constants.Type.back
-                );
-                }}>Change Camera</MainButton>
-            <MainButton style={form.button} onPress={() => takeImageHandler()}>Take Picture</MainButton>
-            <MainButton style={form.button} onPress={() => pickImageHandler()}>Pick Image From Gallery</MainButton>
-            {/* <MainButton style={form.button} onPress={() => pickImageHandler()}>Save</MainButton> */}
-            <MainButton style={form.button} onPress={() => navigation.navigate("Save", {image})}>Save</MainButton>
         </View>
-        {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
+
+      )}
+      <View style={container.formCenter}>
+        <MainButton style={form.button} mode='light' onPress={() => takeImageHandler()}>Take a Picture</MainButton>
+        <MainButton style={form.button} mode='light' onPress={() => pickImageHandler()}>Pick Image From Gallery</MainButton>
+        <MainButton style={form.button} mode='light' onPress={() => navigation.navigate("AddRecipe", { image })}>{image ? ('Save') : ('Cancel')}</MainButton>
+      </View>
+
     </View>
   );
 }
