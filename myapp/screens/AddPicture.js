@@ -47,16 +47,15 @@ export default function AddPicture({ navigation, route }) {
 
   const pickImageHandler = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
+    // console.log(result);
+    setImage(result.assets[0].uri);
+    route.params.imageHandler(result.assets[0].uri)
   };
 
   return (
@@ -74,7 +73,7 @@ export default function AddPicture({ navigation, route }) {
       <View style={container.formCenter}>
         <MainButton style={form.button} mode='light' onPress={() => takeImageHandler()}>Take a Picture</MainButton>
         <MainButton style={form.button} mode='light' onPress={() => pickImageHandler()}>Pick Image From Gallery</MainButton>
-        <MainButton style={form.button} mode='light' onPress={() => navigation.navigate("AddRecipe", { image })}>{image?('Save'):('Cancel')}</MainButton>
+        <MainButton style={form.button} mode='light' onPress={() => navigation.navigate("AddRecipe", { image })}>{image ? ('Save') : ('Cancel')}</MainButton>
       </View>
 
     </View>

@@ -12,7 +12,9 @@ import Input from '../components/UI/Input';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import { container, form } from '../constants/Style';
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs([ 'Non-serializable values were found in the navigation state', ]);
 export default function ImageManager({ navigation }) {
   const [imageUri, setImageUri] = useState('');
 

@@ -21,8 +21,6 @@ export default function AddRecipes(props) {
     const [location, setLocation] = useState('');
     const [caption, setCaption] = useState("")
     const [decription, setDescription] = useState('');
-    const navigation  = props.navigation
-
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [genderOpen, setGenderOpen] = useState(false);
     const [genderValue, setGenderValue] = useState(null);
@@ -54,7 +52,7 @@ export default function AddRecipes(props) {
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
             }
             await writeToDB(uri);
-            navigation.navigate('Profile')
+            props.navigation.navigate('Profile')
             console.log('image upload success')
         } catch (err) {
             console.log("image upload ", err);
@@ -123,7 +121,7 @@ export default function AddRecipes(props) {
 
     return (
         <ScrollView style={container.containerAdd}>
-            <ImageManager navigation={navigation} />
+            <ImageManager navigation={props.navigation} />
             <Column>
                 <Input
                     label="Title"
