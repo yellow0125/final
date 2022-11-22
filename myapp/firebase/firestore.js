@@ -1,5 +1,6 @@
-import { collection, addDoc, deleteDoc, doc, updateDoc, setDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup";
+
 
 export const createUserToDB = async(data) => {
     console.log("Write User to DB in firestore.js for user ID: ", auth.currentUser.uid)
@@ -32,3 +33,14 @@ export async function deleteFromDB(key) {
         console.log(err);
     }
 }
+
+export async function getUser() {
+  try {
+    const docRef = doc(firestore, "users", auth.currentUser.uid);
+    const docSnap = await getDoc(docRef);
+    console.log("Cached document data:", docSnap.data());
+  } catch (err) {
+    console.log(err);
+  }
+}
+
