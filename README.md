@@ -27,8 +27,10 @@ In the first week, we plan to do these work below:
 #### 11/19/2022 Style of add recipe screen
 1. modify layout and styles of add recipes screen
 2. modify main button mode style, offer more styles
-#### 11/21/2022 Profile page
+#### 11/21/2022 Profile page -Camera
 1. modify details of profile page
+2. delete save screen, add uri in Add screen
+3. Add image manager component
 
 ### Xiaolan Wu
 #### 11/17/2022 Saving data Using Firebase and Redux

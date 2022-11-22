@@ -18,7 +18,7 @@ const container = StyleSheet.create({
     },
     center: {
         flex: 1,
-        backgroundColor: Colors.BgDarkGreen
+       
     },
     horizontal: {
         flexDirection: 'row',
@@ -130,9 +130,9 @@ const form = StyleSheet.create({
         marginBottom: -120
     },
     uploadedImage: {
-        marginLeft:30,
-        width:200,
-        height:150,
+        justifyContent: 'center',
+        width: '100%',
+        height: 200
     },
     pictureButton: {
         width: 100,

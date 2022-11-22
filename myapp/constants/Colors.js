@@ -2,6 +2,7 @@ export default {
 	BgDarkGreen: '#419972',
 	BgLighterYellow: '#f7fcb9',
 	Grey: '#9f9f9f',
+	LightGrey:'#d3d7d4',
 	White: '#fff7ff',
 	BgLightGreen: '#5cc7b5',
 	TextGreen: '#2d8172',
