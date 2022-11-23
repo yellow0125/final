@@ -1,20 +1,6 @@
 import { collection, addDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup";
 
-
-// export const createUserToDB = async(data) => {
-//     console.log("Write User to DB in firestore.js for user ID: ", auth.currentUser.uid)
-//     try {
-//         await setDoc(doc(firestore, "Users", auth.currentUser.uid), {
-//             username:data.username,
-//             email:data.email,
-//         });
-//         console.log("Create User in db sucessfully. Users' data is: ", data)
-//     } catch (error) {
-//         console.log("Error when writing into db", error)
-//     }
-// }
-
 export const createUserToDB = async (data) => {
     console.log("Write User to DB in firestore.js for user ID: ", auth.currentUser.uid)
     try {
@@ -63,3 +49,14 @@ export async function getUser() {
   }
 }
 
+export const uploadRecipeToDB = async (recipe) => {
+    try {
+        await addDoc(collection(firestore, "recipes"), {
+            ...recipe,
+            user: auth.currentUser.uid,
+            like: 0,
+          });
+    } catch (error) {
+        console.log("Error when writing into db", error)
+    }
+}
