@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, Alert, Image} from 'react-native';
-import React, { useState, useEffect } from "react";
-import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Alert, Image } from 'react-native';
+import React, { useState, useEffect, } from "react";
 import { Picker } from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
@@ -20,9 +19,8 @@ export default function EditProfile({ navigation, route }) {
     const [gender, setGender] = useState(currentUserData.gender);
     const [location, setLocation] = useState(currentUserData.location);
 
-
     function submitHandler() {
-        Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
+        Alert.alert("Submit", "Are you sure to update your profile?", [
             { text: "No", style: "cancel" },
             { text: "Yes", style: "default", onPress: submitOperation }
         ]);
@@ -38,8 +36,8 @@ export default function EditProfile({ navigation, route }) {
     // store all the information into firebase
     function submitOperation() {
         if (username.length > 0) {
-            
-            writeUserProfileToDB({username, gender, location, key})
+
+            writeUserProfileToDB({ username, gender, location, key })
             navigation.goBack();
             return;
         }
@@ -49,7 +47,7 @@ export default function EditProfile({ navigation, route }) {
             ]);
             return;
         }
-        
+
     }
 
     function resetOperation() {
@@ -63,12 +61,10 @@ export default function EditProfile({ navigation, route }) {
             <Text style={styles.title}>Edit Your Profile</Text>
             <Column>
                 <Input label="Username" value={username} f_onChange={setUsername} />
-                {/* <Input label="Tags" value={tags} f_onChange={setTags} /> */}
 
                 <Picker
                     label="Gender"
                     selectedValue={gender}
-                    mode={'dropdown'}
                     onValueChange={(itemValue) =>
                         setGender(itemValue)
                     }>
@@ -76,6 +72,7 @@ export default function EditProfile({ navigation, route }) {
                     <Picker.Item label="Female" value="Female" />
                     <Picker.Item label="Hiden" value="Hiden" />
                 </Picker>
+
                 <Picker
                     label="Location"
                     selectedValue={location}
