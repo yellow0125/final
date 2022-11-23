@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Button } from 'react'
 import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,9 +31,7 @@ export class Main extends Component {
             tabBarInactiveTintColor: Colors.White,
             tabBarActiveTintColor: Colors.BgLighterYellow,
             headerTitleAlign: 'center',
-            // headerRight: () => {
-            //   return <MainButton onPress={() => navigation.navigate('Profile')} >Username</MainButton>
-            // }
+
           }
         }}
       >
@@ -62,9 +60,14 @@ export class Main extends Component {
           }}
         />
         <Tab.Screen name="Profile" component={Profile}
-          options={{
-            tabBarIcon: ({ color, size }) => <FontAwesome name="user" size={size} color={color} />,
-            headerTitle: "My Profile",
+          options={({navigation}) => {
+            return {
+              tabBarIcon: ({ color, size }) => <FontAwesome name="user" size={size} color={color} />,
+              headerTitle: "My Profile",
+              // headerRight: () => {
+              //   return <Ionicons name="ios-settings-outline" style={{ marginEnd: 10 }} size={24} color="white" onPress={() => navigation.navigate('Profile')} />
+              // }
+            }
           }}
         />
       </Tab.Navigator>
@@ -76,7 +79,7 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser
 })
 const mapDispatchProps = (dispatch) => bindActionCreators({
-  
+
 }, dispatch);
 
 

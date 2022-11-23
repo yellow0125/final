@@ -8,7 +8,7 @@ import { firestore, auth, storage } from '../firebase/firebase-setup';
 import { getUser } from '../firebase/firestore';
 import Row from '../components/UI/Row';
 import Colors from '../constants/Colors';
-import { Entypo, Ionicons, AntDesign } from '@expo/vector-icons';
+import { Entypo, Ionicons, AntDesign, EvilIcons } from '@expo/vector-icons';
 
 export default function Profile({ navigation }) {
     const [userData, setUserData] = useState([]);
@@ -31,7 +31,7 @@ export default function Profile({ navigation }) {
     return (
         <ScrollView>
             <View>
-                <Row>
+                <Row >
                     <View style={styles.imageContainer}>
                         <Image
                             source={require('../assets/user.jpg')}
@@ -46,21 +46,52 @@ export default function Profile({ navigation }) {
                         <Text style={styles.userInfo}>{userData.location}</Text>
                     </View>
                 </Row>
-                <MainButton mode='light' onPress={() => navigation.navigate("EditProfile", { userData })}>Edit Profilew</MainButton>
-                <Row>
-                    <View style={styles.iconContainer}>
-                        <Row style={styles.icon}><Ionicons name="md-fast-food-outline" size={30} color="black" /></Row>
-                        <Row><Text>My Recipes</Text></Row>
-                    </View>
-                    <View style={styles.iconContainer}>
-                        <Row style={styles.icon}><AntDesign name="like2" size={30} color="black" /></Row>
-                        <Row><Text>My Favorite</Text></Row>
-                    </View>
-                </Row>
+                <View style={styles.imageContainer2}>
+                    <Image
+                        source={require('../assets/chef.jpg')}
+                        style={styles.image}
+                        resizeMode="cover"
+                    />
+                </View>
+                <View>
+                    <Row>
+                        <View style={styles.iconContainer}>
+                            <Row style={styles.icon}>
+                                <Ionicons name="location-outline" size={36} color="black" />
+                            </Row>
+                            <Row><Text>Locate Me</Text></Row>
+                        </View>
+
+                        <View style={styles.iconContainer}>
+                            <Row style={styles.icon}>
+                                <Ionicons
+                                    name="ios-settings-outline"
+                                    size={36}
+                                    color="black"
+                                    onPress={() => navigation.navigate("EditProfile", { userData })} />
+                            </Row>
+                            <Row><Text>Edit Profile</Text></Row>
+                        </View>
+                    </Row>
+
+                    <Row>
+                        <View style={styles.iconContainer}>
+                            <Row style={styles.icon}>
+                                <Ionicons name="md-fast-food-outline" size={36} color="black" />
+                            </Row>
+                            <Row><Text>My Recipes</Text></Row>
+                        </View>
+                        <View style={styles.iconContainer}>
+                            <Row style={styles.icon}>
+                                <AntDesign name="like2" size={36} color="black" />
+                            </Row>
+                            <Row><Text>My Favorite</Text></Row>
+                        </View>
+                    </Row>
+                    <MainButton mode='negative' onPress={() => signOut(auth)} >Sign Out</MainButton>
+                </View>
 
 
-
-                <MainButton mode='negative' onPress={() => signOut(auth)} >Sign Out</MainButton>
             </View>
         </ScrollView>
     );
@@ -83,6 +114,10 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%"
     },
+    imageContainer2: {
+        width: Dimensions.get('window').width ,
+        height: Dimensions.get('window').width * 0.22,
+    },
     userContainer: {
         marginVertical: Dimensions.get('window').height / 21,
         marginHorizontal: Dimensions.get('window').width / 10,
@@ -100,8 +135,9 @@ const styles = StyleSheet.create({
 
     },
     iconContainer: {
-        marginHorizontal: Dimensions.get('window').width / 7,
+        marginHorizontal: Dimensions.get('window').width / 6.5,
         marginVertical: Dimensions.get('window').height / 21,
+        justifyContent: 'center',
 
     },
     icon: {
