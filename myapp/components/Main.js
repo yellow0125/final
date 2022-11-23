@@ -31,9 +31,9 @@ export class Main extends Component {
             tabBarInactiveTintColor: Colors.White,
             tabBarActiveTintColor: Colors.BgLighterYellow,
             headerTitleAlign: 'center',
-
           }
         }}
+        initialRouteName="All"
       >
         <Tab.Screen name="Locations" component={LocationsRecipes}
           options={{
