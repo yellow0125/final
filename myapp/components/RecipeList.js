@@ -5,14 +5,19 @@ import { firestore as db} from '../firebase/firebase-setup'
 import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native';
+import { Image } from 'react-native';
 import RecipeButton from './UI/RecipeButton';
 import { StyleSheet } from 'react-native';
 import { container, form } from '../constants/Style';
 import Row from './UI/Row';
 import Colors from '../constants/Colors';
+import RecipeImage from './UI/RecipeImage';
+import Column from './UI/Column';
+import { Entypo, Ionicons, AntDesign, EvilIcons } from '@expo/vector-icons';
 
-export default function ExpenseList() {
+export default function RecipeList() {
     const [recipes, setRecipes] = useState();
+    const [imageURL, setImageURL] = useState("");
 
     useEffect(()=>{
         const unsubsribe = onSnapshot(
@@ -35,26 +40,33 @@ export default function ExpenseList() {
         }
       }, [],);
   return (
-    // <SafeAreaView style={{height: 300}} keyboardShouldPersistTaps='handled'>
       <FlatList
         data={recipes}
         keyExtractor={item=>item.key}
         
         renderItem={({item})=>(
 
-            <RecipeButton style={styles.listItem} 
+            <RecipeButton style={container.post} 
                         // onPress={()=>props.navigate('Edit', {itemID: item.key, important: item.important})}
                         onPress={()=>console.log("navigate to detailRecipe Screen")}
             >
+            <Column>
+            <RecipeImage source={item} />
+
                 <Row>
                     
                   <Text style={styles.titleText}>{item.title}</Text>
-                  <Text style={styles.likeText}>{item.like}</Text>
+                  <View style={styles.iconContainer}>
+                            <Row style={styles.icon}>
+                                <AntDesign name="like2" size={20} color="black" />
+                                <Text>{item.like}</Text>
+                            </Row>
+                        </View>
               </Row>
+              </Column>
             </RecipeButton>
         )}
       />
-    // </SafeAreaView>
   )
 }
 
@@ -70,13 +82,14 @@ const styles=StyleSheet.create({
     },
     titleText: {
       color: Colors.DescriptionText,
-      width:200,
+      marginLeft:10,
+      width:210,
     },
     likeText:{
       textAlign: 'center',
       backgroundColor: Colors.AmountBackground,
       color: Colors.AmountText,
-      width:65,
+      width:105,
       borderRadius:5,
     }
   })
