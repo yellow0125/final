@@ -10,7 +10,7 @@ import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import { container, form } from '../constants/Style';
 import ImageManager from './ImageManager';
-import { writeToDB, deleteFromDB } from "../firebase/firestore";
+import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
 
@@ -20,7 +20,7 @@ export default function AddRecipes(props) {
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
     const [caption, setCaption] = useState("")
-    const [decription, setDescription] = useState('');
+    const [description, setDescription] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [genderOpen, setGenderOpen] = useState(false);
     const [genderValue, setGenderValue] = useState(null);
@@ -41,7 +41,7 @@ export default function AddRecipes(props) {
         }
     };
 
-    const uploadImage = async () => {
+    const submitOperation = async () => {
         let uri = props.route.params.image;
         try {
             if (uri) {
@@ -51,8 +51,8 @@ export default function AddRecipes(props) {
                 const uploadResult = await uploadBytes(imageRef, imageBlob);
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
             }
-            await writeToDB(uri);
-            props.navigation.navigate('Profile')
+            await uploadRecipeToDB({title, description, uri});
+            // props.navigation.navigate('Profile')
             console.log('image upload success')
         } catch (err) {
             console.log("image upload ", err);
@@ -96,7 +96,7 @@ export default function AddRecipes(props) {
     function submitHandler() {
         Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
             { text: "No", style: "cancel", onPress: resetOperation },
-            { text: "Yes", style: "default", onPress: uploadImage }
+            { text: "Yes", style: "default", onPress: submitOperation }
         ]);
     }
 
@@ -105,12 +105,6 @@ export default function AddRecipes(props) {
             { text: "No", style: "cancel", onPress: resetOperation },
             { text: "Yes", style: "default", onPress: resetOperation }
         ]);
-    }
-
-    // store all the information into firebase
-    function submitOperation() {
-        setTitle("");
-        setDescription(0);
     }
 
     function resetOperation() {
@@ -140,7 +134,7 @@ export default function AddRecipes(props) {
                 </Picker>
                 <Input
                     label="Steps"
-                    value={decription}
+                    value={description}
                     f_onChange={(newText) => { setDescription(newText) }}
                     mode="long" />
             </Column>

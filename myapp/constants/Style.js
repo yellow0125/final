@@ -94,6 +94,13 @@ const container = StyleSheet.create({
         backgroundColor: Colors.White,
         paddingTop: 30,
     },
+    post: {
+        backgroundColor: Colors.BgLightGreen,
+        width:300,
+        margin:10,
+        padding: 20,
+        borderRadius:10,
+      },
 
 })
 
@@ -135,6 +142,12 @@ const form = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: 200
+    },
+    imageInPost: {
+        justifyContent: 'center',
+        width: '100%',
+        height: 200,
+        borderRadius: 10,
     },
     pictureButton: {
         width: 100,
