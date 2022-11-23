@@ -41,6 +41,11 @@ In the first week, we plan to do these work below:
 1. implement Camera function, allowing user take picture fliping camere
 2. implement Image picker function, allowing user select photo from gallery
 3. implement camera//gallery request function
+  
+#### 11/22/2022 Implement post in AllRecipeScreen
+1. implement uploadImageToDB function in AddRecipe Screen
+2. implement flatList to show each recipe in AllRecipeScreen.
+2. others: Add componenet RecipeButton, RecipeList and offer more styles.
 
 ### Yichao Wu
 #### 11/17/2022 All screens without features
