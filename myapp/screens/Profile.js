@@ -18,7 +18,7 @@ export default function Profile({ navigation }) {
             doc(firestore, "users", auth.currentUser.uid), (doc) => {
                 let data = doc.data();
                 data = { ...data, key: doc.id };
-                console.log(data);
+                // console.log(data);
                 setUserData(data);
             }
         );
@@ -41,9 +41,9 @@ export default function Profile({ navigation }) {
                     </View>
                     <View style={styles.userContainer}>
                         <Text style={styles.username}>{userData.username}</Text>
-                        <Text>{auth.currentUser.email}</Text>
-                        <Text>{userData.gender}</Text>
-                        <Text>{userData.location}</Text>
+                        <Text style={styles.userInfo}>{auth.currentUser.email}</Text>
+                        <Text style={styles.userInfo}>{userData.gender}</Text>
+                        <Text style={styles.userInfo}>{userData.location}</Text>
                     </View>
                 </Row>
                 <MainButton mode='light' onPress={() => navigation.navigate("EditProfile", { userData })}>Edit Profilew</MainButton>
@@ -89,9 +89,14 @@ const styles = StyleSheet.create({
 
     },
     username: {
-        fontSize: 30,
+        fontSize: 24,
         fontWeight: 'bold',
         paddingBottom: 5
+
+    },
+    userInfo: {
+        color: Colors.Grey,
+        fontSize: 14,
 
     },
     iconContainer: {
