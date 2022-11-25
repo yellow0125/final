@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   flatText: {
-    color: Colors.White,
+    color: Colors.Red,
   },
   pressed: {
     opacity: 0.75,

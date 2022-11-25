@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         color: Colors.Black,
         marginBottom: 4,
         textAlign: "left",
+        fontWeight:'bold',
     },
     input: {
         borderWidth: 1,

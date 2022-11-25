@@ -1,4 +1,4 @@
-import { StyleSheet, Alert, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Alert, TextInput, ScrollView, Text, View } from 'react-native';
 import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -15,7 +15,7 @@ import { ref, uploadBytes } from "firebase/storage";
 
 export default function AddRecipes(props) {
     const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
+    const [cuisine, setCuisine] = useState('');
     const [caption, setCaption] = useState("")
     const [description, setDescription] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState('');
@@ -113,17 +113,62 @@ export default function AddRecipes(props) {
                     label="Title"
                     f_onChange={(newText) => { setTitle(newText) }}
                     value={title} />
-                <Picker
-                    label="location"
-                    selectedValue={selectedLanguage}
-                    mode={'dropdown'}
-                    onValueChange={(itemValue) =>
-                        setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="China" value="java" />
-                    <Picker.Item label="Japan" value="js" />
-                    <Picker.Item label="Italy" value="js" />
-                </Picker>
+
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>Cuisine</Text>
+                    <Picker
+                        label="cuisine"
+                        selectedValue={selectedLanguage}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }
+                    >
+                        <Picker.Item label="China" value="java" />
+                        <Picker.Item label="Japan" value="js" />
+                        <Picker.Item label="Italy" value="js" />
+                        <Picker.Item label="America" value="js" />
+                        <Picker.Item label="British" value="js" />
+                        <Picker.Item label="Franch" value="js" />
+                    </Picker>
+                </View>
+
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>Cooking Style</Text>
+                    <Picker
+                        label="cookingstyle"
+                        selectedValue={selectedLanguage}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Bake" value="java" />
+                        <Picker.Item label="Deep-Fry" value="js" />
+                        <Picker.Item label="Steam" value="js" />
+                        <Picker.Item label="Grill" value="js" />
+                        <Picker.Item label="Pan Fry" value="js" />
+                        <Picker.Item label="Mashup" value="js" />
+                    </Picker>
+                </View>
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>Difficulty</Text>
+                    <Picker
+                        label="difficulty"
+                        selectedValue={selectedLanguage}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Under 15 minutes" value="java" />
+                        <Picker.Item label="Under 30 minutes" value="js" />
+                        <Picker.Item label="Under 45 minutes" value="js" />
+                        <Picker.Item label="Under 1 hour" value="js" />
+                    </Picker>
+                </View>
+
+
                 <Input
                     label="Steps"
                     value={description}
@@ -174,4 +219,11 @@ const styles = StyleSheet.create({
         borderColor: "#B7B7B7",
         height: 50,
     },
+    pickerContainer: {
+        marginLeft: 20
+    },
+    pickerLabel: {
+        fontSize:14,
+        fontWeight:'bold'
+    }
 });
