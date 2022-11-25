@@ -51,10 +51,9 @@ export default function RecipeList() {
                         onPress={()=>console.log("navigate to detailRecipe Screen")}
             >
             <Column>
-            <RecipeImage source={item} />
-
+            <RecipeImage uri={item.uri} />
                 <Row>
-                    
+              
                   <Text style={styles.titleText}>{item.title}</Text>
                   <View style={styles.iconContainer}>
                             <Row style={styles.icon}>

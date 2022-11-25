@@ -19,7 +19,7 @@ export default function ImageManager({ navigation }) {
   const [imageUri, setImageUri] = useState('');
 
   const imageHandler = (uri) => {
-    console.log("imageHandler called", uri);
+    // console.log("imageHandler called", uri);
     setImageUri(uri);
   };
 

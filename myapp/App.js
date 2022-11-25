@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { auth } from "./firebase/firebase-setup";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-
+import { onAuthStateChanged } from "firebase/auth";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import { Provider } from "react-redux";

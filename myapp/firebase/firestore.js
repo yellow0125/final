@@ -7,8 +7,8 @@ export const createUserToDB = async (data) => {
         await setDoc(doc(firestore, "users", auth.currentUser.uid), {
             username: data.username,
             email: data.email,
-            gender: "click edit to add your gender",
-            location: "click edit to add your location",
+            gender: "Click edit to add your gender",
+            location: "Click locate to add your location",
 
         });
         console.log("Create User in db sucessfully. Users' data is: ", data)
@@ -23,7 +23,6 @@ export async function writeUserProfileToDB(profileData) {
             username:profileData.username,
             gender: profileData.gender,
             location: profileData.location
-
         });
     } catch (err) {
         console.log(err);

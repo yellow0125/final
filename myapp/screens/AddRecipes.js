@@ -62,7 +62,7 @@ export default function AddRecipes(props) {
     async function uploadImageTest() {
         let uri = props.route.params.image;
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
-        console.log(childPath);
+        // console.log(childPath);
 
         const response = await fetch(uri);
         const blob = await response.blob();
@@ -143,8 +143,8 @@ export default function AddRecipes(props) {
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
                 <MainButton style={styles.buttons} onPress={submitHandler} mode='light'>Submit</MainButton>
             </Row>
-            <TextInput>dd</TextInput>
-            <TextInput>dd</TextInput>
+            <TextInput></TextInput>
+            <TextInput></TextInput>
         </ScrollView>
 
 
