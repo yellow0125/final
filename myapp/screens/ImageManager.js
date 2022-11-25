@@ -9,13 +9,7 @@ import { LogBox } from 'react-native';
 import Row from '../components/UI/Row';
 
 LogBox.ignoreLogs(['Non-serializable values were found in the navigation state',]);
-export default function ImageManager({ navigation }) {
-  const [imageUri, setImageUri] = useState('');
-
-  const imageHandler = (uri) => {
-    // console.log("imageHandler called", uri);
-    setImageUri(uri);
-  };
+export default function ImageManager({ navigation, imageHandler, imageUri }) {
 
   return (
     <View>

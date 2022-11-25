@@ -10,9 +10,9 @@ export default function AddPicture({ navigation, route }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-
   const [permissionInfo, requestPermisson] = ImagePicker.useCameraPermissions();
   const [image, setImage] = useState(null);
+
   const verifyPermission = async () => {
     if (permissionInfo.granted) {
       return true;
@@ -46,14 +46,25 @@ export default function AddPicture({ navigation, route }) {
   };
 
   const pickImageHandler = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-    setImage(result.assets[0].uri);
-    route.params.imageHandler(result.assets[0].uri)
+    try {
+      const hasPermission = await verifyPermission();
+      if (!hasPermission) {
+        return;
+      }
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 0.1,
+      });
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+        route.params.imageHandler(result.assets[0].uri)
+      }
+    } catch (err) {
+      console.log("Image picking error ", err);
+    }
+
   };
 
   return (
@@ -71,9 +82,8 @@ export default function AddPicture({ navigation, route }) {
       <View style={container.formCenter}>
         <MainButton style={form.button} mode='light' onPress={() => takeImageHandler()}>Take a Picture</MainButton>
         <MainButton style={form.button} mode='light' onPress={() => pickImageHandler()}>Pick Image From Gallery</MainButton>
-        <MainButton style={form.button} mode='light' onPress={() => navigation.navigate("AddRecipe", { image })}>{image ? ('Save') : ('Cancel')}</MainButton>
+        <MainButton style={form.button} mode='light' onPress={() => navigation.navigate("AddRecipe", { image})}>{image ? ('Save') : ('Cancel')}</MainButton>
       </View>
-
     </View>
   );
 }

@@ -13,8 +13,9 @@ import RecipeImage from '../components/UI/RecipeImage';
 import Column from '../components/UI/Column';
 import { AntDesign } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
+import MainButton from '../components/UI/MainButton';
 export default function MyRecipes({ navigation }) {
-    const [recipes, setRecipes] = useState();
+    const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -38,33 +39,40 @@ export default function MyRecipes({ navigation }) {
             unsubsribe();
         }
     }, [],);
-    return (
-        <FlatList
-            data={recipes}
-            numColumns={2}
-            // key={2}
-            keyExtractor={item => item.key}
-            renderItem={({ item }) => (
-                <Pressable
-                    style={styles.wholeContainer}
-                    android_ripple={{ color: Colors.LightGrey, foreground: true }}
-                    onPress={() => console.log("navigate to detailRecipe Screen")}
-                    >
-                        
-                    <View style={styles.imgcontainer}>
-                        <RecipeImage uri={item.uri} style={form.imageInPost2} />
-                    </View>
-                    <View>
-                        <Row>
-                            <Text style={styles.titleText}>{item.title}</Text>
-                            <AntDesign name="like2" size={20} color="black" />
-                            <Text>{item.like}</Text>
-                        </Row>
-                    </View>
-                </Pressable>
 
+    return (
+        <>
+            {recipes.length == 0 ? (
+
+            <MainButton onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
+
+            ) : (<FlatList
+                data={recipes}
+                numColumns={2}
+                keyExtractor={item => item.key}
+                renderItem={({ item }) => (
+                    <Pressable
+                        style={styles.wholeContainer}
+                        android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                        onPress={() => console.log("navigate to detailRecipe Screen")}
+                    >
+
+                        <View style={styles.imgcontainer}>
+                            <RecipeImage uri={item.uri} style={form.imageInPost2} />
+                        </View>
+                        <View>
+                            <Row>
+                                <Text style={styles.titleText}>{item.title}</Text>
+                                <AntDesign name="like2" size={20} color="black" />
+                                <Text>{item.like}</Text>
+                            </Row>
+                        </View>
+                    </Pressable>
+
+                )}
+            />
             )}
-        />
+        </>
     );
 }
 
@@ -83,6 +91,6 @@ const styles = StyleSheet.create({
         color: Colors.DescriptionText,
         marginLeft: 12,
         width: 140,
-        fontWeight:'bold',
+        fontWeight: 'bold',
     },
 })

@@ -16,11 +16,19 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export default function AddRecipes(props) {
+    const [imageUri, setImageUri] = useState('');
+    const imageHandler = (uri) => {
+        setImageUri(uri);
+    };
+
     const [title, setTitle] = useState('');
-    const [cuisine, setCuisine] = useState('');
-    const [caption, setCaption] = useState("")
     const [description, setDescription] = useState('');
-    const [selectedLanguage, setSelectedLanguage] = useState('');
+    const [cuisine, setCuisine] = useState('');
+
+    const [selectedCuisine, setSelectedCuisine] = useState('');
+    const [selectedDiff, setSelectedDiff] = useState('');
+    const [selectedCookStyle, setSelectedCookStyle] = useState('');
+
     const [genderOpen, setGenderOpen] = useState(false);
     const [genderValue, setGenderValue] = useState(null);
     const [gender, setGender] = useState([
@@ -39,7 +47,7 @@ export default function AddRecipes(props) {
             console.log("fetch image ", err);
         }
     };
-
+  
     const submitOperation = async () => {
         let uri = props.route.params.image;
         try {
@@ -53,6 +61,14 @@ export default function AddRecipes(props) {
             await uploadRecipeToDB({ title, description, uri });
             props.navigation.navigate('Profile')
             console.log('image upload success')
+            setTitle('');
+            setDescription('');
+            setCuisine('')
+            setSelectedCuisine('defaultC')
+            setSelectedCookStyle('defaultCS')
+            setSelectedDiff('defaultD')
+            setImageUri('')
+
         } catch (err) {
             console.log("image upload ", err);
         }
@@ -102,14 +118,14 @@ export default function AddRecipes(props) {
     }
 
     function resetOperation() {
-        setTitle("");
-        setDescription(0);
+        setTitle('');
+        setDescription('');
         setCuisine('')
     }
 
     return (
         <ScrollView style={container.containerAdd}>
-            <ImageManager navigation={props.navigation} />
+            <ImageManager navigation={props.navigation} imageHandler={imageHandler} imageUri={imageUri} />
             <Column>
                 <Input
                     label="Title"
@@ -117,16 +133,18 @@ export default function AddRecipes(props) {
                     value={title} />
 
                 <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}><MaterialCommunityIcons name="pot-steam-outline" size={20} color="black" />Cuisine</Text>
+                    <Text style={styles.pickerLabel}>
+                        <MaterialCommunityIcons name="pot-steam-outline" size={20} color="black" />
+                        Cuisine</Text>
                     <Picker
                         label="cuisine"
-                        selectedValue={selectedLanguage}
+                        selectedValue={selectedCuisine}
                         mode={'dropdown'}
                         onValueChange={(itemValue) =>
-                            setSelectedLanguage(itemValue)
+                            setSelectedCuisine(itemValue)
                         }
                     >
-                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Please Select" value="defaultC" />
                         <Picker.Item label="China" value="chn" />
                         <Picker.Item label="Japan" value="ja" />
                         <Picker.Item label="Italy" value="it" />
@@ -142,13 +160,13 @@ export default function AddRecipes(props) {
                         Cooking Style</Text>
                     <Picker
                         label="cookingstyle"
-                        selectedValue={selectedLanguage}
+                        selectedValue={selectedCookStyle}
                         mode={'dropdown'}
                         onValueChange={(itemValue) =>
-                            setSelectedLanguage(itemValue)
+                            setSelectedCookStyle(itemValue)
                         }
                     >
-                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Please Select" value="defaultCS" />
                         <Picker.Item label="Bake" value="ba" />
                         <Picker.Item label="Deep-Fry" value="df" />
                         <Picker.Item label="Steam" value="st" />
@@ -159,16 +177,18 @@ export default function AddRecipes(props) {
                 </View>
                 <View style={styles.pickerContainer}>
 
-                    <Text style={styles.pickerLabel}><Ionicons name="timer-outline" size={20} color="black" /> Difficulty</Text>
+                    <Text style={styles.pickerLabel}>
+                        <Ionicons name="timer-outline" size={20} color="black" />
+                        Difficulty</Text>
                     <Picker
                         label="difficulty"
-                        selectedValue={selectedLanguage}
+                        selectedValue={selectedDiff}
                         mode={'dropdown'}
                         onValueChange={(itemValue) =>
-                            setSelectedLanguage(itemValue)
+                            setSelectedDiff(itemValue)
                         }
                     >
-                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Please Select" value="defaultD" />
                         <Picker.Item label="Under 15 minutes" value="15" />
                         <Picker.Item label="Under 30 minutes" value="30" />
                         <Picker.Item label="Under 45 minutes" value="45" />

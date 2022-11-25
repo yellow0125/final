@@ -66,7 +66,7 @@ export default function EditProfile({ navigation, route }) {
                         onValueChange={(itemValue) =>
                             setGender(itemValue)
                         }>
-                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Please Select" value="defaultG" />
                         <Picker.Item label="Male" value="Male" />
                         <Picker.Item label="Female" value="Female" />
                         <Picker.Item label="Hiden" value="Hiden" />
@@ -82,7 +82,7 @@ export default function EditProfile({ navigation, route }) {
                         onValueChange={(itemValue) =>
                             setLocation(itemValue)
                         }>
-                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Please Select" value="defaultL" />
                         <Picker.Item label="China" value="China" />
                         <Picker.Item label="Japan" value="Japan" />
                         <Picker.Item label="Italy" value="Italy" />
