@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
@@ -12,7 +12,7 @@ import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
 import Column from './UI/Column';
 import { AntDesign } from '@expo/vector-icons';
-
+import { form } from '../constants/Style';
 export default function RecipeList() {
   const [recipes, setRecipes] = useState();
   const [imageURL, setImageURL] = useState("");
@@ -49,7 +49,7 @@ export default function RecipeList() {
           onPress={() => console.log("navigate to detailRecipe Screen")}
         >
           <Column>
-            <RecipeImage uri={item.uri} />
+            <RecipeImage uri={item.uri} style={form.imageInPost} />
             <Row>
               <Text style={styles.titleText}>{item.title}</Text>
               <View style={styles.iconContainer}>

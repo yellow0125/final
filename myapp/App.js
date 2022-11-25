@@ -56,9 +56,9 @@ export default function App() {
             headerTitleAlign: "center",
           }} initialRouteName="Main">
           <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
-          <Stack.Screen name="Camera" component={AddPicture}/>
-          <Stack.Screen name="EditProfile" component={EditProfile} />
-          <Stack.Screen name="MyRecipes" component={MyRecipes} />
+          <Stack.Screen name="Camera" component={AddPicture} />
+          <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerTitle: "Settings" }} />
+          <Stack.Screen name="MyRecipes" component={MyRecipes} options={{ headerTitle: "My Recipes" }} />
 
         </Stack.Navigator>
       </Provider>

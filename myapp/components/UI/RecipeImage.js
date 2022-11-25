@@ -10,7 +10,7 @@ import { getDownloadURL, ref } from "firebase/storage";
 
 export default function RecipeImage(props) {
   const [imageUri, setImageUri] = useState('');
-  const { uri } = props
+  const { uri, style } = props
   useEffect(() => {
     const getImageURL = async () => {
       try {
@@ -28,20 +28,8 @@ export default function RecipeImage(props) {
   }, []);
 
   return (
-    <View style={{ marginHorizontal: 8 }}>
-      <Image source={imageUri ? { uri: imageUri } : null} style={form.imageInPost} />
+    <View style={style}>
+      <Image source={imageUri ? { uri: imageUri } : null} style={form.imageR} />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  imgbutton: {
-    marginHorizontal: 8,
-    minWidth: 100,
-    backgroundColor: Colors.LightGrey,
-    justifyContent: 'center',
-    width: '100%',
-    height: 200
-
-  },
-});
