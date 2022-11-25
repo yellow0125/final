@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Text, TextInput, View, Image } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import { container, form } from '../../constants/Style';
-
 import { auth } from "../../firebase/firebase-setup"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { createUserToDB } from '../../firebase/firestore';
@@ -43,7 +42,6 @@ export default function Register({ navigation }) {
       console.log(err);
     }
   }
-
 
   return (
     <View style={container.center}>
@@ -86,7 +84,6 @@ export default function Register({ navigation }) {
           </Text>
         </View>
       </View>
-
 
       <Snackbar
         visible={isValid.boolSnack}

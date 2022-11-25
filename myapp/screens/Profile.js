@@ -8,7 +8,7 @@ import { firestore, auth, storage } from '../firebase/firebase-setup';
 import { getUser } from '../firebase/firestore';
 import Row from '../components/UI/Row';
 import Colors from '../constants/Colors';
-import { Entypo, Ionicons, AntDesign, EvilIcons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 export default function Profile({ navigation }) {
     const [userData, setUserData] = useState([]);
@@ -18,7 +18,6 @@ export default function Profile({ navigation }) {
             doc(firestore, "users", auth.currentUser.uid), (doc) => {
                 let data = doc.data();
                 data = { ...data, key: doc.id };
-                // console.log(data);
                 setUserData(data);
             }
         );
@@ -57,7 +56,10 @@ export default function Profile({ navigation }) {
                     <Row>
                         <View style={styles.iconContainer}>
                             <Row style={styles.icon}>
-                                <Ionicons name="location-outline" size={36} color="black" />
+                                <Ionicons 
+                                name="location-outline" 
+                                size={36} 
+                                color="black" />
                             </Row>
                             <Row><Text>Locate Me</Text></Row>
                         </View>
@@ -77,13 +79,20 @@ export default function Profile({ navigation }) {
                     <Row>
                         <View style={styles.iconContainer}>
                             <Row style={styles.icon}>
-                                <Ionicons name="md-fast-food-outline" size={36} color="black" />
+                                <Ionicons 
+                                name="md-fast-food-outline" 
+                                size={36} 
+                                color="black" 
+                                onPress={() => navigation.navigate("MyRecipes", { userData })}/>
                             </Row>
                             <Row><Text>My Recipes</Text></Row>
                         </View>
                         <View style={styles.iconContainer}>
                             <Row style={styles.icon}>
-                                <AntDesign name="like2" size={36} color="black" />
+                                <AntDesign 
+                                name="like2" 
+                                size={36} 
+                                color="black" />
                             </Row>
                             <Row><Text>My Favorite</Text></Row>
                         </View>
@@ -95,8 +104,6 @@ export default function Profile({ navigation }) {
             </View>
         </ScrollView>
     );
-
-
 }
 
 const styles = StyleSheet.create({
@@ -115,7 +122,7 @@ const styles = StyleSheet.create({
         height: "100%"
     },
     imageContainer2: {
-        width: Dimensions.get('window').width ,
+        width: Dimensions.get('window').width,
         height: Dimensions.get('window').width * 0.22,
     },
     userContainer: {

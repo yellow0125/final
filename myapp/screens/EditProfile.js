@@ -1,16 +1,13 @@
-import { StyleSheet, Text, View, Alert, Image } from 'react-native';
-import React, { useState, useEffect, } from "react";
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
-import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
 import Input from '../components/UI/Input';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
-import { container, form } from '../constants/Style';
+import { container } from '../constants/Style';
 import { writeUserProfileToDB } from '../firebase/firestore';
-
-import { firestore, auth, storage } from '../firebase/firebase-setup';
 
 export default function EditProfile({ navigation, route }) {
     const currentUserData = route.params.userData;
@@ -36,7 +33,6 @@ export default function EditProfile({ navigation, route }) {
     // store all the information into firebase
     function submitOperation() {
         if (username.length > 0) {
-
             writeUserProfileToDB({ username, gender, location, key })
             navigation.goBack();
             return;
@@ -62,28 +58,39 @@ export default function EditProfile({ navigation, route }) {
             <Column>
                 <Input label="Username" value={username} f_onChange={setUsername} />
 
-                <Picker
-                    label="Gender"
-                    selectedValue={gender}
-                    onValueChange={(itemValue) =>
-                        setGender(itemValue)
-                    }>
-                    <Picker.Item label="Male" value="Male" />
-                    <Picker.Item label="Female" value="Female" />
-                    <Picker.Item label="Hiden" value="Hiden" />
-                </Picker>
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>Gender</Text>
+                    <Picker
+                        label="Gender"
+                        selectedValue={gender}
+                        onValueChange={(itemValue) =>
+                            setGender(itemValue)
+                        }>
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Male" value="Male" />
+                        <Picker.Item label="Female" value="Female" />
+                        <Picker.Item label="Hiden" value="Hiden" />
+                    </Picker>
+                </View>
 
-                <Picker
-                    label="Location"
-                    selectedValue={location}
-                    mode={'dropdown'}
-                    onValueChange={(itemValue) =>
-                        setLocation(itemValue)
-                    }>
-                    <Picker.Item label="China" value="China" />
-                    <Picker.Item label="Japan" value="Japan" />
-                    <Picker.Item label="Italy" value="Italy" />
-                </Picker>
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>Location</Text>
+                    <Picker
+                        label="Location"
+                        selectedValue={location}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setLocation(itemValue)
+                        }>
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="China" value="China" />
+                        <Picker.Item label="Japan" value="Japan" />
+                        <Picker.Item label="Italy" value="Italy" />
+                    </Picker>
+                </View>
+
+
+
 
             </Column>
             <Row style={styles.buttonsContainer}>
@@ -118,4 +125,11 @@ const styles = StyleSheet.create({
         borderColor: "#B7B7B7",
         height: 50,
     },
+    pickerContainer: {
+        marginLeft: 20
+    },
+    pickerLabel: {
+        fontSize: 14,
+        fontWeight: 'bold'
+    }
 });

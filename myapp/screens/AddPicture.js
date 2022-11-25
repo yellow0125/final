@@ -52,8 +52,6 @@ export default function AddPicture({ navigation, route }) {
       aspect: [4, 3],
       quality: 1,
     });
-
-    // console.log(result);
     setImage(result.assets[0].uri);
     route.params.imageHandler(result.assets[0].uri)
   };

@@ -31,6 +31,9 @@ In the first week, we plan to do these work below:
 1. modify details of profile page
 2. delete save screen, add uri in Add screen
 3. Add image manager component
+#### 11/24/2022 My Recipes Screen and ProfileScreen
+1. create my recipes screen, show 2 columns
+2. add icons and other navigate
 
 ### Xiaolan Wu
 #### 11/17/2022 Saving data Using Firebase and Redux
@@ -68,6 +71,15 @@ In the first week, we plan to do these work below:
 - if the user is not login, they can only see these two page, and can do nothing.
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
 
+### 2. Profile page and Edit Profile page
+- allow users check their information and edit them update to database
+- allow users to locate himself by **google map API**
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
+
+### 3. My Recipes page and Add a Recipes page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
 ## Install dependencies
 In order to install, clone this repository and run:
 

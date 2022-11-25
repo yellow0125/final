@@ -1,6 +1,5 @@
-import { StyleSheet, View, Alert, TextInput, Image, ScrollView } from 'react-native';
-import React, { useState, useEffect } from "react";
-import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
+import { StyleSheet, Alert, TextInput, ScrollView, Text, View } from 'react-native';
+import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
@@ -13,12 +12,12 @@ import ImageManager from './ImageManager';
 import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
-
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export default function AddRecipes(props) {
     const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
+    const [cuisine, setCuisine] = useState('');
     const [caption, setCaption] = useState("")
     const [description, setDescription] = useState('');
     const [selectedLanguage, setSelectedLanguage] = useState('');
@@ -51,8 +50,8 @@ export default function AddRecipes(props) {
                 const uploadResult = await uploadBytes(imageRef, imageBlob);
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
             }
-            await uploadRecipeToDB({title, description, uri});
-            // props.navigation.navigate('Profile')
+            await uploadRecipeToDB({ title, description, uri });
+            props.navigation.navigate('Profile')
             console.log('image upload success')
         } catch (err) {
             console.log("image upload ", err);
@@ -62,11 +61,8 @@ export default function AddRecipes(props) {
     async function uploadImageTest() {
         let uri = props.route.params.image;
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
-        console.log(childPath);
-
         const response = await fetch(uri);
         const blob = await response.blob();
-
         const task = firebase
             .storage()
             .ref()
@@ -89,9 +85,7 @@ export default function AddRecipes(props) {
 
         task.on("state_changed", taskProgress, taskError, taskCompleted);
         console.log("upload picture")
-
     }
-
 
     function submitHandler() {
         Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
@@ -110,7 +104,7 @@ export default function AddRecipes(props) {
     function resetOperation() {
         setTitle("");
         setDescription(0);
-        setLocation('')
+        setCuisine('')
     }
 
     return (
@@ -121,17 +115,68 @@ export default function AddRecipes(props) {
                     label="Title"
                     f_onChange={(newText) => { setTitle(newText) }}
                     value={title} />
-                <Picker
-                    label="location"
-                    selectedValue={selectedLanguage}
-                    mode={'dropdown'}
-                    onValueChange={(itemValue) =>
-                        setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="China" value="java" />
-                    <Picker.Item label="Japan" value="js" />
-                    <Picker.Item label="Italy" value="js" />
-                </Picker>
+
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}><MaterialCommunityIcons name="pot-steam-outline" size={20} color="black" />Cuisine</Text>
+                    <Picker
+                        label="cuisine"
+                        selectedValue={selectedLanguage}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="China" value="chn" />
+                        <Picker.Item label="Japan" value="ja" />
+                        <Picker.Item label="Italy" value="it" />
+                        <Picker.Item label="America" value="us" />
+                        <Picker.Item label="British" value="uk" />
+                        <Picker.Item label="Franch" value="fr" />
+                    </Picker>
+                </View>
+
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>
+                        <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
+                        Cooking Style</Text>
+                    <Picker
+                        label="cookingstyle"
+                        selectedValue={selectedLanguage}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Bake" value="ba" />
+                        <Picker.Item label="Deep-Fry" value="df" />
+                        <Picker.Item label="Steam" value="st" />
+                        <Picker.Item label="Grill" value="gr" />
+                        <Picker.Item label="Pan Fry" value="pf" />
+                        <Picker.Item label="Mashup" value="mu" />
+                    </Picker>
+                </View>
+                <View style={styles.pickerContainer}>
+
+                    <Text style={styles.pickerLabel}><Ionicons name="timer-outline" size={20} color="black" /> Difficulty</Text>
+                    <Picker
+                        label="difficulty"
+                        selectedValue={selectedLanguage}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Under 15 minutes" value="15" />
+                        <Picker.Item label="Under 30 minutes" value="30" />
+                        <Picker.Item label="Under 45 minutes" value="45" />
+                        <Picker.Item label="Under 1 hour" value="60" />
+                    </Picker>
+                </View>
+
+
                 <Input
                     label="Steps"
                     value={description}
@@ -143,8 +188,8 @@ export default function AddRecipes(props) {
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
                 <MainButton style={styles.buttons} onPress={submitHandler} mode='light'>Submit</MainButton>
             </Row>
-            <TextInput>dd</TextInput>
-            <TextInput>dd</TextInput>
+            <TextInput></TextInput>
+            <TextInput></TextInput>
         </ScrollView>
 
 
@@ -174,7 +219,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: 200
-
     },
     text: {
         marginLeft: 18,
@@ -183,4 +227,11 @@ const styles = StyleSheet.create({
         borderColor: "#B7B7B7",
         height: 50,
     },
+    pickerContainer: {
+        marginLeft: 20
+    },
+    pickerLabel: {
+        fontSize: 14,
+        fontWeight: 'bold'
+    }
 });
