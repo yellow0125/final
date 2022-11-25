@@ -74,7 +74,7 @@ In the first week, we plan to do these work below:
 ### 2. Profile page and Edit Profile page
 - allow users check their information and edit them update to database
 - allow users to locate himself by **google map API**
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile.png" height="300" alt="profile"/>
 
 ### 3. My Recipes page and Add a Recipes page
 - allow users add a new recipe to db, and all user can see.
