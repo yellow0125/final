@@ -12,6 +12,8 @@ import ImageManager from './ImageManager';
 import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 export default function AddRecipes(props) {
     const [title, setTitle] = useState('');
@@ -102,7 +104,7 @@ export default function AddRecipes(props) {
     function resetOperation() {
         setTitle("");
         setDescription(0);
-        setLocation('')
+        setCuisine('')
     }
 
     return (
@@ -115,7 +117,7 @@ export default function AddRecipes(props) {
                     value={title} />
 
                 <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>Cuisine</Text>
+                    <Text style={styles.pickerLabel}><MaterialCommunityIcons name="pot-steam-outline" size={20} color="black" />Cuisine</Text>
                     <Picker
                         label="cuisine"
                         selectedValue={selectedLanguage}
@@ -124,17 +126,20 @@ export default function AddRecipes(props) {
                             setSelectedLanguage(itemValue)
                         }
                     >
-                        <Picker.Item label="China" value="java" />
-                        <Picker.Item label="Japan" value="js" />
-                        <Picker.Item label="Italy" value="js" />
-                        <Picker.Item label="America" value="js" />
-                        <Picker.Item label="British" value="js" />
-                        <Picker.Item label="Franch" value="js" />
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="China" value="chn" />
+                        <Picker.Item label="Japan" value="ja" />
+                        <Picker.Item label="Italy" value="it" />
+                        <Picker.Item label="America" value="us" />
+                        <Picker.Item label="British" value="uk" />
+                        <Picker.Item label="Franch" value="fr" />
                     </Picker>
                 </View>
 
                 <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>Cooking Style</Text>
+                    <Text style={styles.pickerLabel}>
+                        <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
+                        Cooking Style</Text>
                     <Picker
                         label="cookingstyle"
                         selectedValue={selectedLanguage}
@@ -143,16 +148,18 @@ export default function AddRecipes(props) {
                             setSelectedLanguage(itemValue)
                         }
                     >
-                        <Picker.Item label="Bake" value="java" />
-                        <Picker.Item label="Deep-Fry" value="js" />
-                        <Picker.Item label="Steam" value="js" />
-                        <Picker.Item label="Grill" value="js" />
-                        <Picker.Item label="Pan Fry" value="js" />
-                        <Picker.Item label="Mashup" value="js" />
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Bake" value="ba" />
+                        <Picker.Item label="Deep-Fry" value="df" />
+                        <Picker.Item label="Steam" value="st" />
+                        <Picker.Item label="Grill" value="gr" />
+                        <Picker.Item label="Pan Fry" value="pf" />
+                        <Picker.Item label="Mashup" value="mu" />
                     </Picker>
                 </View>
                 <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>Difficulty</Text>
+
+                    <Text style={styles.pickerLabel}><Ionicons name="timer-outline" size={20} color="black" /> Difficulty</Text>
                     <Picker
                         label="difficulty"
                         selectedValue={selectedLanguage}
@@ -161,10 +168,11 @@ export default function AddRecipes(props) {
                             setSelectedLanguage(itemValue)
                         }
                     >
-                        <Picker.Item label="Under 15 minutes" value="java" />
-                        <Picker.Item label="Under 30 minutes" value="js" />
-                        <Picker.Item label="Under 45 minutes" value="js" />
-                        <Picker.Item label="Under 1 hour" value="js" />
+                        <Picker.Item label="Please Select" value="default" />
+                        <Picker.Item label="Under 15 minutes" value="15" />
+                        <Picker.Item label="Under 30 minutes" value="30" />
+                        <Picker.Item label="Under 45 minutes" value="45" />
+                        <Picker.Item label="Under 1 hour" value="60" />
                     </Picker>
                 </View>
 
@@ -223,7 +231,7 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     pickerLabel: {
-        fontSize:14,
-        fontWeight:'bold'
+        fontSize: 14,
+        fontWeight: 'bold'
     }
 });
