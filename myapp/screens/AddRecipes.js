@@ -13,6 +13,7 @@ import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Snackbar } from 'react-native-paper';
 
 
 export default function AddRecipes(props) {
@@ -28,6 +29,7 @@ export default function AddRecipes(props) {
     const [selectedCuisine, setSelectedCuisine] = useState('');
     const [selectedDiff, setSelectedDiff] = useState('');
     const [selectedCookStyle, setSelectedCookStyle] = useState('');
+    const [isValid, setIsValid] = useState(true);
 
     const [genderOpen, setGenderOpen] = useState(false);
     const [genderValue, setGenderValue] = useState(null);
@@ -47,8 +49,9 @@ export default function AddRecipes(props) {
             console.log("fetch image ", err);
         }
     };
-  
+
     const submitOperation = async () => {
+
         let uri = props.route.params.image;
         try {
             if (uri) {
@@ -104,10 +107,26 @@ export default function AddRecipes(props) {
     }
 
     function submitHandler() {
-        Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
-            { text: "No", style: "cancel", onPress: resetOperation },
-            { text: "Yes", style: "default", onPress: submitOperation }
-        ]);
+        if (imageUri.length==0) {
+            setIsValid({ bool: true, boolSnack: true, message: "Please add a picture" })
+            return;
+        }
+        if (title.length == 0 || description == 0) {
+            setIsValid({ bool: true, boolSnack: true, message: "Please fill out everything" })
+            return;
+        }
+        if (selectedCuisine == 'defaultC' || selectedCookStyle == 'defaultCS' || selectedDiff == 'defaultD') {
+            setIsValid({ bool: true, boolSnack: true, message: "Please selete all tags" })
+            return;
+        }
+        else {
+            Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
+                { text: "No", style: "cancel", onPress: resetOperation },
+                { text: "Yes", style: "default", onPress: submitOperation }
+            ]);
+
+        }
+
     }
 
     function resetHandler() {
@@ -126,6 +145,13 @@ export default function AddRecipes(props) {
     return (
         <ScrollView style={container.containerAdd}>
             <ImageManager navigation={props.navigation} imageHandler={imageHandler} imageUri={imageUri} />
+            <Snackbar
+            style={styles.snackbar}
+                visible={isValid.boolSnack}
+                duration={2000}
+                onDismiss={() => { setIsValid({ boolSnack: false }) }}>
+                {isValid.message}
+            </Snackbar>
             <Column>
                 <Input
                     label="Title"
@@ -217,6 +243,9 @@ export default function AddRecipes(props) {
 }
 
 const styles = StyleSheet.create({
+    snackbar:{
+        marginBottom:400
+    },
     title: {
         textAlign: 'center',
         color: Colors.BgDarkGreen,

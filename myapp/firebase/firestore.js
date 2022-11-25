@@ -31,7 +31,7 @@ export async function writeUserProfileToDB(profileData) {
 
 export async function deleteFromDB(key) {
     try {
-        await deleteDoc(doc(firestore, "goals", key));
+        await deleteDoc(doc(firestore, "recipes", key));
     } catch (err) {
         console.log(err);
     }
