@@ -6,7 +6,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import { Provider } from "react-redux";
-import {applyMiddleware, legacy_createStore as createStore} from 'redux';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import rootReducer from './redux/reducers'
 import thunk from "redux-thunk";
 import Main from "./components/Main";
@@ -48,13 +48,13 @@ export default function App() {
   const AppStack = () => {
     return (
       <Provider store={store}>
-        <Stack.Navigator         
+        <Stack.Navigator
           screenOptions={{
             headerStyle: { backgroundColor: Colors.BgDarkGreen },
             headerTintColor: Colors.White,
             headerTitleAlign: "center",
-          }}initialRouteName="Main">
-          <Stack.Screen name="Main" component={Main} options={{headerShown:false}}/>
+          }} initialRouteName="Main">
+          <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
           <Stack.Screen name="Camera" component={AddPicture} navigation={this.navigation} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
 

@@ -2,19 +2,14 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import Colors from '../../constants/Colors';
 
 export default function CustomInput({ label, value, f_onChange, mode }) {
-
-
     return (
-
         <View style={styles.container}>
             <Text style={styles.label}>{label}</Text>
             <TextInput
-                style={[styles.input, (mode === 'long') ? styles.inputL : null]} 
-                // onChangeText={(newText) => { setText(newText) }}
+                style={[styles.input, (mode === 'long') ? styles.inputL : null]}
                 onChangeText={f_onChange}
                 value={value} />
         </View>
-
     );
 }
 
@@ -28,7 +23,6 @@ const styles = StyleSheet.create({
         color: Colors.Black,
         marginBottom: 4,
         textAlign: "left",
-        // alignItems:"left",
     },
     input: {
         borderWidth: 1,

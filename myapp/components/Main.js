@@ -1,11 +1,9 @@
-import React, { Component, Button } from 'react'
+import React, { Component } from 'react'
 import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { fetchUser } from '../redux/actions/index';
-import MainButton from '../components/UI/MainButton';
 import Colors from "../constants/Colors";
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LocationsRecipes from "../screens/LocationsRecipes";
 import AllRecipes from "../screens/AllRecipes";
@@ -14,11 +12,7 @@ import CollectedRecipes from "../screens/CollectedRecipes";
 import Profile from "../screens/Profile";
 
 const Tab = createBottomTabNavigator();
-
 export class Main extends Component {
-  // componentDidMount() {
-  //   this.props.fetchUser();
-  // }
 
   render() {
     return (
@@ -60,7 +54,7 @@ export class Main extends Component {
           }}
         />
         <Tab.Screen name="Profile" component={Profile}
-          options={({navigation}) => {
+          options={({ navigation }) => {
             return {
               tabBarIcon: ({ color, size }) => <FontAwesome name="user" size={size} color={color} />,
               headerTitle: "My Profile",

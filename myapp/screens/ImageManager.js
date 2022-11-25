@@ -1,20 +1,13 @@
-import { writeToDB, deleteFromDB } from "../firebase/firestore";
-import { firestore, auth, storage } from "../firebase/firebase-setup";
-import { ref, uploadBytes } from "firebase/storage";
-import { StyleSheet, View, Alert, Image, ScrollView } from 'react-native';
-import React, { useState, useEffect } from "react";
-import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
-import { Picker } from '@react-native-picker/picker';
-import DropDownPicker from 'react-native-dropdown-picker';
+
+import { StyleSheet, View, Image, } from 'react-native';
+import React, { useState } from "react";
+import { Entypo } from '@expo/vector-icons';
 import MainButton from '../components/UI/MainButton';
-import Row from '../components/UI/Row';
-import Input from '../components/UI/Input';
-import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
-import { container, form } from '../constants/Style';
+import { form } from '../constants/Style';
 import { LogBox } from 'react-native';
 
-LogBox.ignoreLogs([ 'Non-serializable values were found in the navigation state', ]);
+LogBox.ignoreLogs(['Non-serializable values were found in the navigation state',]);
 export default function ImageManager({ navigation }) {
   const [imageUri, setImageUri] = useState('');
 

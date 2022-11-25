@@ -1,6 +1,5 @@
-import { StyleSheet, View, Alert, TextInput, Image, ScrollView } from 'react-native';
-import React, { useState, useEffect } from "react";
-import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
+import { StyleSheet, Alert, TextInput, ScrollView } from 'react-native';
+import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
@@ -13,8 +12,6 @@ import ImageManager from './ImageManager';
 import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
-
-
 
 export default function AddRecipes(props) {
     const [title, setTitle] = useState('');
@@ -51,8 +48,8 @@ export default function AddRecipes(props) {
                 const uploadResult = await uploadBytes(imageRef, imageBlob);
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
             }
-            await uploadRecipeToDB({title, description, uri});
-            // props.navigation.navigate('Profile')
+            await uploadRecipeToDB({ title, description, uri });
+            props.navigation.navigate('Profile')
             console.log('image upload success')
         } catch (err) {
             console.log("image upload ", err);
@@ -62,11 +59,8 @@ export default function AddRecipes(props) {
     async function uploadImageTest() {
         let uri = props.route.params.image;
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
-        // console.log(childPath);
-
         const response = await fetch(uri);
         const blob = await response.blob();
-
         const task = firebase
             .storage()
             .ref()
@@ -89,9 +83,7 @@ export default function AddRecipes(props) {
 
         task.on("state_changed", taskProgress, taskError, taskCompleted);
         console.log("upload picture")
-
     }
-
 
     function submitHandler() {
         Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
@@ -174,7 +166,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: 200
-
     },
     text: {
         marginLeft: 18,

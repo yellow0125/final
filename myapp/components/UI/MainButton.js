@@ -2,7 +2,6 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Colors from '../../constants/Colors';
 
-
 export default function MainButton({ children, onPress, mode, style }) {
   return (
     <View style={style}>
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
   },
   lightButtonText: {
     color: Colors.White,
-
   },
 
 });

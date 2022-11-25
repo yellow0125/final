@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 import { form } from '../../constants/Style';
-import { firestore, storage } from '../../firebase/firebase-setup';
-import { collection, onSnapshot, query, where } from "firebase/firestore"
+import { storage } from '../../firebase/firebase-setup';
 import { getDownloadURL, ref } from "firebase/storage";
 
 export default function RecipeImage(props) {
@@ -20,7 +19,6 @@ export default function RecipeImage(props) {
           const reference = ref(storage, uri);
           const downloadImageURL = await getDownloadURL(reference);
           setImageUri(downloadImageURL);
-          //   console.log("download successfully for image: ", imageUri)
         }
       } catch (err) {
         console.log("download image ", err);
@@ -30,11 +28,9 @@ export default function RecipeImage(props) {
   }, []);
 
   return (
-
     <View style={{ marginHorizontal: 8 }}>
-      <Image source={imageUri ? {uri: imageUri } : null} style={form.imageInPost} />
+      <Image source={imageUri ? { uri: imageUri } : null} style={form.imageInPost} />
     </View>
-
   )
 }
 

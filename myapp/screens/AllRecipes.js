@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { firestore } from '../firebase/firebase-setup';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { StyleSheet, View } from 'react-native';
 import RecipeList from '../components/RecipeList';
 
 import Colors from '../constants/Colors';
