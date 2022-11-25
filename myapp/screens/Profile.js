@@ -56,7 +56,10 @@ export default function Profile({ navigation }) {
                     <Row>
                         <View style={styles.iconContainer}>
                             <Row style={styles.icon}>
-                                <Ionicons name="location-outline" size={36} color="black" />
+                                <Ionicons 
+                                name="location-outline" 
+                                size={36} 
+                                color="black" />
                             </Row>
                             <Row><Text>Locate Me</Text></Row>
                         </View>
@@ -76,13 +79,20 @@ export default function Profile({ navigation }) {
                     <Row>
                         <View style={styles.iconContainer}>
                             <Row style={styles.icon}>
-                                <Ionicons name="md-fast-food-outline" size={36} color="black" />
+                                <Ionicons 
+                                name="md-fast-food-outline" 
+                                size={36} 
+                                color="black" 
+                                onPress={() => navigation.navigate("MyRecipes", { userData })}/>
                             </Row>
                             <Row><Text>My Recipes</Text></Row>
                         </View>
                         <View style={styles.iconContainer}>
                             <Row style={styles.icon}>
-                                <AntDesign name="like2" size={36} color="black" />
+                                <AntDesign 
+                                name="like2" 
+                                size={36} 
+                                color="black" />
                             </Row>
                             <Row><Text>My Favorite</Text></Row>
                         </View>
