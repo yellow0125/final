@@ -1,18 +1,16 @@
 
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Dimensions, Image, Alert, } from 'react-native';
-import { collection, addDoc, doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
+import { StyleSheet, View, Text, ScrollView, Dimensions, Image, } from 'react-native';
+import { doc, onSnapshot } from "firebase/firestore";
 import MainButton from '../components/UI/MainButton';
 import Loading from '../components/UI/Loading';
 import { signOut } from "firebase/auth";
 import { firestore, auth, storage } from '../firebase/firebase-setup';
-
 import Row from '../components/UI/Row';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import * as Location from "expo-location";
-import { MAPS_API_KEY } from "react-native-dotenv";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { getUser, saveUser } from '../firebase/firestore';
 import Geocoder from 'react-native-geocoding';
 Geocoder.init("AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY", { language: "en" });
@@ -41,11 +39,6 @@ export default function Profile({ navigation }) {
             setIsLoading(false)
         };
     }, []);
-
-
-    // if (isLoading) {
-    // 	return <Loading/>
-    // }
 
     useEffect(() => {
         if (route.params) {
@@ -90,15 +83,10 @@ export default function Profile({ navigation }) {
             console.log("locate user ", err);
         }
     };
-    // const reverseLocation = async (a, b) => {
-
-    // }
 
     const saveUserLocation = async () => {
-
         await saveUser({ country, location });
     };
-
 
     return (
         <ScrollView>
@@ -180,10 +168,7 @@ export default function Profile({ navigation }) {
                     </Row>
                     <MainButton mode='negative' onPress={() => signOut(auth)} >Sign Out</MainButton>
                     {country && <MainButton onPress={saveUserLocation}>Save My Location</MainButton>}
-
                 </View>
-
-
             </View>
         </ScrollView>
     );
