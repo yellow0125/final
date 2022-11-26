@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
 import MainButton from '../components/UI/MainButton';
@@ -8,12 +8,15 @@ import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import { container } from '../constants/Style';
 import { writeUserProfileToDB } from '../firebase/firestore';
-
+import { MAPS_API_KEY } from "react-native-dotenv";
+// MAPS_API_KEY ="AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY"
 export default function EditProfile({ navigation, route }) {
     const currentUserData = route.params.userData;
     const key = currentUserData.key;
     const [username, setUsername] = useState(currentUserData.username);
     const [gender, setGender] = useState(currentUserData.gender);
+    const [country, setCountry] = useState(currentUserData.country);
+    const [location, setLocation] = useState(currentUserData.location);
 
     function submitHandler() {
         Alert.alert("Submit", "Are you sure to update your profile?", [
@@ -71,6 +74,24 @@ export default function EditProfile({ navigation, route }) {
                         <Picker.Item label="Hiden" value="Hiden" />
                     </Picker>
                 </View>
+
+                {country && <View>
+                    <Text style={styles.pickerLabel}>Your Country</Text>
+                    <Text>{currentUserData.country}</Text>
+                </View>}
+
+                {location && (
+                    <View>
+                        <Text style={styles.pickerLabel}>Your Location</Text>
+                        <Image
+                            source={{
+                                uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
+                            }}
+                            style={{ width: "100%", height: 200 }}
+
+                        />
+                    </View>
+                )}
             </Column>
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
