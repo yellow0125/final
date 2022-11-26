@@ -35,6 +35,10 @@ In the first week, we plan to do these work below:
 1. create my recipes screen, show 2 columns
 2. add icons and other navigate
 
+#### 11/25/2022 Location
+1. add location in profile page
+2. use Geocoder to reverse location data
+
 ### Xiaolan Wu
 #### 11/17/2022 Saving data Using Firebase and Redux
 1. implement creating new user to database function

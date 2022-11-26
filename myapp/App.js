@@ -59,6 +59,7 @@ export default function App() {
           <Stack.Screen name="Camera" component={AddPicture} />
           <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerTitle: "Settings" }} />
           <Stack.Screen name="MyRecipes" component={MyRecipes} options={{ headerTitle: "My Recipes" }} />
+     
 
         </Stack.Navigator>
       </Provider>
