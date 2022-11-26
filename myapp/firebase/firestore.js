@@ -23,7 +23,6 @@ export async function writeUserProfileToDB(profileData) {
         const docRef = await updateDoc(doc(firestore, "users", profileData.key), {
             username: profileData.username,
             gender: profileData.gender,
-            country: profileData.country,
         });
     } catch (err) {
         console.log(err);
@@ -33,8 +32,8 @@ export async function writeUserProfileToDB(profileData) {
 export async function saveUser(user) {
     try {
         await updateDoc(doc(firestore, "users", auth.currentUser.uid), {
-            country:user.country,
-            location:user.location
+            country: user.country,
+            location: user.location
         });
         console.log('update success')
     } catch (err) {

@@ -14,7 +14,6 @@ export default function EditProfile({ navigation, route }) {
     const key = currentUserData.key;
     const [username, setUsername] = useState(currentUserData.username);
     const [gender, setGender] = useState(currentUserData.gender);
-    const [country, setCountry] = useState(currentUserData.country);
 
     function submitHandler() {
         Alert.alert("Submit", "Are you sure to update your profile?", [
@@ -29,11 +28,10 @@ export default function EditProfile({ navigation, route }) {
             { text: "Yes", style: "default", onPress: resetOperation }
         ]);
     }
-
     // store all the information into firebase
     function submitOperation() {
         if (username.length > 0) {
-            writeUserProfileToDB({ username, gender, country, key })
+            writeUserProfileToDB({ username, gender, key })
             navigation.goBack();
             return;
         }
@@ -50,6 +48,7 @@ export default function EditProfile({ navigation, route }) {
         setUsername(currentUserData.username);
         setGender(currentUserData.gender);
         setCountry(currentUserData.country);
+        setLocation(currentUserData.location);
     }
 
     return (
@@ -72,26 +71,6 @@ export default function EditProfile({ navigation, route }) {
                         <Picker.Item label="Hiden" value="Hiden" />
                     </Picker>
                 </View>
-
-                <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>Country</Text>
-                    <Picker
-                        label="Country"
-                        selectedValue={country}
-                        mode={'dropdown'}
-                        onValueChange={(itemValue) =>
-                            setCountry(itemValue)
-                        }>
-                        <Picker.Item label="Please Select" value="defaultL" />
-                        <Picker.Item label="China" value="China" />
-                        <Picker.Item label="Japan" value="Japan" />
-                        <Picker.Item label="Italy" value="Italy" />
-                    </Picker>
-                </View>
-
-
-
-
             </Column>
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
