@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
 import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { FlatList } from 'react-native';
-import RecipeButton from '../components/UI/RecipeButton';
 import { StyleSheet } from 'react-native';
-import { container, form } from '../constants/Style';
+import { form } from '../constants/Style';
 import Row from '../components/UI/Row';
 import Colors from '../constants/Colors';
 import RecipeImage from '../components/UI/RecipeImage';
-import Column from '../components/UI/Column';
 import { AntDesign } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
@@ -44,7 +42,7 @@ export default function MyRecipes({ navigation }) {
         <>
             {recipes.length == 0 ? (
 
-            <MainButton onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
+                <MainButton onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
 
             ) : (<FlatList
                 data={recipes}

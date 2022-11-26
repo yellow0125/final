@@ -14,7 +14,7 @@ export default function EditProfile({ navigation, route }) {
     const key = currentUserData.key;
     const [username, setUsername] = useState(currentUserData.username);
     const [gender, setGender] = useState(currentUserData.gender);
-    const [location, setLocation] = useState(currentUserData.location);
+    const [country, setCountry] = useState(currentUserData.country);
 
     function submitHandler() {
         Alert.alert("Submit", "Are you sure to update your profile?", [
@@ -33,7 +33,7 @@ export default function EditProfile({ navigation, route }) {
     // store all the information into firebase
     function submitOperation() {
         if (username.length > 0) {
-            writeUserProfileToDB({ username, gender, location, key })
+            writeUserProfileToDB({ username, gender, country, key })
             navigation.goBack();
             return;
         }
@@ -49,7 +49,7 @@ export default function EditProfile({ navigation, route }) {
     function resetOperation() {
         setUsername(currentUserData.username);
         setGender(currentUserData.gender);
-        setLocation(currentUserData.location);
+        setCountry(currentUserData.country);
     }
 
     return (
@@ -74,13 +74,13 @@ export default function EditProfile({ navigation, route }) {
                 </View>
 
                 <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>Location</Text>
+                    <Text style={styles.pickerLabel}>Country</Text>
                     <Picker
-                        label="Location"
-                        selectedValue={location}
+                        label="Country"
+                        selectedValue={country}
                         mode={'dropdown'}
                         onValueChange={(itemValue) =>
-                            setLocation(itemValue)
+                            setCountry(itemValue)
                         }>
                         <Picker.Item label="Please Select" value="defaultL" />
                         <Picker.Item label="China" value="China" />
