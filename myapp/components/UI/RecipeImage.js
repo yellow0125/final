@@ -32,7 +32,6 @@ export default function RecipeImage(props) {
             <Image source={imageUri ? { uri: imageUri } : null} style={form.imageR} />
           </View>
 
-    )
   }
   
   const styles = StyleSheet.create({
