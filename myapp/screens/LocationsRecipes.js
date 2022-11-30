@@ -17,8 +17,13 @@ export default function LocationsRecipes({ navigation }) {
                 style={{height: 50, width: 200}}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
             >
-                <Picker.Item label="United States" value="america" />
-                <Picker.Item label="United Kingdom" value="uk" />
+                <Picker.Item label="Africa" value="africa" />
+                <Picker.Item label="American" value="america" />
+                <Picker.Item label="Brazillian" value="brazillian" />
+                <Picker.Item label="British" value="uk" />
+                <Picker.Item label="China" value="china" />
+                <Picker.Item label="French" value="french" />                
+                <Picker.Item label="Italy" value="italy" />
                 <Text>selectedValue</Text>
             </Picker>
             <RecipeList location={selectedValue} />

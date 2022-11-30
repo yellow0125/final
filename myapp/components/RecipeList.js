@@ -49,17 +49,6 @@ export default function RecipeList(props) {
           unsubsribe();
         }
       }, [],);
-    
-      function locationFilter () {
-        let data = recipes
-        // console.log(data)
-        if (props.location && recipes) {
-          data.filter(recipe => recipe.selectedCuisine === props.location);
-          console.log(data)
-          console.log("show location", props.location)
-        } 
-        return data 
-      }
 
   return (
       <FlatList
