@@ -49,29 +49,32 @@ export default function RecipeList(props) {
   }, [],);
   return (
     <FlatList
-      data={props.location ? filteredRecipes : recipes}
-      numColumns={2}
-      keyExtractor={item => item.key}
-      renderItem={({ item }) => (
+    data={props.location? filteredRecipes: recipes}
+    numColumns={2}
+    keyExtractor={item => item.key}
+    renderItem={({ item }) => (
         <RecipeButton
-          style={styles.wholeContainer}
-          android_ripple={{ color: Colors.LightGrey, foreground: true }}
-          onPress={() => console.log("navigate to detailRecipe Screen")}
+            style={styles.wholeContainer}
+            android_ripple={{ color: Colors.LightGrey, foreground: true }}
+            onPress={() => props.navigation.navigate("RecipeDetails", { item })}
         >
 
-          <View style={styles.imgcontainer}>
-            <RecipeImage uri={item.uri} style={form.imageInPost2} />
-          </View>
-          <View>
-            <Row>
-              <Text style={styles.titleText}>{item.title}</Text>
-              <AntDesign name="like2" size={20} color="black" />
-              <Text>{item.like}</Text>
-            </Row>
-          </View>
+            <View style={styles.imgcontainer}>
+                <RecipeImage uri={item.uri} style={form.imageInPost2} />
+            </View>
+            <View>
+                <Row>
+                    <Text style={styles.titleText}>{item.title}</Text>
+                    <AntDesign name="like2" size={20} color="black" />
+                    <Text>{item.like}</Text>
+                </Row>
+            </View>
         </RecipeButton>
 
-        //<RecipeButton style={container.post}
+    )}
+/>
+
+        // <RecipeButton style={container.post}
         //   // onPress={()=>props.navigate('Edit', {itemID: item.key, important: item.important})}
         //   onPress={() => console.log("navigate to detailRecipe Screen")}
         // >
@@ -88,41 +91,31 @@ export default function RecipeList(props) {
         //     </Row>
         //   </Column>
         // </RecipeButton>
-      )}
-    />
+      // )}
+    // />
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      backgroundColor: Colors.White,
+      alignItems: 'center',
+  },
   imgcontainer: {
-    width: Dimensions.get('window').width,
+      width: Dimensions.get('window').width,
   },
   wholeContainer: {
-    flex: 1,
-    height: 230,
-    borderRadius: 5,
-    marginTop: 4,
-    marginRight: 6,
-  },
-  listItem: {
-    flex: 1,
-    backgroundColor: Colors.BgLightGreen,
-    flexDirection: 'row',
-    width: 300,
-    margin: 10,
-    padding: 20,
-    borderRadius: 8,
+      flex: 1,
+      height: 230,
+      borderRadius: 5,
+      marginTop: 4,
+      marginRight: 6,
   },
   titleText: {
-    color: Colors.DescriptionText,
-    marginLeft: 10,
-    width: 210,
+      color: Colors.DescriptionText,
+      marginLeft: 12,
+      width: 140,
+      fontWeight: 'bold',
   },
-  likeText: {
-    textAlign: 'center',
-    backgroundColor: Colors.AmountBackground,
-    color: Colors.AmountText,
-    width: 105,
-    borderRadius: 5,
-  }
-})
+});

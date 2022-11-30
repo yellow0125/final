@@ -18,7 +18,7 @@ export default function LocationsRecipes({ navigation }) {
     const headerHeight = useHeaderHeight();
 
     return (
-        <View style={styles.container}>
+        <View>
             <StatusBar backgroundColor={Colors.BgDarkGreen}/>
             <Picker
                 selectedValue={selectedValue}
@@ -36,7 +36,9 @@ export default function LocationsRecipes({ navigation }) {
                 <Picker.Item style={container.pickerItem} label="French" value="french" />                
                 <Picker.Item style={container.pickerItem} label="Italian" value="italy" />
             </Picker>
-            <RecipeList location={selectedValue} />
+            <View>
+                <RecipeList location={selectedValue} navigation={navigation} />
+            </View>
         </View>
     );
 }
