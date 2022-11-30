@@ -1,22 +1,21 @@
 import { StyleSheet, Text, View, Alert, Image } from 'react-native';
-import React, { useState, useEffect, } from "react";
+import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
-import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
 import Input from '../components/UI/Input';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
-import { container, form } from '../constants/Style';
+import { container } from '../constants/Style';
 import { writeUserProfileToDB } from '../firebase/firestore';
-
-import { firestore, auth, storage } from '../firebase/firebase-setup';
-
+import { MAPS_API_KEY } from "react-native-dotenv";
+// MAPS_API_KEY ="AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY"
 export default function EditProfile({ navigation, route }) {
     const currentUserData = route.params.userData;
     const key = currentUserData.key;
     const [username, setUsername] = useState(currentUserData.username);
     const [gender, setGender] = useState(currentUserData.gender);
+    const [country, setCountry] = useState(currentUserData.country);
     const [location, setLocation] = useState(currentUserData.location);
 
     function submitHandler() {
@@ -32,12 +31,10 @@ export default function EditProfile({ navigation, route }) {
             { text: "Yes", style: "default", onPress: resetOperation }
         ]);
     }
-
     // store all the information into firebase
     function submitOperation() {
         if (username.length > 0) {
-
-            writeUserProfileToDB({ username, gender, location, key })
+            writeUserProfileToDB({ username, gender, key })
             navigation.goBack();
             return;
         }
@@ -53,6 +50,7 @@ export default function EditProfile({ navigation, route }) {
     function resetOperation() {
         setUsername(currentUserData.username);
         setGender(currentUserData.gender);
+        setCountry(currentUserData.country);
         setLocation(currentUserData.location);
     }
 
@@ -62,29 +60,38 @@ export default function EditProfile({ navigation, route }) {
             <Column>
                 <Input label="Username" value={username} f_onChange={setUsername} />
 
-                <Picker
-                    label="Gender"
-                    selectedValue={gender}
-                    onValueChange={(itemValue) =>
-                        setGender(itemValue)
-                    }>
-                    <Picker.Item label="Male" value="Male" />
-                    <Picker.Item label="Female" value="Female" />
-                    <Picker.Item label="Hiden" value="Hiden" />
-                </Picker>
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>Gender</Text>
+                    <Picker
+                        label="Gender"
+                        selectedValue={gender}
+                        onValueChange={(itemValue) =>
+                            setGender(itemValue)
+                        }>
+                        <Picker.Item label="Please Select" value="defaultG" />
+                        <Picker.Item label="Male" value="Male" />
+                        <Picker.Item label="Female" value="Female" />
+                        <Picker.Item label="Hiden" value="Hiden" />
+                    </Picker>
+                </View>
 
-                <Picker
-                    label="Location"
-                    selectedValue={location}
-                    mode={'dropdown'}
-                    onValueChange={(itemValue) =>
-                        setLocation(itemValue)
-                    }>
-                    <Picker.Item label="China" value="China" />
-                    <Picker.Item label="Japan" value="Japan" />
-                    <Picker.Item label="Italy" value="Italy" />
-                </Picker>
+                {country && <View>
+                    <Text style={styles.pickerLabel}>Your Country</Text>
+                    <Text>{currentUserData.country}</Text>
+                </View>}
 
+                {location && (
+                    <View>
+                        <Text style={styles.pickerLabel}>Your Location</Text>
+                        <Image
+                            source={{
+                                uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
+                            }}
+                            style={{ width: "100%", height: 200 }}
+
+                        />
+                    </View>
+                )}
             </Column>
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
@@ -118,4 +125,11 @@ const styles = StyleSheet.create({
         borderColor: "#B7B7B7",
         height: 50,
     },
+    pickerContainer: {
+        marginLeft: 20
+    },
+    pickerLabel: {
+        fontSize: 14,
+        fontWeight: 'bold'
+    }
 });

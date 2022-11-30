@@ -18,10 +18,10 @@ const container = StyleSheet.create({
     },
     center: {
         flex: 1,
-        backgroundColor:Colors.BgDarkGreen
-       
+        backgroundColor: Colors.BgDarkGreen
+
     },
- 
+
     horizontal: {
         flexDirection: 'row',
         display: 'flex',
@@ -96,8 +96,8 @@ const container = StyleSheet.create({
     },
     post: {
         backgroundColor: Colors.BgLightGreen,
-        width:300,
-        margin:10,
+        width: 300,
+        margin: 10,
         padding: 20,
         borderRadius:10,
       },
@@ -107,7 +107,12 @@ const container = StyleSheet.create({
     pickerItem: {
         color: Colors.White,
         backgroundColor:Colors.BgDarkGreen,
-    }
+    },
+    post2: {
+        width: "100%",
+        marginTop: 10,
+    },
+
 
 })
 
@@ -156,11 +161,29 @@ const form = StyleSheet.create({
         height: 200,
         borderRadius: 10,
     },
+    imageInPost2: {
+        justifyContent: 'center',
+        width: '46%',
+        height: 170,
+        margin:5,
+       
+    },
+    imageInDetail: {
+        justifyContent: 'center',
+        width: '90%',
+        height: 400,
+        borderRadius: 10,
+    },
     pictureButton: {
         width: 100,
         height: 100,
         borderRadius: 100 / 2
-    }
+    },
+    imageR:{
+        width:'100%',
+        height:'100%',
+        borderRadius:10
+    },
 
 })
 

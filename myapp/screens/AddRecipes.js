@@ -1,6 +1,5 @@
-import { StyleSheet, View, Alert, TextInput, Image, ScrollView } from 'react-native';
-import React, { useState, useEffect } from "react";
-import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
+import { StyleSheet, Alert, TextInput, ScrollView, Text, View } from 'react-native';
+import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
@@ -13,24 +12,24 @@ import ImageManager from './ImageManager';
 import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
-
-
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Snackbar } from 'react-native-paper';
+import KeyboardSpacerView from 'react-native-keyboard-spacer-view';
+import Spacer from "react-native-spacer"
 
 export default function AddRecipes(props) {
+    const [imageUri, setImageUri] = useState('');
+    const imageHandler = (uri) => {
+        setImageUri(uri);
+    };
+
     const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
-    const [caption, setCaption] = useState("")
-    const [description, setDescription] = useState('');
-    const [selectedLanguage, setSelectedLanguage] = useState('');
-    const [genderOpen, setGenderOpen] = useState(false);
-    const [genderValue, setGenderValue] = useState(null);
-    const [gender, setGender] = useState([
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
-        { label: "Prefer Not to Say", value: "neutral" },
-    ]);
-
-
+    const [step1, setStep1] = useState('');
+    const [step2, setStep2] = useState('');
+    const [selectedCuisine, setSelectedCuisine] = useState('');
+    const [selectedDiff, setSelectedDiff] = useState('');
+    const [selectedCookStyle, setSelectedCookStyle] = useState('');
+    const [isValid, setIsValid] = useState(true);
     const getImage = async (uri) => {
         try {
             const response = await fetch(uri);
@@ -42,6 +41,7 @@ export default function AddRecipes(props) {
     };
 
     const submitOperation = async () => {
+
         let uri = props.route.params.image;
         try {
             if (uri) {
@@ -51,9 +51,19 @@ export default function AddRecipes(props) {
                 const uploadResult = await uploadBytes(imageRef, imageBlob);
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
             }
-            await uploadRecipeToDB({title, description, uri});
-            // props.navigation.navigate('Profile')
+            await uploadRecipeToDB({
+                title,
+                selectedCuisine,
+                selectedCookStyle,
+                selectedDiff,
+                step1,
+                step2,
+                uri
+            });
+            props.navigation.navigate('MyRecipes')
             console.log('image upload success')
+            resetOperation()
+
         } catch (err) {
             console.log("image upload ", err);
         }
@@ -62,11 +72,8 @@ export default function AddRecipes(props) {
     async function uploadImageTest() {
         let uri = props.route.params.image;
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
-        console.log(childPath);
-
         const response = await fetch(uri);
         const blob = await response.blob();
-
         const task = firebase
             .storage()
             .ref()
@@ -89,15 +96,29 @@ export default function AddRecipes(props) {
 
         task.on("state_changed", taskProgress, taskError, taskCompleted);
         console.log("upload picture")
-
     }
 
-
     function submitHandler() {
-        Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
-            { text: "No", style: "cancel", onPress: resetOperation },
-            { text: "Yes", style: "default", onPress: submitOperation }
-        ]);
+        if (imageUri.length == 0) {
+            setIsValid({ bool: true, boolSnack: true, message: "Please add a picture" })
+            return;
+        }
+        if (title.length == 0 || step1.length == 0 || step2.length == 0) {
+            setIsValid({ bool: true, boolSnack: true, message: "Please fill out everything" })
+            return;
+        }
+        if (selectedCuisine == 'defaultC' || selectedCookStyle == 'defaultCS' || selectedDiff == 'defaultD') {
+            setIsValid({ bool: true, boolSnack: true, message: "Please selete all tags" })
+            return;
+        }
+        else {
+            Alert.alert("Submit & Share", "Are you sure to submit your recipe?", [
+                { text: "No", style: "cancel", onPress: resetOperation },
+                { text: "Yes", style: "default", onPress: submitOperation }
+            ]);
+
+        }
+
     }
 
     function resetHandler() {
@@ -108,43 +129,117 @@ export default function AddRecipes(props) {
     }
 
     function resetOperation() {
-        setTitle("");
-        setDescription(0);
-        setLocation('')
+        setTitle('');
+        setStep1('');
+        setStep2('');
+        setSelectedCuisine('defaultC')
+        setSelectedCookStyle('defaultCS')
+        setSelectedDiff('defaultD')
+        setImageUri('')
     }
 
     return (
+
         <ScrollView style={container.containerAdd}>
-            <ImageManager navigation={props.navigation} />
+            <ImageManager navigation={props.navigation} imageHandler={imageHandler} imageUri={imageUri} />
+            <Snackbar
+                style={styles.snackbar}
+                visible={isValid.boolSnack}
+                duration={2000}
+                onDismiss={() => { setIsValid({ boolSnack: false }) }}>
+                {isValid.message}
+            </Snackbar>
+
             <Column>
+
                 <Input
                     label="Title"
                     f_onChange={(newText) => { setTitle(newText) }}
                     value={title} />
-                <Picker
-                    label="location"
-                    selectedValue={selectedLanguage}
-                    mode={'dropdown'}
-                    onValueChange={(itemValue) =>
-                        setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="China" value="java" />
-                    <Picker.Item label="Japan" value="js" />
-                    <Picker.Item label="Italy" value="js" />
-                </Picker>
-                <Input
-                    label="Steps"
-                    value={description}
-                    f_onChange={(newText) => { setDescription(newText) }}
-                    mode="long" />
+
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>
+                        <MaterialCommunityIcons name="map-marker-radius" size={20} color="black" />
+                        Cuisine</Text>
+                    <Picker
+                        label="cuisine"
+                        selectedValue={selectedCuisine}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedCuisine(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Please Select" value="defaultC" />
+                        <Picker.Item label="China" value="china" />
+                        <Picker.Item label="Japan" value="japan" />
+                        <Picker.Item label="Italy" value="italy" />
+                        <Picker.Item label="America" value="america" />
+                        <Picker.Item label="British" value="british" />
+                        <Picker.Item label="Franch" value="franch" />
+                    </Picker>
+                </View>
+
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.pickerLabel}>
+                        <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
+                        Cooking Style</Text>
+                    <Picker
+                        label="cookingstyle"
+                        selectedValue={selectedCookStyle}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedCookStyle(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Please Select" value="defaultCS" />
+                        <Picker.Item label="Bake" value="bake" />
+                        <Picker.Item label="Deep-Fry" value="deepfry" />
+                        <Picker.Item label="Steam" value="steam" />
+                        <Picker.Item label="Grill" value="grill" />
+                        <Picker.Item label="Pan Fry" value="panfry" />
+                        <Picker.Item label="Mashup" value="mashup" />
+                    </Picker>
+                </View>
+                <View style={styles.pickerContainer}>
+
+                    <Text style={styles.pickerLabel}>
+                        <Ionicons name="timer-outline" size={20} color="black" />
+                        Difficulty</Text>
+                    <Picker
+                        label="difficulty"
+                        selectedValue={selectedDiff}
+                        mode={'dropdown'}
+                        onValueChange={(itemValue) =>
+                            setSelectedDiff(itemValue)
+                        }
+                    >
+                        <Picker.Item label="Please Select" value="defaultD" />
+                        <Picker.Item label="Under 15 minutes" value="15min" />
+                        <Picker.Item label="Under 30 minutes" value="30min" />
+                        <Picker.Item label="Under 45 minutes" value="45min" />
+                        <Picker.Item label="Under 1 hour" value="60min" />
+                    </Picker>
+                </View>
+
+                <Spacer style={styles.inputWrapper}>
+
+                    <Input
+                        label="Prepare Step"
+                        value={step1}
+                        f_onChange={(newText) => { setStep1(newText) }}
+                        mode="long" />
+                    <Input
+                        label="Cook Step"
+                        value={step2}
+                        f_onChange={(newText) => { setStep2(newText) }}
+                        mode="long" />
+                </Spacer>
             </Column>
 
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
                 <MainButton style={styles.buttons} onPress={submitHandler} mode='light'>Submit</MainButton>
             </Row>
-            <TextInput>dd</TextInput>
-            <TextInput>dd</TextInput>
         </ScrollView>
 
 
@@ -152,6 +247,9 @@ export default function AddRecipes(props) {
 }
 
 const styles = StyleSheet.create({
+    snackbar: {
+        marginBottom: 400
+    },
     title: {
         textAlign: 'center',
         color: Colors.BgDarkGreen,
@@ -162,6 +260,7 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         justifyContent: 'center',
         marginTop: 20,
+        marginBottom:40,
     },
     buttons: {
         marginHorizontal: 8,
@@ -174,7 +273,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: 200
-
     },
     text: {
         marginLeft: 18,
@@ -183,4 +281,15 @@ const styles = StyleSheet.create({
         borderColor: "#B7B7B7",
         height: 50,
     },
+    pickerContainer: {
+        marginLeft: 20
+    },
+    pickerLabel: {
+        fontSize: 14,
+        fontWeight: 'bold'
+    },
+    inputWrapper: {
+        backgroundColor: '#FFFFFF',
+        padding: 20
+      },
 });

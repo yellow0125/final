@@ -31,6 +31,13 @@ In the first week, we plan to do these work below:
 1. modify details of profile page
 2. delete save screen, add uri in Add screen
 3. Add image manager component
+#### 11/24/2022 My Recipes Screen and ProfileScreen
+1. create my recipes screen, show 2 columns
+2. add icons and other navigate
+
+#### 11/25/2022 Location
+1. add location in profile page
+2. use Geocoder to reverse location data
 
 ### Xiaolan Wu
 #### 11/17/2022 Saving data Using Firebase and Redux
@@ -41,6 +48,11 @@ In the first week, we plan to do these work below:
 1. implement Camera function, allowing user take picture fliping camere
 2. implement Image picker function, allowing user select photo from gallery
 3. implement camera//gallery request function
+  
+#### 11/22/2022 Implement post in AllRecipeScreen
+1. implement uploadImageToDB function in AddRecipe Screen
+2. implement flatList to show each recipe in AllRecipeScreen.
+2. others: Add componenet RecipeButton, RecipeList and offer more styles.
 
 ### Yichao Wu
 #### 11/17/2022 All screens without features
@@ -56,6 +68,15 @@ In the first week, we plan to do these work below:
 1. implemente a new screen to edit profile information and update datebase
 2. modify firestore and add functions to support CRUD operations.
 
+#### 11/29/2022 Implemented RecipeDetails and adjust the UI of AllRecipes & MyRecipes
+1. implemente a new screen to view the details of specific recipe.
+2. adjust the UI of AllRecipes and MyRecipes
+3. implemente the navigation from ALlRecipes/MyRecipes to RecipeDetails
+
+#### 11/30/2022 Implemented unfinished collectedRecipes
+1. implemente collectedRecipes by adding new fields in firebase(unfinished)
+2. add like button in RecipeDetails screen.
+
 
 ## Structure of the App
 ### 1. Login and Register page
@@ -63,6 +84,15 @@ In the first week, we plan to do these work below:
 - if the user is not login, they can only see these two page, and can do nothing.
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
 
+### 2. Profile page and Edit Profile page
+- allow users check their information and edit them update to database
+- allow users to locate himself by **google map API**
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
+
+### 3. My Recipes page and Add a Recipes page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
 ## Install dependencies
 In order to install, clone this repository and run:
 

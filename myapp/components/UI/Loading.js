@@ -1,13 +1,17 @@
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, Text, ActivityIndicator } from 'react-native'
 import Color from '../../constants/Colors';
 import React from 'react'
+import Row from './Row';
+import Colors from '../../constants/Colors';
 
 export default function Loading() {
-  return (
-    <View style={styles.container}>
-			<ActivityIndicator size='large' color= {Color.White} />
+	return (
+		<View style={styles.container}>
+			<Row>
+				<ActivityIndicator size='large' color={Colors.Red} />
+			</Row>
 		</View>
-  )
+	)
 }
 
 const styles = StyleSheet.create({
@@ -16,6 +20,5 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: 24,
-		backgroundColor:Color.BgDarkGreen
 	}
 });

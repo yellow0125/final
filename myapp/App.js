@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { auth } from "./firebase/firebase-setup";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-
+import { onAuthStateChanged } from "firebase/auth";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import { Provider } from "react-redux";
-import {applyMiddleware, legacy_createStore as createStore} from 'redux';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import rootReducer from './redux/reducers'
 import thunk from "redux-thunk";
 import Main from "./components/Main";
 import AddPicture from "./screens/AddPicture";
 import EditProfile from "./screens/EditProfile";
+import MyRecipes from "./screens/MyRecipes";
+import RecipeDetails from "./screens/RecipeDetails";
 import Colors from "./constants/Colors";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -49,15 +50,18 @@ export default function App() {
   const AppStack = () => {
     return (
       <Provider store={store}>
-        <Stack.Navigator         
+        <Stack.Navigator
           screenOptions={{
             headerStyle: { backgroundColor: Colors.BgDarkGreen },
             headerTintColor: Colors.White,
             headerTitleAlign: "center",
-          }}initialRouteName="Main">
-          <Stack.Screen name="Main" component={Main} options={{headerShown:false}}/>
-          <Stack.Screen name="Camera" component={AddPicture} navigation={this.navigation} />
-          <Stack.Screen name="EditProfile" component={EditProfile} />
+          }} initialRouteName="Main">
+          <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
+          <Stack.Screen name="Camera" component={AddPicture} />
+          <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerTitle: "Settings" }} />
+          <Stack.Screen name="MyRecipes" component={MyRecipes} options={{ headerTitle: "My Recipes" }} />
+          <Stack.Screen name="RecipeDetails" component={RecipeDetails} options={{ headerTitle: "Recipe Details" }} />
+     
 
         </Stack.Navigator>
       </Provider>

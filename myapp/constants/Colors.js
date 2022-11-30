@@ -10,5 +10,6 @@ export default {
 	transparent: 'transparent',
 	ShadowBg: '#004529',
 	Red:'#ef5b9c',
-	Orange:'#f47920'
+	Orange:'#f47920',
+	Red:'#f05b72'
 }

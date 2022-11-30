@@ -7,8 +7,9 @@ export const createUserToDB = async (data) => {
         await setDoc(doc(firestore, "users", auth.currentUser.uid), {
             username: data.username,
             email: data.email,
-            gender: "click edit to add your gender",
-            location: "click edit to add your location",
+            gender: "Click edit to add your gender",
+            country: "null",
+            location: "null",
 
         });
         console.log("Create User in db sucessfully. Users' data is: ", data)
@@ -20,33 +21,43 @@ export const createUserToDB = async (data) => {
 export async function writeUserProfileToDB(profileData) {
     try {
         const docRef = await updateDoc(doc(firestore, "users", profileData.key), {
-            username:profileData.username,
+            username: profileData.username,
             gender: profileData.gender,
-            location: profileData.location
-
         });
     } catch (err) {
         console.log(err);
     }
 }
 
+export async function saveUser(user) {
+    try {
+        await updateDoc(doc(firestore, "users", auth.currentUser.uid), {
+            country: user.country,
+            location: user.location
+        });
+        console.log('update success')
+    } catch (err) {
+        console.log("save user ", err);
+    }
+}
+
 export async function deleteFromDB(key) {
     try {
-        await deleteDoc(doc(firestore, "goals", key));
+        await deleteDoc(doc(firestore, "recipes", key));
     } catch (err) {
         console.log(err);
     }
 }
 
 export async function getUser() {
-  try {
-    const docRef = doc(firestore, "users", auth.currentUser.uid);
-    const docSnap = await getDoc(docRef);
-    console.log("Cached document data:", docSnap.data());
+    try {
+        const docRef = doc(firestore, "users", auth.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        console.log("Cached document data:", docSnap.data());
 
-  } catch (err) {
-    console.log(err);
-  }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 export const uploadRecipeToDB = async (recipe) => {
@@ -55,8 +66,21 @@ export const uploadRecipeToDB = async (recipe) => {
             ...recipe,
             user: auth.currentUser.uid,
             like: 0,
-          });
+
+        });
     } catch (error) {
         console.log("Error when writing into db", error)
     }
 }
+
+export const updateLikesRecipeToDB = async (recipe, currentLikes) => {
+    try {
+        await updateDoc(collection(firestore, "recipes", recipe.key), {
+            // likedUser: [ ...likedUser, auth.currentUser.uid],
+            like: currentLikes,
+        });
+    } catch (error) {
+        console.log("Error when updating likes into db", error)
+    }
+}
+
