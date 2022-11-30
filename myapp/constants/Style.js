@@ -1,6 +1,6 @@
-
 import { StyleSheet } from 'react-native'
 import Colors from './Colors'
+
 const container = StyleSheet.create({
     container: {
         flex: 1,
@@ -101,6 +101,17 @@ const container = StyleSheet.create({
         padding: 20,
         borderRadius:10,
       },
+    picker: {
+        height:50,
+        backgroundColor: Colors.BgDarkGreen,
+
+        
+    },
+    pickerItem: {
+        color: Colors.White,
+        fontSize: 50,
+        
+    }
 
 })
 
