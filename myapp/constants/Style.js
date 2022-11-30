@@ -102,15 +102,11 @@ const container = StyleSheet.create({
         borderRadius:10,
       },
     picker: {
-        height:50,
-        backgroundColor: Colors.BgDarkGreen,
-
-        
+        backgroundColor: Colors.BgDarkGreen, 
     },
     pickerItem: {
         color: Colors.White,
-        fontSize: 50,
-        
+        backgroundColor:Colors.BgDarkGreen,
     }
 
 })

@@ -25,15 +25,16 @@ export default function LocationsRecipes({ navigation }) {
                 style={[container.picker, {width:width},{height:headerHeight}]}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                 itemStyle={container.pickerItem}
+                mode={'dropdown'}
+                dropdownIconColor={Colors.White}
             >
-                <Picker.Item label="Africa" value="africa" />
-                <Picker.Item label="American" value="america" />
-                <Picker.Item label="Brazillian" value="brazillian" />
-                <Picker.Item label="British" value="uk" />
-                <Picker.Item label="China" value="china" />
-                <Picker.Item label="French" value="french" />                
-                <Picker.Item label="Italy" value="italy" />
-                <Text>selectedValue</Text>
+                <Picker.Item style={container.pickerItem} label="African" value="africa" />
+                <Picker.Item style={container.pickerItem} label="American" value="america" />
+                <Picker.Item style={container.pickerItem} label="Brazilian" value="brazillian" />
+                <Picker.Item style={container.pickerItem} label="British" value="uk" />
+                <Picker.Item style={container.pickerItem} label="Chinese" value="china" />
+                <Picker.Item style={container.pickerItem} label="French" value="french" />                
+                <Picker.Item style={container.pickerItem} label="Italian" value="italy" />
             </Picker>
             <RecipeList location={selectedValue} />
         </View>
