@@ -14,8 +14,7 @@ import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Snackbar } from 'react-native-paper';
-import KeyboardSpacerView from 'react-native-keyboard-spacer-view';
-import Spacer from "react-native-spacer"
+import Spacer from "react-native-spacer";
 
 export default function AddRecipes(props) {
     const [imageUri, setImageUri] = useState('');

@@ -12,7 +12,6 @@ import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
 import Column from './UI/Column';
 import { Entypo, Ionicons, AntDesign, EvilIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 import { form } from '../constants/Style';
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState();
