@@ -27,11 +27,11 @@ export default function RecipeImage(props) {
     getImageURL();
   }, []);
 
-
+    return (
           <View style={style}>
             <Image source={imageUri ? { uri: imageUri } : null} style={form.imageR} />
           </View>
-
+    )
   }
   
   const styles = StyleSheet.create({
