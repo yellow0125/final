@@ -54,6 +54,11 @@ In the first week, we plan to do these work below:
 2. implement flatList to show each recipe in AllRecipeScreen.
 2. others: Add componenet RecipeButton, RecipeList and offer more styles.
 
+#### 11/29/2022 Implement show recipes in different locations
+1. implement filter recipes function in RecipeList.js
+2. implement picker function in LocaitonRecipes.js
+3. others: modify styles
+
 ### Yichao Wu
 #### 11/17/2022 All screens without features
 1. Implement all screens of this app, including LocationsRecripes, AllRecipes, AddRecipes, CollectedRecipes and Profile.
