@@ -65,10 +65,22 @@ export const uploadRecipeToDB = async (recipe) => {
         await addDoc(collection(firestore, "recipes"), {
             ...recipe,
             user: auth.currentUser.uid,
-            like: 99,
-            
+            like: 0,
+
         });
     } catch (error) {
         console.log("Error when writing into db", error)
     }
 }
+
+export const updateLikesRecipeToDB = async (recipe, currentLikes) => {
+    try {
+        await updateDoc(collection(firestore, "recipes", recipe.key), {
+            // likedUser: [ ...likedUser, auth.currentUser.uid],
+            like: currentLikes,
+        });
+    } catch (error) {
+        console.log("Error when updating likes into db", error)
+    }
+}
+

@@ -159,7 +159,7 @@ export default function AddRecipes(props) {
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="pot-steam-outline" size={20} color="black" />
+                        <MaterialCommunityIcons name="map-marker-radius" size={20} color="black" />
                         Cuisine</Text>
                     <Picker
                         label="cuisine"
