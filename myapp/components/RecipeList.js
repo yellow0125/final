@@ -19,6 +19,16 @@ export default function RecipeList(props) {
     const [recipes, setRecipes] = useState();
     const [imageURL, setImageURL] = useState("");
 
+    let filteredRecipes = [];
+    if (props.location && recipes != undefined) {
+      for (let i = 0; i < recipes.length; i++) {
+        let recipe = recipes[i];
+        if (recipe.selectedCuisine === props.location) {
+          filteredRecipes.push(recipe);
+        }
+      }
+    }
+
     useEffect(()=>{
         const unsubsribe = onSnapshot(
           collection(db, "recipes"), 
@@ -34,11 +44,6 @@ export default function RecipeList(props) {
                 return data;
               })
             );
-            if (props.location) {
-              console.log("Location selected")
-            } else {
-              console.log("No location selected")
-            }
         });
         return () => {
           unsubsribe();
@@ -46,16 +51,19 @@ export default function RecipeList(props) {
       }, [],);
     
       function locationFilter () {
-        if (props.location) {
-          console.log("Location selected")
-        } else {
-          console.log("No location selected")
-        }
+        let data = recipes
+        // console.log(data)
+        if (props.location && recipes) {
+          data.filter(recipe => recipe.selectedCuisine === props.location);
+          console.log(data)
+          console.log("show location", props.location)
+        } 
+        return data 
       }
 
   return (
       <FlatList
-        data={recipes}
+        data={props.location ? filteredRecipes : recipes}
         keyExtractor={item=>item.key}
         
         renderItem={({item})=>(

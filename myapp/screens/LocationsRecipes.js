@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
 
 export default function LocationsRecipes({ navigation }) {
-    const [selectedValue, setSelectedValue] = useState("China");
+    const [selectedValue, setSelectedValue] = useState("america");
 
     return (
         <View style={styles.container}>
