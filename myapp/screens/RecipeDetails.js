@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Alert} from 'react-native';
 import { firestore } from '../firebase/firebase-setup';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { container, form } from '../constants/Style';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { updateLikesRecipeToDB } from '../firebase/firestore';
 
 import Colors from '../constants/Colors';
 import MainButton from '../components/UI/MainButton';
@@ -14,6 +15,30 @@ import RecipeImage from '../components/UI/RecipeImage';
 
 export default function RecipeDetails({ navigation, route }) {
     const recipe = route.params.item;
+
+
+
+    function LikeHandler() {
+        Alert.alert("Reset", "Are you sure to reset your recipe?", [
+            { text: "No", style: "cancel", onPress: likeOperation },
+            { text: "Yes", style: "default", onPress: likeOperation }
+        ]);
+    }
+
+
+    const likeOperation = async () => {
+        try {
+            const currentLikes = recipe.like + 1;
+            await updateLikesRecipeToDB(
+                recipe,
+                currentLikes
+            );
+            console.log('update likes', currentLikes);
+
+        } catch (err) {
+            console.log("update likes ", err);
+        }
+    };
 
     return (
         // <View style={styles.container}>
@@ -44,7 +69,7 @@ export default function RecipeDetails({ navigation, route }) {
                 <View style={styles.pickerContainer}>
 
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="pot-steam-outline" size={20} color="black" />
+                        <MaterialCommunityIcons name="map-marker-radius" size={20} color="black" />
                         Cuisine</Text>
                     <Text style={styles.content}>{recipe.selectedCuisine}</Text>
                 </View>
@@ -67,7 +92,7 @@ export default function RecipeDetails({ navigation, route }) {
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
+                        <MaterialCommunityIcons name="food-variant" size={24} color="black" />
                         Prepare Step</Text>
                     <Text style={styles.content}>{recipe.step1}</Text>
 
@@ -75,7 +100,7 @@ export default function RecipeDetails({ navigation, route }) {
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
+                        <MaterialCommunityIcons name="pot-steam-outline" size={24} color="black" />
                         Cook Step</Text>
                     <Text style={styles.content}>{recipe.step2}</Text>
 
@@ -89,10 +114,10 @@ export default function RecipeDetails({ navigation, route }) {
                 
             </Column>
 
-            {/* <Row style={styles.buttonsContainer}>
-                <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
-                <MainButton style={styles.buttons} onPress={submitHandler} mode='light'>Submit</MainButton>
-            </Row> */}
+            <Row style={styles.buttonsContainer}>
+                <MainButton style={styles.buttons} onPress={LikeHandler} mode='light'>Like</MainButton>
+                <MainButton style={styles.buttons} onPress={LikeHandler} mode='light'>Unlike</MainButton>
+            </Row>
         </ScrollView>
     );
 }
@@ -115,7 +140,6 @@ const styles = StyleSheet.create({
         color: 'black',
         fontWeight: 'bold',
         fontSize: 24,
-        marginVertical: 12,
     },
     content: {
         marginLeft: 30,
