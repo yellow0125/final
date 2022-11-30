@@ -68,6 +68,10 @@ In the first week, we plan to do these work below:
 1. implemente a new screen to edit profile information and update datebase
 2. modify firestore and add functions to support CRUD operations.
 
+#### 11/29/2022 Implemented RecipeDetails and adjust the UI of AllRecipes & MyRecipes
+1. implemente a new screen to view the details of specific recipe.
+2. adjust the UI of AllRecipes and MyRecipes
+3. implemente the navigation from ALlRecipes/MyRecipes to RecipeDetails
 
 ## Structure of the App
 ### 1. Login and Register page
