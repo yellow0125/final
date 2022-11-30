@@ -73,6 +73,11 @@ In the first week, we plan to do these work below:
 2. adjust the UI of AllRecipes and MyRecipes
 3. implemente the navigation from ALlRecipes/MyRecipes to RecipeDetails
 
+#### 11/30/2022 Implemented unfinished collectedRecipes
+1. implemente collectedRecipes by adding new fields in firebase(unfinished)
+2. add like button in RecipeDetails screen.
+
+
 ## Structure of the App
 ### 1. Login and Register page
 - allow users to register and login
