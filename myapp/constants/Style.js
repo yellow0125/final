@@ -1,6 +1,6 @@
-
 import { StyleSheet } from 'react-native'
 import Colors from './Colors'
+
 const container = StyleSheet.create({
     container: {
         flex: 1,
@@ -99,12 +99,20 @@ const container = StyleSheet.create({
         width: 300,
         margin: 10,
         padding: 20,
-        borderRadius: 10,
+        borderRadius:10,
+      },
+    picker: {
+        backgroundColor: Colors.BgDarkGreen, 
+    },
+    pickerItem: {
+        color: Colors.White,
+        backgroundColor:Colors.BgDarkGreen,
     },
     post2: {
         width: "100%",
         marginTop: 10,
     },
+
 
 })
 

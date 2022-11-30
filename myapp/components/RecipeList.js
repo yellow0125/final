@@ -11,11 +11,22 @@ import Row from './UI/Row';
 import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
 import Column from './UI/Column';
+import { Entypo, Ionicons, AntDesign, EvilIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { form } from '../constants/Style';
-export default function RecipeList() {
+export default function RecipeList(props) {
   const [recipes, setRecipes] = useState();
   const [imageURL, setImageURL] = useState("");
+  
+  let filteredRecipes = [];
+  if (props.location && recipes != undefined) {
+     for (let i = 0; i < recipes.length; i++) {
+        let recipe = recipes[i];
+        if (recipe.selectedCuisine === props.location) {
+          filteredRecipes.push(recipe);
+        }
+      }
+    }
 
   useEffect(() => {
     const unsubsribe = onSnapshot(
@@ -39,7 +50,7 @@ export default function RecipeList() {
   }, [],);
   return (
     <FlatList
-      data={recipes}
+      data={props.location ? filteredRecipes : recipes}
       numColumns={2}
       keyExtractor={item => item.key}
       renderItem={({ item }) => (

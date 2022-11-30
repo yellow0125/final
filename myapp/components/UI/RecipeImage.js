@@ -27,9 +27,23 @@ export default function RecipeImage(props) {
     getImageURL();
   }, []);
 
-  return (
-    <View style={style}>
-      <Image source={imageUri ? { uri: imageUri } : null} style={form.imageR} />
-    </View>
-  )
-}
+
+          <View style={style}>
+            <Image source={imageUri ? { uri: imageUri } : null} style={form.imageR} />
+          </View>
+
+    )
+  }
+  
+  const styles = StyleSheet.create({
+    imgbutton: {
+      marginHorizontal: 8,
+      minWidth: 100,
+      backgroundColor: Colors.LightGrey,
+      justifyContent: 'center',
+      width: '100%',
+      height: 200
+  
+    },
+  });
+

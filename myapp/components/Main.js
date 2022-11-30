@@ -27,12 +27,13 @@ export class Main extends Component {
             headerTitleAlign: 'center',
           }
         }}
-        initialRouteName="All"
+        initialRouteName="Locations"
       >
-        <Tab.Screen name="Locations" component={LocationsRecipes}
+        <Tab.Screen name="Locations" component={LocationsRecipes} 
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
-            headerTitle: "Locations",
+            headerTitle: "All Locations",
+            headerShown:false,
           }}
         />
         <Tab.Screen name="All" component={AllRecipes}
