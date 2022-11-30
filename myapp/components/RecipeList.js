@@ -15,7 +15,7 @@ import RecipeImage from './UI/RecipeImage';
 import Column from './UI/Column';
 import { Entypo, Ionicons, AntDesign, EvilIcons } from '@expo/vector-icons';
 
-export default function RecipeList() {
+export default function RecipeList(props) {
     const [recipes, setRecipes] = useState();
     const [imageURL, setImageURL] = useState("");
 
@@ -34,11 +34,25 @@ export default function RecipeList() {
                 return data;
               })
             );
+            if (props.location) {
+              console.log("Location selected")
+            } else {
+              console.log("No location selected")
+            }
         });
         return () => {
           unsubsribe();
         }
       }, [],);
+    
+      function locationFilter () {
+        if (props.location) {
+          console.log("Location selected")
+        } else {
+          console.log("No location selected")
+        }
+      }
+
   return (
       <FlatList
         data={recipes}

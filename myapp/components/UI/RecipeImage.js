@@ -32,7 +32,7 @@ export default function RecipeImage(props) {
     return (
 
           <View style={{ marginHorizontal: 8 }}>
-            <Image source={{ uri: imageUri }} style={form.imageInPost} />
+            <Image source={{ uri: imageUri ? imageUri : null }} style={form.imageInPost} />
           </View>
 
     )
