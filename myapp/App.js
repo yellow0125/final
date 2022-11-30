@@ -12,7 +12,8 @@ import thunk from "redux-thunk";
 import Main from "./components/Main";
 import AddPicture from "./screens/AddPicture";
 import EditProfile from "./screens/EditProfile";
-import MyRecipes from "./screens/MyRecipes"
+import MyRecipes from "./screens/MyRecipes";
+import RecipeDetails from "./screens/RecipeDetails";
 import Colors from "./constants/Colors";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -59,6 +60,7 @@ export default function App() {
           <Stack.Screen name="Camera" component={AddPicture} />
           <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerTitle: "Settings" }} />
           <Stack.Screen name="MyRecipes" component={MyRecipes} options={{ headerTitle: "My Recipes" }} />
+          <Stack.Screen name="RecipeDetails" component={RecipeDetails} options={{ headerTitle: "Recipe Details" }} />
      
 
         </Stack.Navigator>

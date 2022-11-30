@@ -7,6 +7,7 @@ import { FlatList } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { form } from '../constants/Style';
 import Row from '../components/UI/Row';
+import RecipeButton from '../components/UI/RecipeButton';
 import Colors from '../constants/Colors';
 import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
@@ -38,6 +39,11 @@ export default function MyRecipes({ navigation }) {
         }
     }, [],);
 
+    function detailHandler() {
+        console.log("navigate to detailRecipe Screen");
+        navigation.navigate("RecipeDetails");
+    }
+
     return (
         <>
             {recipes.length == 0 ? (
@@ -49,10 +55,10 @@ export default function MyRecipes({ navigation }) {
                 numColumns={2}
                 keyExtractor={item => item.key}
                 renderItem={({ item }) => (
-                    <Pressable
+                    <RecipeButton
                         style={styles.wholeContainer}
                         android_ripple={{ color: Colors.LightGrey, foreground: true }}
-                        onPress={() => console.log("navigate to detailRecipe Screen")}
+                        onPress={() => navigation.navigate("RecipeDetails", { item })}
                     >
 
                         <View style={styles.imgcontainer}>
@@ -65,7 +71,7 @@ export default function MyRecipes({ navigation }) {
                                 <Text>{item.like}</Text>
                             </Row>
                         </View>
-                    </Pressable>
+                    </RecipeButton>
 
                 )}
             />

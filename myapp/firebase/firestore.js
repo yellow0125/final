@@ -66,6 +66,7 @@ export const uploadRecipeToDB = async (recipe) => {
             ...recipe,
             user: auth.currentUser.uid,
             like: 99,
+            
         });
     } catch (error) {
         console.log("Error when writing into db", error)

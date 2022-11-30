@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Dimensions, Pressable } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
@@ -40,33 +40,60 @@ export default function RecipeList() {
   return (
     <FlatList
       data={recipes}
+      numColumns={2}
       keyExtractor={item => item.key}
-
       renderItem={({ item }) => (
-
-        <RecipeButton style={container.post}
-          // onPress={()=>props.navigate('Edit', {itemID: item.key, important: item.important})}
+        <RecipeButton
+          style={styles.wholeContainer}
+          android_ripple={{ color: Colors.LightGrey, foreground: true }}
           onPress={() => console.log("navigate to detailRecipe Screen")}
         >
-          <Column>
-            <RecipeImage uri={item.uri} style={form.imageInPost} />
+
+          <View style={styles.imgcontainer}>
+            <RecipeImage uri={item.uri} style={form.imageInPost2} />
+          </View>
+          <View>
             <Row>
               <Text style={styles.titleText}>{item.title}</Text>
-              <View style={styles.iconContainer}>
-                <Row style={styles.icon}>
-                  <AntDesign name="like2" size={20} color="black" />
-                  <Text>{item.like}</Text>
-                </Row>
-              </View>
+              <AntDesign name="like2" size={20} color="black" />
+              <Text>{item.like}</Text>
             </Row>
-          </Column>
+          </View>
         </RecipeButton>
+
+        //<RecipeButton style={container.post}
+        //   // onPress={()=>props.navigate('Edit', {itemID: item.key, important: item.important})}
+        //   onPress={() => console.log("navigate to detailRecipe Screen")}
+        // >
+        //   <Column>
+        //     <RecipeImage uri={item.uri} style={form.imageInPost} />
+        //     <Row>
+        //       <Text style={styles.titleText}>{item.title}</Text>
+        //       <View style={styles.iconContainer}>
+        //         <Row style={styles.icon}>
+        //           <AntDesign name="like2" size={20} color="black" />
+        //           <Text>{item.like}</Text>
+        //         </Row>
+        //       </View>
+        //     </Row>
+        //   </Column>
+        // </RecipeButton>
       )}
     />
   )
 }
 
 const styles = StyleSheet.create({
+  imgcontainer: {
+    width: Dimensions.get('window').width,
+  },
+  wholeContainer: {
+    flex: 1,
+    height: 230,
+    borderRadius: 5,
+    marginTop: 4,
+    marginRight: 6,
+  },
   listItem: {
     flex: 1,
     backgroundColor: Colors.BgLightGreen,
