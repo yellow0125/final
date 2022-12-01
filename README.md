@@ -78,9 +78,10 @@ In the first week, we plan to do these work below:
 2. adjust the UI of AllRecipes and MyRecipes
 3. implemente the navigation from ALlRecipes/MyRecipes to RecipeDetails
 
-#### 11/30/2022 Implemented unfinished collectedRecipes
-1. implemente collectedRecipes by adding new fields in firebase(unfinished)
-2. add like button in RecipeDetails screen.
+#### 11/30/2022 Implemented collectedRecipes
+1. implemente collectedRecipes by adding new fields in firebase(likedUser)
+2. add like and unlike buttons in RecipeDetails screen
+3. finished add features about collected/like, such as update the number of likes, give different response to user in different liked status.
 
 
 ## Structure of the App
