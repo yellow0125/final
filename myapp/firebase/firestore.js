@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup";
 
 export const createUserToDB = async (data) => {
@@ -73,11 +73,24 @@ export const uploadRecipeToDB = async (recipe) => {
     }
 }
 
-export const updateLikesRecipeToDB = async (recipe, currentLikes) => {
+export const updateLikesRecipeToDB = async (likesupdate) => {
     try {
-        await updateDoc(collection(firestore, "recipes", recipe.key), {
-            // likedUser: [ ...likedUser, auth.currentUser.uid],
-            like: currentLikes,
+        const recipeDocRef = doc(firestore, "recipes", likesupdate.recipe.key);
+        await updateDoc(recipeDocRef, {
+            likedUser: arrayUnion(auth.currentUser.uid),
+            like: likesupdate.currentLikes,
+        });
+    } catch (error) {
+        console.log("Error when updating likes into db", error)
+    }
+}
+
+export const updateUnLikesRecipeToDB = async (unlikesupdate) => {
+    try {
+        const recipeDocRef = doc(firestore, "recipes", unlikesupdate.recipe.key);
+        await updateDoc(recipeDocRef, {
+            likedUser: arrayRemove(auth.currentUser.uid),
+            like: unlikesupdate.currentLikes,
         });
     } catch (error) {
         console.log("Error when updating likes into db", error)

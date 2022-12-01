@@ -29,6 +29,7 @@ export default function AddRecipes(props) {
     const [selectedDiff, setSelectedDiff] = useState('');
     const [selectedCookStyle, setSelectedCookStyle] = useState('');
     const [isValid, setIsValid] = useState(true);
+    const [likedUser, setLikedUser] = useState({});
     const getImage = async (uri) => {
         try {
             const response = await fetch(uri);
@@ -49,6 +50,7 @@ export default function AddRecipes(props) {
                 const imageRef = await ref(storage, `images/${imageName}`);
                 const uploadResult = await uploadBytes(imageRef, imageBlob);
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
+                
             }
             await uploadRecipeToDB({
                 title,
@@ -57,7 +59,8 @@ export default function AddRecipes(props) {
                 selectedDiff,
                 step1,
                 step2,
-                uri
+                uri,
+                likedUser:[],
             });
             props.navigation.navigate('MyRecipes')
             console.log('image upload success')

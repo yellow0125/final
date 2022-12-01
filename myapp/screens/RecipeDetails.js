@@ -4,7 +4,7 @@ import { firestore } from '../firebase/firebase-setup';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { container, form } from '../constants/Style';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { updateLikesRecipeToDB } from '../firebase/firestore';
+import { updateLikesRecipeToDB, updateUnLikesRecipeToDB } from '../firebase/firestore';
 
 import Colors from '../constants/Colors';
 import MainButton from '../components/UI/MainButton';
@@ -20,8 +20,15 @@ export default function RecipeDetails({ navigation, route }) {
 
     function LikeHandler() {
         Alert.alert("Reset", "Are you sure to reset your recipe?", [
-            { text: "No", style: "cancel", onPress: likeOperation },
+            { text: "No", style: "cancel", onPress: nothingHappenOperation },
             { text: "Yes", style: "default", onPress: likeOperation }
+        ]);
+    }
+
+    function UnLikeHandler() {
+        Alert.alert("Reset", "Are you sure to reset your recipe?", [
+            { text: "No", style: "cancel", onPress: nothingHappenOperation },
+            { text: "Yes", style: "default", onPress: unLikeOperation }
         ]);
     }
 
@@ -29,16 +36,34 @@ export default function RecipeDetails({ navigation, route }) {
     const likeOperation = async () => {
         try {
             const currentLikes = recipe.like + 1;
-            await updateLikesRecipeToDB(
+            await updateLikesRecipeToDB({
                 recipe,
                 currentLikes
-            );
+            });
             console.log('update likes', currentLikes);
 
         } catch (err) {
             console.log("update likes ", err);
         }
     };
+
+    const unLikeOperation = async () => {
+        try {
+            const currentLikes = recipe.like - 1;
+            await updateUnLikesRecipeToDB({
+                recipe,
+                currentLikes
+            });
+            console.log('update likes', currentLikes);
+
+        } catch (err) {
+            console.log("update likes ", err);
+        }
+    };
+
+    function nothingHappenOperation() {
+        return;
+    }
 
     return (
         // <View style={styles.container}>
@@ -116,7 +141,7 @@ export default function RecipeDetails({ navigation, route }) {
 
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={LikeHandler} mode='light'>Like</MainButton>
-                <MainButton style={styles.buttons} onPress={LikeHandler} mode='light'>Unlike</MainButton>
+                <MainButton style={styles.buttons} onPress={UnLikeHandler} mode='light'>Unlike</MainButton>
             </Row>
         </ScrollView>
     );

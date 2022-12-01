@@ -19,10 +19,11 @@ export default function MyRecipes({ navigation }) {
     useEffect(() => {
         const unsubsribe = onSnapshot(
             query(
+                // collection(db, "recipes"),
+                // where("user", "==", auth.currentUser.uid)),
                 collection(db, "recipes"),
-                where("user", "==", auth.currentUser.uid)),
-                // collectionGroup(db, "likerUser"),
-                // where("likedUser", "==", auth.currentUser.uid)),
+                where("likedUser", "array-contains", auth.currentUser.uid)),
+                
             (QuerySnapshot) => {
                 if (QuerySnapshot.empty) {
                     setRecipes([]);
@@ -40,6 +41,7 @@ export default function MyRecipes({ navigation }) {
             unsubsribe();
         }
     }, [],);
+    console.log(auth.currentUser.uid);
 
     function detailHandler() {
         console.log("navigate to detailRecipe Screen");
