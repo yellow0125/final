@@ -80,7 +80,6 @@ export default function RecipeDetails({ navigation, route }) {
             });
             console.log('update likes', currentLikes);
             navigation.goBack();
-
         } catch (err) {
             console.log("update likes ", err);
         }}
@@ -100,7 +99,6 @@ export default function RecipeDetails({ navigation, route }) {
             });
             console.log('update likes', currentLikes);
             navigation.goBack();
-
         } catch (err) {
             console.log("update likes ", err);
         }}
@@ -111,19 +109,6 @@ export default function RecipeDetails({ navigation, route }) {
     }
 
     return (
-        // <View style={styles.container}>
-            
-               
-        //         <Text>{recipe.selectedCuisine}</Text>
-        //         <Text>{recipe.selectedCookStyle}</Text>
-        //         <Text>{recipe.selectedDiff}</Text>
-        //         <Text>{recipe.step1}</Text>
-        //         <Text>{recipe.step2}</Text>
-                
-            
-        // </View>
-
-
         <ScrollView style={container.containerAdd}>
 
 
