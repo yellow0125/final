@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Alert} from 'react-native';
-import { firestore } from '../firebase/firebase-setup';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { firestore as db } from '../firebase/firebase-setup'
 import { container, form } from '../constants/Style';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { updateLikesRecipeToDB, updateUnLikesRecipeToDB } from '../firebase/firestore';
+import { collection, onSnapshot, query, where, collectionGroup } from "firebase/firestore";
+import { auth } from '../firebase/firebase-setup';
 
 import Colors from '../constants/Colors';
 import MainButton from '../components/UI/MainButton';
@@ -15,18 +16,49 @@ import RecipeImage from '../components/UI/RecipeImage';
 
 export default function RecipeDetails({ navigation, route }) {
     const recipe = route.params.item;
+    const [liked, setLiked] = useState(false);
+    // const [recipes, setRecipes] = useState([]);
+    // if (recipes != undefined) {
+    //     for (let i = 0; i < recipes.length; i++) {
+    //         let currentRecipe = recipes[i];
+    //         if (currentRecipe.key === recipe.key) {
+    //             setLiked(true);
+    //             console.log(auth.currentUser.uid, "liked", recipe.key);
+    //         }
+    //     }
+    // }
 
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                // collection(db, "recipes"),
+                // where("user", "==", auth.currentUser.uid)),
+                collection(db, "recipes"),
+                where("likedUser", "array-contains", auth.currentUser.uid)),
+
+            (QuerySnapshot) => {
+                QuerySnapshot.docs.map((snapDoc) => {
+                    if (snapDoc.id == recipe.key){
+                        setLiked(true);
+                        console.log(auth.currentUser.uid, "liked", recipe.key);
+                    } 
+                })
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
 
 
     function LikeHandler() {
-        Alert.alert("Reset", "Are you sure to reset your recipe?", [
+        Alert.alert("Like", "Are you sure to like this recipe?", [
             { text: "No", style: "cancel", onPress: nothingHappenOperation },
             { text: "Yes", style: "default", onPress: likeOperation }
         ]);
     }
 
     function UnLikeHandler() {
-        Alert.alert("Reset", "Are you sure to reset your recipe?", [
+        Alert.alert("Unlike", "Are you sure to unlike your recipe?", [
             { text: "No", style: "cancel", onPress: nothingHappenOperation },
             { text: "Yes", style: "default", onPress: unLikeOperation }
         ]);
@@ -34,6 +66,12 @@ export default function RecipeDetails({ navigation, route }) {
 
 
     const likeOperation = async () => {
+        if (liked) {
+            Alert.alert("Already Liked", "You already liked this recipe", [
+                { text: "ok", style: "cancel", onPress: nothingHappenOperation }
+            ]);
+        }
+        else {
         try {
             const currentLikes = recipe.like + 1;
             await updateLikesRecipeToDB({
@@ -41,13 +79,19 @@ export default function RecipeDetails({ navigation, route }) {
                 currentLikes
             });
             console.log('update likes', currentLikes);
+            navigation.goBack();
 
         } catch (err) {
             console.log("update likes ", err);
-        }
+        }}
     };
 
     const unLikeOperation = async () => {
+        if (!liked) {
+            Alert.alert("Already unliked", "You didn't like this recipe", [
+                { text: "ok", style: "cancel", onPress: nothingHappenOperation }
+            ]);
+        } else {
         try {
             const currentLikes = recipe.like - 1;
             await updateUnLikesRecipeToDB({
@@ -55,14 +99,15 @@ export default function RecipeDetails({ navigation, route }) {
                 currentLikes
             });
             console.log('update likes', currentLikes);
+            navigation.goBack();
 
         } catch (err) {
             console.log("update likes ", err);
-        }
+        }}
     };
 
     function nothingHappenOperation() {
-        return;
+        navigation.goBack();
     }
 
     return (
