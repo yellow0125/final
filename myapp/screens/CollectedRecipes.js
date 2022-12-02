@@ -13,14 +13,13 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
+
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
             query(
-                // collection(db, "recipes"),
-                // where("user", "==", auth.currentUser.uid)),
                 collection(db, "recipes"),
                 where("likedUser", "array-contains", auth.currentUser.uid)),
                 
@@ -41,19 +40,11 @@ export default function MyRecipes({ navigation }) {
             unsubsribe();
         }
     }, [],);
-    console.log(auth.currentUser.uid);
-
-    function detailHandler() {
-        console.log("navigate to detailRecipe Screen");
-        navigation.navigate("RecipeDetails");
-    }
 
     return (
         <>
             {recipes.length == 0 ? (
-
-                <MainButton onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
-
+                <MainButton onPress={() => navigation.navigate("AddRecipe")}>Collect a New Recipe</MainButton>
             ) : (<FlatList
                 data={recipes}
                 numColumns={2}
@@ -71,7 +62,7 @@ export default function MyRecipes({ navigation }) {
                         <View>
                             <Row>
                                 <Text style={styles.titleText}>{item.title}</Text>
-                                <AntDesign name="like2" size={20} color="black" />
+                                <AntDesign name="like2" size={20} color={Colors.Black} />
                                 <Text>{item.like}</Text>
                             </Row>
                         </View>

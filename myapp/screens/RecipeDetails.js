@@ -139,7 +139,7 @@ export default function RecipeDetails({ navigation, route }) {
                 <View style={styles.pickerContainer}>
 
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="map-marker-radius" size={20} color="black" />
+                        <MaterialCommunityIcons name="map-marker-radius" size={20} color={Colors.Black} />
                         Cuisine</Text>
                     <Text style={styles.content}>{recipe.selectedCuisine}</Text>
                 </View>
@@ -147,14 +147,14 @@ export default function RecipeDetails({ navigation, route }) {
                 <View style={styles.pickerContainer}>
 
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
+                        <MaterialCommunityIcons name="food-turkey" size={24} color={Colors.Black} />
                         Cook Style</Text>
                     <Text style={styles.content}>{recipe.selectedCookStyle}</Text>
                 </View>
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <Ionicons name="timer-outline" size={20} color="black" />
+                        <Ionicons name="timer-outline" size={20} color={Colors.Black} />
                         Difficulty</Text>
                     <Text style={styles.content}>{recipe.selectedDiff}</Text>
 
@@ -162,7 +162,7 @@ export default function RecipeDetails({ navigation, route }) {
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="food-variant" size={24} color="black" />
+                        <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
                         Prepare Step</Text>
                     <Text style={styles.content}>{recipe.step1}</Text>
 
@@ -170,7 +170,7 @@ export default function RecipeDetails({ navigation, route }) {
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="pot-steam-outline" size={24} color="black" />
+                        <MaterialCommunityIcons name="pot-steam-outline" size={24} color={Colors.Black} />
                         Cook Step</Text>
                     <Text style={styles.content}>{recipe.step2}</Text>
 
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        color: 'black',
+        color: Colors.Black,
         fontWeight: 'bold',
         fontSize: 24,
     },

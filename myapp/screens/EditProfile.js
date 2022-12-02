@@ -74,24 +74,6 @@ export default function EditProfile({ navigation, route }) {
                         <Picker.Item label="Hiden" value="Hiden" />
                     </Picker>
                 </View>
-
-                {country && <View>
-                    <Text style={styles.pickerLabel}>Your Country</Text>
-                    <Text>{currentUserData.country}</Text>
-                </View>}
-
-                {location && (
-                    <View>
-                        <Text style={styles.pickerLabel}>Your Location</Text>
-                        <Image
-                            source={{
-                                uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
-                            }}
-                            style={{ width: "100%", height: 200 }}
-
-                        />
-                    </View>
-                )}
             </Column>
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>

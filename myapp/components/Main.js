@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { fetchUser } from '../redux/actions/index';
 import Colors from "../constants/Colors";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LocationsRecipes from "../screens/LocationsRecipes";
@@ -59,9 +58,6 @@ export class Main extends Component {
             return {
               tabBarIcon: ({ color, size }) => <FontAwesome name="user" size={size} color={color} />,
               headerTitle: "My Profile",
-              // headerRight: () => {
-              //   return <Ionicons name="ios-settings-outline" style={{ marginEnd: 10 }} size={24} color="white" onPress={() => navigation.navigate('Profile')} />
-              // }
             }
           }}
         />

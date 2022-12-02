@@ -67,7 +67,7 @@ export default function MyRecipes({ navigation }) {
                         <View>
                             <Row>
                                 <Text style={styles.titleText}>{item.title}</Text>
-                                <AntDesign name="like2" size={20} color="black" />
+                                <AntDesign name="like2" size={20} color={Colors.Black} />
                                 <Text>{item.like}</Text>
                             </Row>
                         </View>

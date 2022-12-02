@@ -6,7 +6,7 @@ export default {
 	White: '#fff7ff',
 	BgLightGreen: '#5cc7b5',
 	TextGreen: '#2d8172',
-	Black: '#0d081b',
+	Black: '#111112',
 	transparent: 'transparent',
 	ShadowBg: '#004529',
 	Red:'#ef5b9c',

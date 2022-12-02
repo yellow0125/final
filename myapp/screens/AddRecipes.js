@@ -161,7 +161,7 @@ export default function AddRecipes(props) {
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="map-marker-radius" size={20} color="black" />
+                        <MaterialCommunityIcons name="map-marker-radius" size={20} color={Colors.Black} />
                         Cuisine</Text>
                     <Picker
                         label="cuisine"
@@ -183,7 +183,7 @@ export default function AddRecipes(props) {
 
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="food-turkey" size={24} color="black" />
+                        <MaterialCommunityIcons name="food-turkey" size={24} color={Colors.Black} />
                         Cooking Style</Text>
                     <Picker
                         label="cookingstyle"
@@ -205,7 +205,7 @@ export default function AddRecipes(props) {
                 <View style={styles.pickerContainer}>
 
                     <Text style={styles.pickerLabel}>
-                        <Ionicons name="timer-outline" size={20} color="black" />
+                        <Ionicons name="timer-outline" size={20} color={Colors.Black} />
                         Difficulty</Text>
                     <Picker
                         label="difficulty"
@@ -250,7 +250,7 @@ export default function AddRecipes(props) {
 
 const styles = StyleSheet.create({
     snackbar: {
-        marginBottom: 400
+        marginBottom: 520
     },
     title: {
         textAlign: 'center',
