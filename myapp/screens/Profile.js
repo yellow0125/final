@@ -136,7 +136,7 @@ export default function Profile({ navigation }) {
                                 <Ionicons
                                     name="ios-settings-outline"
                                     size={36}
-                                    color="black"
+                                    color={Colors.Black}
                                     onPress={() => navigation.navigate("EditProfile", { userData })} />
                             </Row>
                             <Row><Text>   Edit Profile</Text></Row>
@@ -149,7 +149,7 @@ export default function Profile({ navigation }) {
                                 <Ionicons
                                     name="md-fast-food-outline"
                                     size={36}
-                                    color="black"
+                                    color={Colors.Black}
                                     onPress={() => navigation.navigate("MyRecipes", { userData })} />
                             </Row>
                             <Row><Text>My Recipes</Text></Row>
@@ -159,7 +159,7 @@ export default function Profile({ navigation }) {
                                 <Ionicons
                                     name="heart-circle-outline"
                                     size={36}
-                                    color="black"
+                                    color={Colors.Black}
                                     onPress={() => navigation.navigate("Collected", { userData })}
                                 />
                             </Row>
