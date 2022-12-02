@@ -42,7 +42,6 @@ export default function AllRecipes({ navigation }) {
     }, [],);
     return (
         <>
-            <Banner />
             <FlatList
                 data={recipes}
                 numColumns={2}
