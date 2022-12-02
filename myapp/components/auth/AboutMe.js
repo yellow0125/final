@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import Swiper from 'react-native-swiper';
-import { container, form } from '../../constants/Style';
-import MainButton from '../UI/MainButton';
 import { Button } from 'react-native-paper';
 import Colors from '../../constants/Colors';
 export default function AboutMe({ navigation }) {
@@ -22,7 +20,9 @@ export default function AboutMe({ navigation }) {
           <Image source={require('../../assets/img/hello4.png')} style={styles.image} />
         </View>
       </Swiper>
+      <View>
       <Button onPress={() => navigation.replace("Register")}>Create your account</Button>
+      </View>
     </>
   )
 }
@@ -40,5 +40,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
 
-  }
+  },
+  button:{
+    justifyContent:'center',
+    alignContent:'center'
+  },
 });
