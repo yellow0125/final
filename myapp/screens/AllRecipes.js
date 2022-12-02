@@ -39,16 +39,7 @@ export default function AllRecipes({ navigation }) {
             unsubsribe();
         }
     }, [],);
-
-    // function detailHandler(item) {
-    //     console.log("navigate to detailRecipe Screen");
-    //     navigation.navigate("RecipeDetails", {itemObject: item});
-    // }
-
     return (
-        // <View>
-        //     <RecipeList />
-        // </View>
         <FlatList
             data={recipes}
             numColumns={2}
@@ -59,14 +50,13 @@ export default function AllRecipes({ navigation }) {
                     android_ripple={{ color: Colors.LightGrey, foreground: true }}
                     onPress={() => navigation.navigate("RecipeDetails", { item })}
                 >
-
                     <View style={styles.imgcontainer}>
                         <RecipeImage uri={item.uri} style={form.imageInPost2} />
                     </View>
                     <View>
                         <Row>
                             <Text style={styles.titleText}>{item.title}</Text>
-                            <AntDesign name="like2" size={20} color="black" />
+                            <AntDesign name="like2" size={20} color={Colors.Black} />
                             <Text>{item.like}</Text>
                         </Row>
                     </View>

@@ -44,7 +44,6 @@ export default function Profile({ navigation }) {
 
     useEffect(() => {
         if (route.params) {
-            console.log(route.params);
             setLocation({
                 latitude: route.params.currentLocation.latitude,
                 longitude: route.params.currentLocation.longitude,
@@ -86,6 +85,10 @@ export default function Profile({ navigation }) {
             console.log("locate user ", err);
         }
     };
+
+    const locationPickerHandler = () => {
+        navigation.navigate("Map", { initialLocation: location });
+      };
 
     const saveUserLocation = async () => {
         await saveUser({ country, location });
@@ -132,7 +135,7 @@ export default function Profile({ navigation }) {
                         />
                     )}
                     <Row style={styles.buttonsContainer}>
-                        <MainButton style={styles.buttons} onPress={saveUserLocation} >Pick on the Map</MainButton>
+                        <MainButton style={styles.buttons} onPress={locationPickerHandler} >Pick on the Map</MainButton>
                         {country && <MainButton style={styles.buttons} onPress={saveUserLocation} >Save</MainButton>}
                     </Row>
                 </View>

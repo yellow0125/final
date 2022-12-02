@@ -6,16 +6,13 @@ import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { FlatList } from 'react-native';
 import RecipeButton from './UI/RecipeButton';
 import { StyleSheet } from 'react-native';
-import { container } from '../constants/Style';
 import Row from './UI/Row';
 import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
-import Column from './UI/Column';
-import { Entypo, Ionicons, AntDesign, EvilIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { form } from '../constants/Style';
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState();
-  const [imageURL, setImageURL] = useState("");
   
   let filteredRecipes = [];
   if (props.location && recipes != undefined) {
@@ -65,7 +62,7 @@ export default function RecipeList(props) {
             <View>
                 <Row>
                     <Text style={styles.titleText}>{item.title}</Text>
-                    <AntDesign name="like2" size={20} color="black" />
+                    <AntDesign name="like2" size={20} color={Colors.Black} />
                     <Text>{item.like}</Text>
                 </Row>
             </View>
@@ -73,26 +70,6 @@ export default function RecipeList(props) {
 
     )}
 />
-
-        // <RecipeButton style={container.post}
-        //   // onPress={()=>props.navigate('Edit', {itemID: item.key, important: item.important})}
-        //   onPress={() => console.log("navigate to detailRecipe Screen")}
-        // >
-        //   <Column>
-        //     <RecipeImage uri={item.uri} style={form.imageInPost} />
-        //     <Row>
-        //       <Text style={styles.titleText}>{item.title}</Text>
-        //       <View style={styles.iconContainer}>
-        //         <Row style={styles.icon}>
-        //           <AntDesign name="like2" size={20} color="black" />
-        //           <Text>{item.like}</Text>
-        //         </Row>
-        //       </View>
-        //     </Row>
-        //   </Column>
-        // </RecipeButton>
-      // )}
-    // />
   )
 }
 

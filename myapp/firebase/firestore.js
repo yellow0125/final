@@ -35,7 +35,7 @@ export async function saveUser(user) {
             country: user.country,
             location: user.location
         });
-        console.log('update success')
+        console.log('update country and location success')
     } catch (err) {
         console.log("save user ", err);
     }
