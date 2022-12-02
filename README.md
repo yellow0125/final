@@ -34,10 +34,14 @@ In the first week, we plan to do these work below:
 #### 11/24/2022 My Recipes Screen and ProfileScreen
 1. create my recipes screen, show 2 columns
 2. add icons and other navigate
-
 #### 11/25/2022 Location
 1. add location in profile page
 2. use Geocoder to reverse location data
+#### 12/2/2022 Location and Welcome page
+1. add map interaction in profile page
+2. modify profile ui
+3. when user install app and open at the first time, it will show the about me page
+4. use ansycstorage to implement point 3
 
 ### Xiaolan Wu
 #### 11/17/2022 Saving data Using Firebase and Redux
