@@ -8,7 +8,7 @@ import Colors from '../../constants/Colors';
 export default function AboutMe({ navigation }) {
   return (
     <>
-      <Swiper style={styles.wrapper} showsButtons={true}>
+      <Swiper style={styles.wrapper} showsButtons={true} autoplay={true}>
         <View style={styles.slide}>
           <Image source={require('../../assets/img/hello1.png')} style={styles.image} />
         </View>
