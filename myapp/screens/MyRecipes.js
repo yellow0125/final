@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Pressable } from 'react-native'
+import { View, Text, Dimensions, Image } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
@@ -47,9 +47,19 @@ export default function MyRecipes({ navigation }) {
     return (
         <>
             {recipes.length == 0 ? (
-
-                <MainButton onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
-
+                <>
+                    <View style={styles.imageContainer}>
+                        <Image
+                            source={require('../assets/img/collect.jpg')}
+                            style={styles.image}
+                            resizeMode="cover"
+                        />
+                    </View>
+                    <Text style={styles.text}>You do not have any recipes! Create one!</Text>
+                    <View style={{marginHorizontal:50}}>
+                        <MainButton mode='light' onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
+                    </View>
+                </>
             ) : (<FlatList
                 data={recipes}
                 numColumns={2}
@@ -81,8 +91,16 @@ export default function MyRecipes({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    imgcontainer: {
-        width: Dimensions.get('window').width,
+    imageContainer: {
+        width: Dimensions.get('window').width * 0.7,
+        height: Dimensions.get('window').width * 0.7,
+        borderRadius: Dimensions.get('window').width * 0.7 / 2,
+        borderWidth: 2,
+        borderColor: Colors.BgDarkGreen,
+        overflow: "hidden",
+        marginVertical: Dimensions.get('window').height / 30,
+        alignSelf: 'center'
+
     },
     wholeContainer: {
         flex: 1,
@@ -97,4 +115,13 @@ const styles = StyleSheet.create({
         width: 140,
         fontWeight: 'bold',
     },
+    image: {
+        width: "100%",
+        height: "100%"
+    },
+    text: {
+        fontSize: 16,
+        alignSelf: 'center',
+        margin: 5
+    }
 })
