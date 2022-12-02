@@ -57,7 +57,7 @@ export default function MyRecipes({ navigation }) {
                     </View>
                     <Text style={styles.text}>You do not have any recipes! Create one!</Text>
                     <View style={{marginHorizontal:50}}>
-                        <MainButton mode='light' onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
+                        <MainButton onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
                     </View>
                 </>
             ) : (<FlatList

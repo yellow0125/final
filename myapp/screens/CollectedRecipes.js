@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Pressable } from 'react-native'
+import { View, Text, Dimensions, Image } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
@@ -22,7 +22,7 @@ export default function MyRecipes({ navigation }) {
             query(
                 collection(db, "recipes"),
                 where("likedUser", "array-contains", auth.currentUser.uid)),
-                
+
             (QuerySnapshot) => {
                 if (QuerySnapshot.empty) {
                     setRecipes([]);
@@ -44,7 +44,22 @@ export default function MyRecipes({ navigation }) {
     return (
         <>
             {recipes.length == 0 ? (
-                <MainButton onPress={() => navigation.navigate("AddRecipe")}>Collect a New Recipe</MainButton>
+                <>
+                    <View style={styles.imageContainer}>
+                        <Image
+                            source={require('../assets/img/collect.jpg')}
+                            style={styles.image}
+                            resizeMode="cover"
+                        />
+                    </View>
+                    <Text style={styles.text}>You do not have any collected recipes! Find one!</Text>
+                    <View style={{ marginHorizontal: 50 }}>
+                        <MainButton onPress={() => navigation.navigate("AddRecipe")}>Find More Recipes</MainButton>
+                    </View>
+                </>
+
+
+
             ) : (<FlatList
                 data={recipes}
                 numColumns={2}
@@ -76,9 +91,6 @@ export default function MyRecipes({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    imgcontainer: {
-        width: Dimensions.get('window').width,
-    },
     wholeContainer: {
         flex: 1,
         height: 230,
@@ -92,4 +104,24 @@ const styles = StyleSheet.create({
         width: 140,
         fontWeight: 'bold',
     },
+    imageContainer: {
+        width: Dimensions.get('window').width * 0.7,
+        height: Dimensions.get('window').width * 0.7,
+        borderRadius: Dimensions.get('window').width * 0.7 / 2,
+        borderWidth: 2,
+        borderColor: Colors.BgDarkGreen,
+        overflow: "hidden",
+        marginVertical: Dimensions.get('window').height / 30,
+        alignSelf: 'center'
+
+    },
+    image: {
+        width: "100%",
+        height: "100%"
+    },
+    text: {
+        fontSize: 16,
+        alignSelf: 'center',
+        margin: 5
+    }
 })
