@@ -126,7 +126,7 @@ export default function Profile({ navigation }) {
                                 <Ionicons
                                     name="location-outline"
                                     size={36}
-                                    color="black"
+                                    color={Colors.Black}
                                     onPress={locateUserHandler} />
                             </Row>
                             <Row><Text>Locate Me</Text></Row>
