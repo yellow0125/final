@@ -17,6 +17,7 @@ import MyRecipes from "./screens/MyRecipes";
 import RecipeDetails from "./screens/RecipeDetails";
 import Colors from "./constants/Colors";
 import Map from "./screens/Map";
+import AboutMe from "./components/auth/AboutMe";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
@@ -43,6 +44,7 @@ export default function App() {
           headerTitleAlign: "center",
         }}
       >
+        <Stack.Screen name="AboutMe" component={AboutMe} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
