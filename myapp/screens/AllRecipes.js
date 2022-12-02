@@ -13,6 +13,7 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
+import Banner from '../components/UI/Banner';
 
 
 export default function AllRecipes({ navigation }) {
@@ -40,30 +41,33 @@ export default function AllRecipes({ navigation }) {
         }
     }, [],);
     return (
-        <FlatList
-            data={recipes}
-            numColumns={2}
-            keyExtractor={item => item.key}
-            renderItem={({ item }) => (
-                <RecipeButton
-                    style={styles.wholeContainer}
-                    android_ripple={{ color: Colors.LightGrey, foreground: true }}
-                    onPress={() => navigation.navigate("RecipeDetails", { item })}
-                >
-                    <View style={styles.imgcontainer}>
-                        <RecipeImage uri={item.uri} style={form.imageInPost2} />
-                    </View>
-                    <View>
-                        <Row>
-                            <Text style={styles.titleText}>{item.title}</Text>
-                            <AntDesign name="like2" size={20} color={Colors.Black} />
-                            <Text>{item.like}</Text>
-                        </Row>
-                    </View>
-                </RecipeButton>
+        <>
+            <Banner />
+            <FlatList
+                data={recipes}
+                numColumns={2}
+                keyExtractor={item => item.key}
+                renderItem={({ item }) => (
+                    <RecipeButton
+                        style={styles.wholeContainer}
+                        android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                        onPress={() => navigation.navigate("RecipeDetails", { item })}
+                    >
+                        <View style={styles.imgcontainer}>
+                            <RecipeImage uri={item.uri} style={form.imageInPost2} />
+                        </View>
+                        <View>
+                            <Row>
+                                <Text style={styles.titleText}>{item.title}</Text>
+                                <AntDesign name="like2" size={20} color={Colors.Black} />
+                                <Text>{item.like}</Text>
+                            </Row>
+                        </View>
+                    </RecipeButton>
 
-            )}
-        />
+                )}
+            />
+        </>
     );
 }
 
