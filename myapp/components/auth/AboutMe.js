@@ -20,9 +20,10 @@ export default function AboutMe({ navigation }) {
           <Image source={require('../../assets/img/hello4.png')} style={styles.image} />
         </View>
       </Swiper>
-      <View>
-      <Button onPress={() => navigation.replace("Register")}>Create your account</Button>
+      <View style={styles.button}>
+        <Button onPress={() => navigation.replace("Register")}>Create your account</Button>
       </View>
+
     </>
   )
 }
@@ -41,8 +42,9 @@ const styles = StyleSheet.create({
     height: '100%',
 
   },
-  button:{
-    justifyContent:'center',
-    alignContent:'center'
+  button: {
+    marginBottom: 5,
+    justifyContent: 'center',
+    alignContent: 'center'
   },
 });
