@@ -18,12 +18,28 @@ import RecipeDetails from "./screens/RecipeDetails";
 import Colors from "./constants/Colors";
 import Map from "./screens/Map";
 import AboutMe from "./components/auth/AboutMe";
-
+import { storeData, getItemFor } from "./helpers/storageHelper"
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
 
+const HAS_LAUNCHED = 'HAS_LAUNCHED';
+
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
+  const [hasLaunched, setHasLaunched] = useState(false)
+
+  useEffect(() => {
+    const getData = async () => {
+      const hasLaunched = await getItemFor(HAS_LAUNCHED);
+      if (hasLaunched) {
+        setHasLaunched(true)
+      }
+      else {
+        await storeData(HAS_LAUNCHED, "true");
+      }
+    };
+    getData().catch((err) => { console.log(err) })
+  }, [])
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -34,7 +50,6 @@ export default function App() {
       }
     });
   });
-
   const AuthStack = () => {
     return (
       <Stack.Navigator
@@ -44,7 +59,8 @@ export default function App() {
           headerTitleAlign: "center",
         }}
       >
-        <Stack.Screen name="AboutMe" component={AboutMe} />
+        {!hasLaunched && <Stack.Screen name="AboutMe" component={AboutMe} />}
+        
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
@@ -66,8 +82,6 @@ export default function App() {
           <Stack.Screen name="MyRecipes" component={MyRecipes} options={{ headerTitle: "My Recipes" }} />
           <Stack.Screen name="RecipeDetails" component={RecipeDetails} options={{ headerTitle: "Recipe Details" }} />
           <Stack.Screen name="Map" component={Map} options={{ headerTitle: "Pick up your location" }} />
-
-
         </Stack.Navigator>
       </Provider>
     );
