@@ -28,18 +28,18 @@ export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
   const [hasLaunched, setHasLaunched] = useState(false)
 
-  useEffect(() => {
-    const getData = async () => {
-      const hasLaunched = await getItemFor(HAS_LAUNCHED);
-      if (hasLaunched) {
-        setHasLaunched(true)
-      }
-      else {
-        await storeData(HAS_LAUNCHED, "true");
-      }
-    };
-    getData().catch((err) => { console.log(err) })
-  }, [])
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const hasLaunched = await getItemFor(HAS_LAUNCHED);
+  //     if (hasLaunched) {
+  //       setHasLaunched(true)
+  //     }
+  //     else {
+  //       await storeData(HAS_LAUNCHED, "true");
+  //     }
+  //   };
+  //   getData().catch((err) => { console.log(err) })
+  // }, [])
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -59,10 +59,10 @@ export default function App() {
           headerTitleAlign: "center",
         }}
       >
-        {!hasLaunched && <Stack.Screen name="AboutMe" component={AboutMe} />}
+        {!hasLaunched && <Stack.Screen name="AboutMe" component={AboutMe} options={{headerShown: false}}/>}
         
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Login" component={Login} options={{ headerTitle: "Log in your account" }}/>
+        <Stack.Screen name="Register" component={Register} options={{ headerTitle: "Create a new account" }}/>
       </Stack.Navigator>
     );
   };
