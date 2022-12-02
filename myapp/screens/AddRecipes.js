@@ -250,7 +250,7 @@ export default function AddRecipes(props) {
 
 const styles = StyleSheet.create({
     snackbar: {
-        marginBottom: 400
+        marginBottom: 520
     },
     title: {
         textAlign: 'center',
