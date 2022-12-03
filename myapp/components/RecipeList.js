@@ -12,10 +12,10 @@ import RecipeImage from './UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { form } from '../constants/Style';
 export default function RecipeList(props) {
-  const [recipes, setRecipes] = useState();
+  const [recipes, setRecipes] = useState([]);
   
   let filteredRecipes = [];
-  if (props.location && recipes != undefined) {
+  if (props.location && recipes.length != 0) {
      for (let i = 0; i < recipes.length; i++) {
         let recipe = recipes[i];
         if (props.location.includes(recipe.selectedCuisine)) {
@@ -36,6 +36,7 @@ export default function RecipeList(props) {
           QuerySnapshot.docs.map((snapDoc) => {
             let data = snapDoc.data();
             data = { ...data, key: snapDoc.id };
+            console.log(props.location)
             return data;
           })
         );
