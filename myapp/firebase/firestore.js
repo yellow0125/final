@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, deleteDoc } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup";
 
 export const createUserToDB = async (data) => {
@@ -92,6 +92,14 @@ export const updateUnLikesRecipeToDB = async (unlikesupdate) => {
             likedUser: arrayRemove(auth.currentUser.uid),
             like: unlikesupdate.currentLikes,
         });
+    } catch (error) {
+        console.log("Error when updating likes into db", error)
+    }
+}
+
+export const deleteRecipeToDB = async (key) => {
+    try {
+        await deleteDoc(doc(firestore, "recipes", key));
     } catch (error) {
         console.log("Error when updating likes into db", error)
     }

@@ -15,6 +15,30 @@ import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
+    const [likedRecipes, setLikedRecipes] = useState([]);
+
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                collection(db, "recipes"),
+                where("likedUser", "array-contains", auth.currentUser.uid)),
+
+            (QuerySnapshot) => {
+                if (QuerySnapshot.empty) {
+                    setLikedRecipes([]);
+                    return;
+                }
+                setLikedRecipes(
+                    QuerySnapshot.docs.map((snapDoc) => {
+                        let data = snapDoc.id;
+                        return data;
+                    })
+                );
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -29,7 +53,7 @@ export default function MyRecipes({ navigation }) {
                 setRecipes(
                     QuerySnapshot.docs.map((snapDoc) => {
                         let data = snapDoc.data();
-                        data = { ...data, key: snapDoc.id };
+                        data = { ...data, key: snapDoc.id};
                         return data;
                     })
                 );
@@ -77,7 +101,10 @@ export default function MyRecipes({ navigation }) {
                         <View>
                             <Row>
                                 <Text style={styles.titleText}>{item.title}</Text>
-                                <AntDesign name="like2" size={20} color={Colors.Black} />
+                                {likedRecipes.includes(item.key) ? (
+                                    <AntDesign name="like1" size={20} color={Colors.Black} />) : (
+                                    <AntDesign name="like2" size={20} color={Colors.Black} />
+                                )}
                                 <Text>{item.like}</Text>
                             </Row>
                         </View>
@@ -101,6 +128,9 @@ const styles = StyleSheet.create({
         marginVertical: Dimensions.get('window').height / 30,
         alignSelf: 'center'
 
+    },
+    imgcontainer: {
+        width: Dimensions.get('window').width,
     },
     wholeContainer: {
         flex: 1,

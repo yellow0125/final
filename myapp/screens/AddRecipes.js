@@ -5,6 +5,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
 import Input from '../components/UI/Input';
+import MultipleInput from '../components/UI/MultipleInput';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import { container, form } from '../constants/Style';
@@ -225,16 +226,18 @@ export default function AddRecipes(props) {
 
                 <Spacer style={styles.inputWrapper}>
 
-                    <Input
+                    <MultipleInput
                         label="Prepare Step"
                         value={step1}
                         f_onChange={(newText) => { setStep1(newText) }}
                         mode="long" />
-                    <Input
+                    <MultipleInput
                         label="Cook Step"
                         value={step2}
                         f_onChange={(newText) => { setStep2(newText) }}
-                        mode="long" />
+                        mode="long" 
+                        numberOfLines={4}/>
+
                 </Spacer>
             </Column>
 

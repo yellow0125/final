@@ -95,6 +95,11 @@ In the first week, we plan to do these work below:
 2. add like and unlike buttons in RecipeDetails screen
 3. finished add features about collected/like, such as update the number of likes, give different response to user in different liked status.
 
+#### 12/2/2022 optimize collected/like feature and recipe detials page
+1. optimize recipes details, add delete feature
+2. adjust the step1 and step2 to multiplelines in AddRecipes and RecipeDetail
+3. optimze features about collected/like, show solid icon when liked and hollow icon when unliked.
+
 
 ## Structure of the App
 ### 1. Login and Register page
