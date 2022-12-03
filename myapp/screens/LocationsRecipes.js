@@ -10,6 +10,9 @@ import { useHeaderHeight } from '@react-navigation/elements';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
 
 export default function LocationsRecipes({ navigation }) {
     const [selectedValue, setSelectedValue] = useState("america");
@@ -21,6 +24,7 @@ export default function LocationsRecipes({ navigation }) {
             <StatusBar backgroundColor={Colors.BgDarkGreen}/>
             
                 <View>
+                <SectionedMultiSelect IconRenderer={Icon}/>
                 <Picker
                     selectedValue={selectedValue}
                     style={[container.picker, {width:width},{height:headerHeight},{marginTop: 20}]}
