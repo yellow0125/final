@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Entypo, Ionicons, FontAwesome5,FontAwesome } from '@expo/vector-icons';
+import { Entypo, Ionicons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Colors from "../constants/Colors";
@@ -30,24 +30,26 @@ export class Main extends Component {
             headerTitleAlign: 'center',
           }
         }}
-        initialRouteName="Locations"
+        initialRouteName="All"
       >
-        <Tab.Screen name="Locations" component={LocationsRecipes} 
-          options={({navigation}) => {
-            return {
-            tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
-            headerTitle: "All Locations",
-            headerLeft: () => (
-              <LocateMe navigation={navigation}/>
-            ),
-          }}}
-        />
         <Tab.Screen name="All" component={AllRecipes}
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="list" size={size} color={color} />,
             headerTitle: "All Recipes",
           }}
         />
+        <Tab.Screen name="Locations" component={LocationsRecipes}
+          options={({ navigation }) => {
+            return {
+              tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
+              headerTitle: "All Locations",
+              headerLeft: () => (
+                <LocateMe navigation={navigation} />
+              ),
+            }
+          }}
+        />
+
         <Tab.Screen name="AddRecipe" component={AddRecipes}
           options={{
             tabBarIcon: ({ color, size }) => <Ionicons name="add-circle" size={size} color={color} />,
