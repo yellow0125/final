@@ -17,7 +17,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 export default function LocationsRecipes({ navigation }) {    
     const [selectedValue, setSelectedValue] = useState([]);
 
-
     function onSelectedItemsChange(value) {
         setSelectedValue(value)
     };
@@ -37,9 +36,9 @@ export default function LocationsRecipes({ navigation }) {
                 styles={{selectToggle: form.selectToggle, chipContainer: {borderColor:Colors.BgDarkGreen}}}
                 colors={{primary: Colors.BgDarkGreen, success: Colors.BgDarkGreen}}
             />
-
                 <RecipeList location={selectedValue} navigation={navigation} />
-        </View>
+        </View> 
+        
     );
 }
 
@@ -68,8 +67,8 @@ const items = [
           id: 'africa',
         },
         {
-          name: 'American',
-          id: 'america',
+          name: 'United States',
+          id: 'United States',
         },
         {
           name: 'Brazilian',

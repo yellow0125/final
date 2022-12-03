@@ -9,7 +9,7 @@ import { useRoute } from "@react-navigation/native";
 import { useState } from 'react';
 import Colors from '../../constants/Colors';
 
-export default function LocateMe() {
+export default function LocateMe({navigation}) {
     const [userData, setUserData] = useState([]);
 
     const route = useRoute();
@@ -45,7 +45,6 @@ export default function LocateMe() {
 
             Geocoder.from(currentPosition.coords.latitude, currentPosition.coords.longitude)
                 .then(async json => {
-                    // console.log(json.results[0].address_components.slice(-2)[0])
                     var addressComponent = json.results[0].address_components.slice(-2)[0];
                     setCountry(addressComponent.long_name)
                     console.log("get address", addressComponent.long_name)
@@ -55,11 +54,19 @@ export default function LocateMe() {
         } catch (err) {
             console.log("locate user ", err);
         }
+        navigation.navigate('NearBy', {p: country})
+
     };
   return (
+        (isLoading) ? (
+            <View style={{margin: 10}}>
+                <Text style={{fontSize:16, color: Colors.White}}>Loading</Text>
+            </View>
+        ) : (
         <MainButton mode='light' onPress={locateUserHandler}>
             <FontAwesome5 name="location-arrow" size={20} color={Colors.White} />
             <Text style={{fontSize:10}}>nearby</Text>
         </MainButton>
+        )
   )
 }

@@ -12,6 +12,7 @@ import thunk from "redux-thunk";
 import Main from "./components/Main";
 import AddPicture from "./screens/AddPicture";
 import EditProfile from "./screens/EditProfile";
+import NearBy from "./screens/NearBy";
 
 import MyRecipes from "./screens/MyRecipes";
 import RecipeDetails from "./screens/RecipeDetails";
@@ -27,19 +28,6 @@ const HAS_LAUNCHED = 'HAS_LAUNCHED';
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
   const [hasLaunched, setHasLaunched] = useState(false)
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const hasLaunched = await getItemFor(HAS_LAUNCHED);
-  //     if (hasLaunched) {
-  //       setHasLaunched(true)
-  //     }
-  //     else {
-  //       await storeData(HAS_LAUNCHED, "true");
-  //     }
-  //   };
-  //   getData().catch((err) => { console.log(err) })
-  // }, [])
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -82,6 +70,7 @@ export default function App() {
           <Stack.Screen name="MyRecipes" component={MyRecipes} options={{ headerTitle: "My Recipes" }} />
           <Stack.Screen name="RecipeDetails" component={RecipeDetails} options={{ headerTitle: "Recipe Details" }} />
           <Stack.Screen name="Map" component={Map} options={{ headerTitle: "Pick up your location" }} />
+          <Stack.Screen name="NearBy" component={NearBy} options={{ headerTitle: "NearBy" }} />
         </Stack.Navigator>
       </Provider>
     );

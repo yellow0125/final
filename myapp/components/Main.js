@@ -33,17 +33,14 @@ export class Main extends Component {
         initialRouteName="Locations"
       >
         <Tab.Screen name="Locations" component={LocationsRecipes} 
-          options={{
+          options={({navigation}) => {
+            return {
             tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
             headerTitle: "All Locations",
             headerLeft: () => (
-              // <MainButton mode='light' onPress={() => {console.log("click button")}}>
-              //   <FontAwesome5 name="location-arrow" size={20} color={Colors.White} />
-              //   <Text style={{fontSize:10}}>nearby</Text>
-              // </MainButton>
-              <LocateMe />
+              <LocateMe navigation={navigation}/>
             ),
-          }}
+          }}}
         />
         <Tab.Screen name="All" component={AllRecipes}
           options={{
