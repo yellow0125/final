@@ -11,6 +11,7 @@ import AllRecipes from "../screens/AllRecipes";
 import AddRecipes from "../screens/AddRecipes";
 import CollectedRecipes from "../screens/CollectedRecipes";
 import Profile from "../screens/Profile";
+import LocateMe from './UI/LocateMe';
 
 
 const Tab = createBottomTabNavigator();
@@ -35,10 +36,12 @@ export class Main extends Component {
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
             headerTitle: "All Locations",
-            headerRight: () => (
-              <MainButton mode='light' onPress={() => {console.log("click button")}}>
-                <FontAwesome5 name="location-arrow" size={22} color={Colors.White} />
-              </MainButton>
+            headerLeft: () => (
+              // <MainButton mode='light' onPress={() => {console.log("click button")}}>
+              //   <FontAwesome5 name="location-arrow" size={20} color={Colors.White} />
+              //   <Text style={{fontSize:10}}>nearby</Text>
+              // </MainButton>
+              <LocateMe />
             ),
           }}
         />
