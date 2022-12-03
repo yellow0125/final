@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Entypo, Ionicons, FontAwesome5,FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Colors from "../constants/Colors";
+import { Button, Text } from 'react-native';
+import MainButton from './UI/MainButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LocationsRecipes from "../screens/LocationsRecipes";
 import AllRecipes from "../screens/AllRecipes";
 import AddRecipes from "../screens/AddRecipes";
 import CollectedRecipes from "../screens/CollectedRecipes";
 import Profile from "../screens/Profile";
+
 
 const Tab = createBottomTabNavigator();
 export class Main extends Component {
@@ -32,7 +35,11 @@ export class Main extends Component {
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
             headerTitle: "All Locations",
-            // headerShown:false,
+            headerRight: () => (
+              <MainButton mode='light' onPress={() => {console.log("click button")}}>
+                <FontAwesome5 name="location-arrow" size={22} color={Colors.White} />
+              </MainButton>
+            ),
           }}
         />
         <Tab.Screen name="All" component={AllRecipes}
