@@ -18,7 +18,7 @@ export default function RecipeList(props) {
   if (props.location && recipes != undefined) {
      for (let i = 0; i < recipes.length; i++) {
         let recipe = recipes[i];
-        if (recipe.selectedCuisine === props.location) {
+        if (props.location.includes(recipe.selectedCuisine)) {
           filteredRecipes.push(recipe);
         }
       }
