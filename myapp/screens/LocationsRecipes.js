@@ -10,39 +10,39 @@ import { useHeaderHeight } from '@react-navigation/elements';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
-export default function LocationsRecipes({ navigation }) {
-    const [selectedValue, setSelectedValue] = useState("america");
+
+export default function LocationsRecipes({ navigation }) {    
+    const [selectedValue, setSelectedValue] = useState([]);
     const { height, width } = useWindowDimensions();
     const headerHeight = useHeaderHeight();
 
-    return (
-        <View style={container.containerAdd}>
-            <StatusBar backgroundColor={Colors.BgDarkGreen}/>
-            
-                <View>
-                <Picker
-                    selectedValue={selectedValue}
-                    style={[container.picker, {width:width},{height:headerHeight},{marginTop: 20}]}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                    itemStyle={container.pickerItem}
-                    mode={'dropdown'}
-                    dropdownIconColor={Colors.White}
-                >
-                    <Picker.Item style={container.pickerItem} label="African" value="africa" />
-                    <Picker.Item style={container.pickerItem} label="American" value="america" />
-                    <Picker.Item style={container.pickerItem} label="Brazilian" value="brazillian" />
-                    <Picker.Item style={container.pickerItem} label="British" value="uk" />
-                    <Picker.Item style={container.pickerItem} label="Chinese" value="china" />
-                    <Picker.Item style={container.pickerItem} label="French" value="french" />                
-                    <Picker.Item style={container.pickerItem} label="Italian" value="italy" />
-                </Picker>
-                </View>
+    function onSelectedItemsChange(value) {
+        setSelectedValue(value)
+        console.log("get value in LocationRecipes.js", value)
+    };
 
-            <View style={styles.wholeContainer}>
+    return (
+        <View style={container.container}>
+                <SectionedMultiSelect
+                items={items}
+                IconRenderer={Icon}
+                uniqueKey="id"
+                subKey="children"
+                selectText="Please select here"
+                showDropDowns={true}
+                readOnlyHeadings={true}
+                onSelectedItemsChange={onSelectedItemsChange}
+                selectedItems={selectedValue}
+                styles={{selectToggle: form.selectToggle, chipContainer: {borderColor:Colors.BgDarkGreen}}}
+                colors={{primary: Colors.BgDarkGreen, success: Colors.BgDarkGreen}}
+            />
+
+            <View style={container.container}>
                 <RecipeList location={selectedValue} navigation={navigation} />
             </View>
-            
         </View>
     );
 }
@@ -61,3 +61,43 @@ const styles = StyleSheet.create({
         marginRight: 6,
     },
 });
+
+const items = [
+    {
+      name: 'Countries',
+      id: 0,
+      children: [
+        {
+          name: 'African',
+          id: 'africa',
+        },
+        {
+          name: 'American',
+          id: 'america',
+        },
+        {
+          name: 'Brazilian',
+          id: 'brazillian',
+        },
+        {
+          name: 'British',
+          id: 'uk',
+        },
+        {
+          name: 'Chinese',
+          id: 'china',
+        },
+        {
+          name: 'French',
+          id: 'french',
+        },
+        {
+          name: 'Italian',
+          id: 'italy'
+        }
+      ],
+    },
+
+  
+  ];
+  

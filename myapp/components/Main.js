@@ -32,7 +32,7 @@ export class Main extends Component {
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
             headerTitle: "All Locations",
-            headerShown:false,
+            // headerShown:false,
           }}
         />
         <Tab.Screen name="All" component={AllRecipes}
