@@ -31,20 +31,18 @@ export default function LocationsRecipes({ navigation }) {
                 IconRenderer={Icon}
                 uniqueKey="id"
                 subKey="children"
-                selectText="Please select country here"
+                selectText="Please select here"
                 showDropDowns={true}
                 readOnlyHeadings={true}
                 onSelectedItemsChange={onSelectedItemsChange}
                 selectedItems={selectedValue}
-                styles={{height: headerHeight}}
-                backgroundColor={Colors.BgDarkGreen}
+                styles={{selectToggle: form.selectToggle, chipContainer: {borderColor:Colors.BgDarkGreen}}}
+                colors={{primary: Colors.BgDarkGreen, success: Colors.BgDarkGreen}}
             />
 
-            <View style={styles.wholeContainer}>
+            <View style={container.container}>
                 <RecipeList location={selectedValue} navigation={navigation} />
-
             </View>
-            
         </View>
     );
 }

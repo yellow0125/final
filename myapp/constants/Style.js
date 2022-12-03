@@ -184,6 +184,13 @@ const form = StyleSheet.create({
         height:'100%',
         borderRadius:10
     },
+    selectToggle: {
+        paddingHorizontal: 10,
+        paddingVertical: 12,
+        borderColor: Colors.BgDarkGreen,
+        borderWidth: 2,
+        margin:5,
+      },
 
 })
 
