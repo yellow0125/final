@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, ScrollView, Alert} from 'react-native';
 import { firestore as db } from '../firebase/firebase-setup'
 import { container, form } from '../constants/Style';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { updateLikesRecipeToDB, updateUnLikesRecipeToDB } from '../firebase/firestore';
+import { updateLikesRecipeToDB, updateUnLikesRecipeToDB, deleteRecipeToDB } from '../firebase/firestore';
 import { collection, onSnapshot, query, where, collectionGroup } from "firebase/firestore";
 import { auth } from '../firebase/firebase-setup';
 
@@ -17,22 +17,10 @@ import RecipeImage from '../components/UI/RecipeImage';
 export default function RecipeDetails({ navigation, route }) {
     const recipe = route.params.item;
     const [liked, setLiked] = useState(false);
-    // const [recipes, setRecipes] = useState([]);
-    // if (recipes != undefined) {
-    //     for (let i = 0; i < recipes.length; i++) {
-    //         let currentRecipe = recipes[i];
-    //         if (currentRecipe.key === recipe.key) {
-    //             setLiked(true);
-    //             console.log(auth.currentUser.uid, "liked", recipe.key);
-    //         }
-    //     }
-    // }
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
             query(
-                // collection(db, "recipes"),
-                // where("user", "==", auth.currentUser.uid)),
                 collection(db, "recipes"),
                 where("likedUser", "array-contains", auth.currentUser.uid)),
 
@@ -61,6 +49,13 @@ export default function RecipeDetails({ navigation, route }) {
         Alert.alert("Unlike", "Are you sure to unlike your recipe?", [
             { text: "No", style: "cancel", onPress: nothingHappenOperation },
             { text: "Yes", style: "default", onPress: unLikeOperation }
+        ]);
+    }
+
+    function DeleteHandler() {
+        Alert.alert("Delete", "Are you sure to Delete your recipe? It cannot be recovered after deletion!", [
+            { text: "No", style: "cancel", onPress: nothingHappenOperation },
+            { text: "Yes", style: "default", onPress: deleteOperation }
         ]);
     }
 
@@ -98,37 +93,51 @@ export default function RecipeDetails({ navigation, route }) {
                 recipe,
                 currentLikes
             });
-            console.log('update likes', currentLikes);
+            console.log('update unlikes', currentLikes);
             navigation.goBack();
 
         } catch (err) {
-            console.log("update likes ", err);
+            console.log("update unlikes ", err);
         }}
     };
 
-    function nothingHappenOperation() {
+    const deleteOperation = async () => {
+
+        if (liked) {
+            unLikeOperation();
+        } 
+        try {
+            const key = recipe.key;
+            await deleteRecipeToDB(key);
+            console.log('delete recipe', key);
+            navigation.goBack();
+
+        } catch (err) {
+            console.log("delete recipe ", err);
+        }
+        
+    };
+
+    function comebackOperation() {
         navigation.goBack();
     }
 
+    function nothingHappenOperation() {
+        return;
+    }
+
+
     return (
-        // <View style={styles.container}>
-            
-               
-        //         <Text>{recipe.selectedCuisine}</Text>
-        //         <Text>{recipe.selectedCookStyle}</Text>
-        //         <Text>{recipe.selectedDiff}</Text>
-        //         <Text>{recipe.step1}</Text>
-        //         <Text>{recipe.step2}</Text>
-                
-            
-        // </View>
-
-
         <ScrollView style={container.containerAdd}>
 
 
             <Column>
 
+
+                <View style={styles.pickerContainer}>
+                    <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
+
+                </View>
 
                 <View >
                     <Text style={styles.title}>{recipe.title}</Text>
@@ -176,10 +185,6 @@ export default function RecipeDetails({ navigation, route }) {
 
                 </View>
 
-                <View style={styles.pickerContainer}>
-                    <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
-
-                </View>
 
                 
             </Column>
@@ -187,6 +192,9 @@ export default function RecipeDetails({ navigation, route }) {
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={LikeHandler} mode='light'>Like</MainButton>
                 <MainButton style={styles.buttons} onPress={UnLikeHandler} mode='light'>Unlike</MainButton>
+            </Row>
+            <Row style={styles.buttonsContainer2}>
+                <MainButton style={styles.buttons} onPress={DeleteHandler} mode='light'>Delete</MainButton>
             </Row>
         </ScrollView>
     );
@@ -200,6 +208,22 @@ const styles = StyleSheet.create({
     },
     pickerContainer: {
         marginLeft: 20
+    },
+    buttonsContainer: {
+        justifyContent: 'center',
+        marginTop: 20,
+        marginBottom: 20,
+    },
+    buttonsContainer2: {
+        justifyContent: 'center',
+        marginTop: 0,
+        marginBottom: 100,
+    },
+    buttons: {
+        marginHorizontal: 8,
+        marginLeft: 5,
+        marginRight: 5,
+        minWidth: 100,
     },
     pickerLabel: {
         fontSize: 14,

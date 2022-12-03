@@ -19,6 +19,30 @@ import Banner from '../components/UI/Banner';
 export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState();
     const [imageURL, setImageURL] = useState("");
+    const [likedRecipes, setLikedRecipes] = useState([]);
+
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                collection(db, "recipes"),
+                where("likedUser", "array-contains", auth.currentUser.uid)),
+
+            (QuerySnapshot) => {
+                if (QuerySnapshot.empty) {
+                    setLikedRecipes([]);
+                    return;
+                }
+                setLikedRecipes(
+                    QuerySnapshot.docs.map((snapDoc) => {
+                        let data = snapDoc.id;
+                        return data;
+                    })
+                );
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -42,7 +66,6 @@ export default function AllRecipes({ navigation }) {
     }, [],);
     return (
         <>
-            <Banner />
             <FlatList
                 data={recipes}
                 numColumns={2}
@@ -59,7 +82,10 @@ export default function AllRecipes({ navigation }) {
                         <View>
                             <Row>
                                 <Text style={styles.titleText}>{item.title}</Text>
-                                <AntDesign name="like2" size={20} color={Colors.Black} />
+                                {likedRecipes.includes(item.key) ? (
+                                    <AntDesign name="like1" size={20} color={Colors.Black} />) : (
+                                    <AntDesign name="like2" size={20} color={Colors.Black} />
+                                )}
                                 <Text>{item.like}</Text>
                             </Row>
                         </View>

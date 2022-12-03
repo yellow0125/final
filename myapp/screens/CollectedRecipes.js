@@ -16,6 +16,30 @@ import MainButton from '../components/UI/MainButton';
 
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
+    const [likedRecipes, setLikedRecipes] = useState([]);
+
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                collection(db, "recipes"),
+                where("likedUser", "array-contains", auth.currentUser.uid)),
+
+            (QuerySnapshot) => {
+                if (QuerySnapshot.empty) {
+                    setLikedRecipes([]);
+                    return;
+                }
+                setLikedRecipes(
+                    QuerySnapshot.docs.map((snapDoc) => {
+                        let data = snapDoc.id;
+                        return data;
+                    })
+                );
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -54,7 +78,7 @@ export default function MyRecipes({ navigation }) {
                     </View>
                     <Text style={styles.text}>You do not have any collected recipes! Find one!</Text>
                     <View style={{ marginHorizontal: 50 }}>
-                        <MainButton onPress={() => navigation.navigate("AddRecipe")}>Find More Recipes</MainButton>
+                        <MainButton onPress={() => navigation.navigate("All")}>Find More Recipes</MainButton>
                     </View>
                 </>
 
@@ -76,8 +100,11 @@ export default function MyRecipes({ navigation }) {
                         </View>
                         <View>
                             <Row>
-                                <Text style={styles.titleText}>{item.title}</Text>
-                                <AntDesign name="like2" size={20} color={Colors.Black} />
+                                <Text style={styles.titleText}>{item.title}</Text>                                
+                                {likedRecipes.includes(item.key) ? (
+                                    <AntDesign name="like1" size={20} color={Colors.Black} />) : (
+                                    <AntDesign name="like2" size={20} color={Colors.Black} />
+                                )}
                                 <Text>{item.like}</Text>
                             </Row>
                         </View>
@@ -97,6 +124,9 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: 4,
         marginRight: 6,
+    },
+    imgcontainer: {
+        width: Dimensions.get('window').width,
     },
     titleText: {
         color: Colors.DescriptionText,

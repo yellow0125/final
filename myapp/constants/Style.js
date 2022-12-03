@@ -142,6 +142,8 @@ const form = StyleSheet.create({
     },
     button: {
         marginTop: 5,
+        marginLeft: 5,
+        marginRight: 5,
     },
     image: {
         alignSelf: 'center',
