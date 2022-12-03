@@ -63,6 +63,12 @@ In the first week, we plan to do these work below:
 2. implement picker function in LocaitonRecipes.js
 3. others: modify styles
 
+#### 12/2/2022 Upgrad picker to multiple selector
+1. implement multiple selector to allow user select different recipes in LocationRecipes.js
+2. Modify filter function in RecipeList.js to allow user customize recipesList.
+3. Adjust the UI of multiple selector.
+
+
 ### Yichao Wu
 #### 11/17/2022 All screens without features
 1. Implement all screens of this app, including LocationsRecripes, AllRecipes, AddRecipes, CollectedRecipes and Profile.
