@@ -7,7 +7,6 @@ import { container, form } from '../constants/Style';
 import { useWindowDimensions } from 'react-native';
 import { useHeaderHeight } from '@react-navigation/elements';
 
-import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
@@ -15,7 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 
 export default function LocationsRecipes({ navigation }) {    
-    const [selectedValue, setSelectedValue] = useState([]);
+    const [selectedValue, setSelectedValue] = useState(['United States','Chinese']);
 
     function onSelectedItemsChange(value) {
         setSelectedValue(value)
