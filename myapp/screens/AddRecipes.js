@@ -173,12 +173,12 @@ export default function AddRecipes(props) {
                         }
                     >
                         <Picker.Item label="Please Select" value="defaultC" />
-                        <Picker.Item label="China" value="china" />
-                        <Picker.Item label="Japan" value="japan" />
-                        <Picker.Item label="Italy" value="italy" />
-                        <Picker.Item label="America" value="america" />
-                        <Picker.Item label="British" value="british" />
-                        <Picker.Item label="Franch" value="franch" />
+                        <Picker.Item label="China" value="Chinese" />
+                        <Picker.Item label="Japan" value="Japan" />
+                        <Picker.Item label="Italy" value="Italy" />
+                        <Picker.Item label="America" value="America" />
+                        <Picker.Item label="British" value="British" />
+                        <Picker.Item label="Franch" value="Franch" />
                     </Picker>
                 </View>
 

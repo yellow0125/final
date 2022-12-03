@@ -35,7 +35,7 @@ export class Main extends Component {
         <Tab.Screen name="All" component={AllRecipes}
           options={{
             tabBarIcon: ({ color, size }) => <Entypo name="list" size={size} color={color} />,
-            headerTitle: "All Recipes",
+            headerTitle: "Welcome to Fooriend",
           }}
         />
         <Tab.Screen name="Locations" component={LocationsRecipes}
