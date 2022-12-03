@@ -27,34 +27,37 @@ export default function LocateMe({navigation}) {
         return requestPermissionResponse.granted;
     };
 
+    const getCountryFromGeocoderAndNavigate = async (currentPosition) => {
+        Geocoder.from(currentPosition.coords.latitude, currentPosition.coords.longitude)
+        .then(async json => {
+            var addressComponent = json.results[0].address_components.slice(-2)[0];
+            const countryFromGeocoder = addressComponent.long_name
+            setCountry(countryFromGeocoder)
+            setIsLoading(false)
+            navigation.navigate('NearBy', {p: countryFromGeocoder})
+        })
+        .catch(error => console.warn(error));
+    };
+
     const locateUserHandler = async () => {
         setIsLoading(true)
-        console.log("go into locateUserHandler")
         try {
             const hasPermission = await verifyPermission();
             if (!hasPermission) {
                 console.log("no premission allowed")
                 return;
             }
+
             const currentPosition = await Location.getCurrentPositionAsync();
 
             setLocation({
                 latitude: currentPosition.coords.latitude,
                 longitude: currentPosition.coords.longitude,
             });
-
-            Geocoder.from(currentPosition.coords.latitude, currentPosition.coords.longitude)
-                .then(async json => {
-                    var addressComponent = json.results[0].address_components.slice(-2)[0];
-                    setCountry(addressComponent.long_name)
-                    console.log("get address", addressComponent.long_name)
-                })
-                .catch(error => console.warn(error));
-            setIsLoading(false)
+            getCountryFromGeocoderAndNavigate(currentPosition)
         } catch (err) {
             console.log("locate user ", err);
         }
-        navigation.navigate('NearBy', {p: country})
 
     };
   return (
