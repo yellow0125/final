@@ -23,7 +23,6 @@ export default function AboutMe({ navigation }) {
       <View style={styles.button}>
         <Button onPress={() => navigation.replace("Register")}>Create your account</Button>
       </View>
-
     </>
   )
 }

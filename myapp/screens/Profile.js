@@ -13,6 +13,7 @@ import * as Location from "expo-location";
 import { useRoute } from "@react-navigation/native";
 import { getUser, saveUser } from '../firebase/firestore';
 import { MAPS_API_KEY } from "react-native-dotenv";
+import NotificationManager from '../components/NotificationManager';
 import Geocoder from 'react-native-geocoding';
 Geocoder.init("AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY", { language: "en" });
 
@@ -88,7 +89,7 @@ export default function Profile({ navigation }) {
 
     const locationPickerHandler = () => {
         navigation.navigate("Map", { initialLocation: location });
-      };
+    };
 
     const saveUserLocation = async () => {
         await saveUser({ country, location });
@@ -112,6 +113,9 @@ export default function Profile({ navigation }) {
                         <Text style={styles.userInfo}>{userData.country}</Text>
                     </View>
                 </Row>
+                <View>
+                    <NotificationManager />
+                </View>
                 <View>
                     <MainButton mode='light' onPress={locateUserHandler}>
                         <Text>Where am I?   </Text>
