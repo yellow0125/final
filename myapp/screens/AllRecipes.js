@@ -17,6 +17,7 @@ export default function AllRecipes({ navigation }) {
     const [weeklyRecipes, setWeeklyRecipes] = useState([]);
     const [drinkRecipes, setDrinkRecipes] = useState([]);
     const [japanRecipes, setJapanRecipes] = useState([]);
+    const [easyRecipes, setEasyRecipes] = useState([]);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -69,7 +70,7 @@ export default function AllRecipes({ navigation }) {
         const unsubsribe = onSnapshot(
             query(
                 collection(db, "recipes"),
-                where("selectedCookStyle","==","Drinks/Dessert")),
+                where("selectedCookStyle", "==", "Drinks/Dessert")),
             (QuerySnapshot) => {
                 if (QuerySnapshot.empty) {
                     setDrinkRecipes([]);
@@ -92,7 +93,7 @@ export default function AllRecipes({ navigation }) {
         const unsubsribe = onSnapshot(
             query(
                 collection(db, "recipes"),
-                where("selectedCuisine","==","Japanese")),
+                where("selectedCuisine", "==", "Japanese")),
             (QuerySnapshot) => {
                 if (QuerySnapshot.empty) {
                     setJapanRecipes([]);
@@ -111,12 +112,34 @@ export default function AllRecipes({ navigation }) {
         }
     }, [],);
 
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                collection(db, "recipes"),
+                where("selectedDiff", "==", "Under 30 minutes")),
+            (QuerySnapshot) => {
+                if (QuerySnapshot.empty) {
+                    setEasyRecipes([]);
+                    return;
+                }
+                setEasyRecipes(
+                    QuerySnapshot.docs.map((snapDoc) => {
+                        let data = snapDoc.data();
+                        data = { ...data, key: snapDoc.id };
+                        return data;
+                    })
+                );
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
+
     return (
         <ScrollView>
-            <View>
-                <Banner navigation={navigation} />
-            </View>
+            <Banner navigation={navigation} />
             <NotificationManager />
+
             <View style={styles.recipesContainer}>
                 <Row style={styles.headContainer}>
                     <AntDesign name="staro" size={20} color={Colors.Orange} />
@@ -222,6 +245,31 @@ export default function AllRecipes({ navigation }) {
                     )}
                 />
             </View>
+
+            <View style={styles.recipesContainer}>
+                <Row style={styles.headContainer}>
+                    <AntDesign name="staro" size={20} color={Colors.Orange} />
+                    <Text style={styles.headtext}> Easy Meals to Start Cooking</Text>
+                </Row>
+                <FlatList
+                    data={easyRecipes}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={item => item.key}
+                    renderItem={({ item }) => (
+                        <RecipeButton
+                            android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                            onPress={() => navigation.navigate("RecipeDetails", { item })}
+                        >
+                            <View style={styles.weekImg}>
+                                <RecipeImage uri={item.uri} />
+                            </View>
+                            <Text style={styles.weekText}>{item.title}</Text>
+                        </RecipeButton>
+                    )}
+                />
+            </View>
+
             <TouchableOpacity style={styles.buttonC} onPress={() => navigation.navigate("Locations")}>
                 <Row>
                     <Text style={styles.button}>-View More-</Text>
@@ -271,8 +319,8 @@ const styles = StyleSheet.create({
     },
     weekText: {
         fontSize: 14,
-        fontWeight:'bold',
-        textAlign:'center',
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     popularText1: {
         color: Colors.DescriptionText,
@@ -280,7 +328,7 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         fontSize: 14,
         marginBottom: 5,
-        fontWeight:'bold',
+        fontWeight: 'bold',
     },
     popularText2: {
         color: Colors.DescriptionText,
