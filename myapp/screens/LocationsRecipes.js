@@ -5,11 +5,9 @@ import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import NotificationManager from '../components/NotificationManager';
-
 
 export default function LocationsRecipes({ navigation }) {    
-    const [selectedValue, setSelectedValue] = useState(['United States','china']);
+    const [selectedValue, setSelectedValue] = useState(['Chinese']);
 
     function onSelectedItemsChange(value) {
         setSelectedValue(value)
@@ -17,7 +15,6 @@ export default function LocationsRecipes({ navigation }) {
 
     return (
         <View style={container.container}>
-            
             <SectionedMultiSelect
                 items={items}
                 IconRenderer={Icon}
@@ -55,7 +52,7 @@ const styles = StyleSheet.create({
 const items = [
     {
       name: 'Countries',
-      id: 0,
+      id: 1,
       children: [
         {
           name: 'African',
@@ -85,6 +82,32 @@ const items = [
           name: 'Italian',
           id: 'italy'
         }
+      ],
+    },
+    {
+      name: 'Difficulty',
+      id: 2,
+      children: [
+        {
+          name: 'Under 15 minutes',
+          id: 'Under 15 minutes',
+        },
+        {
+          name: 'Under 30 minutes',
+          id: 'Under 30 minutes',
+        },
+        {
+          name: 'Under 45 minutes',
+          id: 'Under 45 minutes',
+        },
+        {
+          name: 'Under 1 hour',
+          id: 'Under 1 hour',
+        },
+        {
+          name: 'More than 1 hour',
+          id: 'More than 1 hour',
+        },
       ],
     },
 

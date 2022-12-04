@@ -14,6 +14,7 @@ export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
     const [imageURL, setImageURL] = useState("");
     const [weeklyRecipes, setWeeklyRecipes] = useState([]);
+    
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
