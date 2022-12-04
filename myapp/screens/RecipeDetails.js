@@ -135,7 +135,7 @@ export default function RecipeDetails({ navigation, route }) {
                 <Text >featured in <Text style={styles.redText}>5 Hearty Slow Cooker Recipes</Text></Text>
                 <Row style={{ marginTop: 15 }}>
                     <AntDesign name="like2" size={22} color={Colors.Black} />
-                    <Text style={styles.boldText}>{recipe.like}</Text>
+                    <Text style={styles.boldText}> {recipe.like}</Text>
                     <Text> people like this recipe</Text>
                 </Row>
                 <Row style={{ marginTop: 15 }}>
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     },
     boldText: {
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 15,
     },
     pickerLabel: {
         fontSize: 16,
