@@ -15,7 +15,9 @@ export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
     const [imageURL, setImageURL] = useState("");
     const [weeklyRecipes, setWeeklyRecipes] = useState([]);
-    
+    const [drinkRecipes, setDrinkRecipes] = useState([]);
+    const [japanRecipes, setJapanRecipes] = useState([]);
+    const [easyRecipes, setEasyRecipes] = useState([]);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -63,35 +65,82 @@ export default function AllRecipes({ navigation }) {
             unsubsribe();
         }
     }, [],);
+
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                collection(db, "recipes"),
+                where("selectedCookStyle", "==", "Drinks/Dessert")),
+            (QuerySnapshot) => {
+                if (QuerySnapshot.empty) {
+                    setDrinkRecipes([]);
+                    return;
+                }
+                setDrinkRecipes(
+                    QuerySnapshot.docs.map((snapDoc) => {
+                        let data = snapDoc.data();
+                        data = { ...data, key: snapDoc.id };
+                        return data;
+                    })
+                );
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
+
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                collection(db, "recipes"),
+                where("selectedCuisine", "==", "Japanese")),
+            (QuerySnapshot) => {
+                if (QuerySnapshot.empty) {
+                    setJapanRecipes([]);
+                    return;
+                }
+                setJapanRecipes(
+                    QuerySnapshot.docs.map((snapDoc) => {
+                        let data = snapDoc.data();
+                        data = { ...data, key: snapDoc.id };
+                        return data;
+                    })
+                );
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
+
+    useEffect(() => {
+        const unsubsribe = onSnapshot(
+            query(
+                collection(db, "recipes"),
+                where("selectedDiff", "==", "Under 30 minutes")),
+            (QuerySnapshot) => {
+                if (QuerySnapshot.empty) {
+                    setEasyRecipes([]);
+                    return;
+                }
+                setEasyRecipes(
+                    QuerySnapshot.docs.map((snapDoc) => {
+                        let data = snapDoc.data();
+                        data = { ...data, key: snapDoc.id };
+                        return data;
+                    })
+                );
+            });
+        return () => {
+            unsubsribe();
+        }
+    }, [],);
+
     return (
         <ScrollView>
-            <View>
-                <Banner navigation={navigation}/>
-            </View>
+            <Banner navigation={navigation} />
             <NotificationManager />
-            <View>
-                <Row style={styles.headContainer}>
-                    <AntDesign name="staro" size={20} color={Colors.Orange} />
-                    <Text style={styles.headtext}> Weekly Recommend</Text>
-                </Row>
-                <FlatList
-                    data={weeklyRecipes}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    keyExtractor={item => item.key}
-                    renderItem={({ item }) => (
-                        <RecipeButton
-                            android_ripple={{ color: Colors.LightGrey, foreground: true }}
-                            onPress={() => navigation.navigate("RecipeDetails", { item })}
-                        >
-                            <View style={styles.weekImg}>
-                                <RecipeImage uri={item.uri} />
-                            </View>
-                        </RecipeButton>
-                    )}
-                />
-            </View>
-            <View>
+
+            <View style={styles.recipesContainer}>
                 <Row style={styles.headContainer}>
                     <AntDesign name="staro" size={20} color={Colors.Orange} />
                     <Text style={styles.headtext}> Most Popular</Text>
@@ -124,9 +173,106 @@ export default function AllRecipes({ navigation }) {
                     )}
                 />
             </View>
+
+            <View style={styles.recipesContainer}>
+                <Row style={styles.headContainer}>
+                    <AntDesign name="staro" size={20} color={Colors.Orange} />
+                    <Text style={styles.headtext}> Recommended For You</Text>
+                </Row>
+                <FlatList
+                    data={weeklyRecipes}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={item => item.key}
+                    renderItem={({ item }) => (
+                        <RecipeButton
+                            android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                            onPress={() => navigation.navigate("RecipeDetails", { item })}
+                        >
+                            <View style={styles.weekImg}>
+                                <RecipeImage uri={item.uri} />
+                            </View>
+                            <Text style={styles.weekText}>{item.title}</Text>
+                        </RecipeButton>
+                    )}
+                />
+            </View>
+
+            <View style={styles.recipesContainer}>
+                <Row style={styles.headContainer}>
+                    <AntDesign name="staro" size={20} color={Colors.Orange} />
+                    <Text style={styles.headtext}> Drinks and Dessert Bars</Text>
+                </Row>
+                <FlatList
+                    data={drinkRecipes}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={item => item.key}
+                    renderItem={({ item }) => (
+                        <RecipeButton
+                            android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                            onPress={() => navigation.navigate("RecipeDetails", { item })}
+                        >
+                            <View style={styles.weekImg}>
+                                <RecipeImage uri={item.uri} />
+                            </View>
+                            <Text style={styles.weekText}>{item.title}</Text>
+                        </RecipeButton>
+                    )}
+                />
+            </View>
+
+            <View style={styles.recipesContainer}>
+                <Row style={styles.headContainer}>
+                    <AntDesign name="staro" size={20} color={Colors.Orange} />
+                    <Text style={styles.headtext}> Trending</Text>
+                </Row>
+                <FlatList
+                    data={japanRecipes}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={item => item.key}
+                    renderItem={({ item }) => (
+                        <RecipeButton
+                            android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                            onPress={() => navigation.navigate("RecipeDetails", { item })}
+                        >
+                            <View style={styles.weekImg}>
+                                <RecipeImage uri={item.uri} />
+                            </View>
+                            <Text style={styles.weekText}>{item.title}</Text>
+                        </RecipeButton>
+                    )}
+                />
+            </View>
+
+            <View style={styles.recipesContainer}>
+                <Row style={styles.headContainer}>
+                    <AntDesign name="staro" size={20} color={Colors.Orange} />
+                    <Text style={styles.headtext}> Easy Meals to Start Cooking</Text>
+                </Row>
+                <FlatList
+                    data={easyRecipes}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={item => item.key}
+                    renderItem={({ item }) => (
+                        <RecipeButton
+                            android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                            onPress={() => navigation.navigate("RecipeDetails", { item })}
+                        >
+                            <View style={styles.weekImg}>
+                                <RecipeImage uri={item.uri} />
+                            </View>
+                            <Text style={styles.weekText}>{item.title}</Text>
+                        </RecipeButton>
+                    )}
+                />
+            </View>
+
             <TouchableOpacity style={styles.buttonC} onPress={() => navigation.navigate("Locations")}>
                 <Row>
-                    <Text style={styles.button}>View More Recipes</Text>
+                    <Text style={styles.button}>-View More-</Text>
                     <FontAwesome5 name="hand-point-left" size={24} color={Colors.Orange} />
                 </Row>
             </TouchableOpacity>
@@ -142,8 +288,8 @@ const styles = StyleSheet.create({
 
     },
     headtext: {
-        fontSize: 18,
-        color: Colors.Orange,
+        fontSize: 20,
+        color: Colors.Black,
         fontWeight: 'bold',
     },
     headContainer: {
@@ -155,8 +301,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
     },
     weekImg: {
-        width: Dimensions.get('window').width * 0.6,
-        height: Dimensions.get('window').height * 0.25,
+        width: Dimensions.get('window').width * 0.43,
+        height: Dimensions.get('window').height * 0.23,
         borderWidth: 0.5,
         borderRadius: 2,
         borderColor: Colors.BgDarkGreen,
@@ -171,31 +317,31 @@ const styles = StyleSheet.create({
         borderColor: Colors.BgDarkGreen,
         marginHorizontal: 5,
     },
-    weekTextC: {
-        alignItems: 'center'
-    },
     weekText: {
-        fontSize: 16,
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     popularText1: {
         color: Colors.DescriptionText,
         width: 120,
         marginLeft: 12,
-        fontSize: 18,
-        marginBottom:5,
+        fontSize: 14,
+        marginBottom: 5,
+        fontWeight: 'bold',
     },
     popularText2: {
         color: Colors.DescriptionText,
         width: 120,
         marginLeft: 12,
         fontSize: 14,
-        marginBottom:5,
+        marginBottom: 5,
     },
     likeText: {
         color: Colors.Red,
         marginLeft: 5,
         fontSize: 16,
-        fontWeight:'bold'
+        fontWeight: 'bold'
 
     },
     button: {
@@ -204,5 +350,8 @@ const styles = StyleSheet.create({
     buttonC: {
         alignItems: 'center',
         padding: 5,
+    },
+    recipesContainer: {
+        marginVertical: 10,
     },
 });
