@@ -7,7 +7,7 @@ import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default function LocationsRecipes({ navigation }) {    
-    const [selectedValue, setSelectedValue] = useState(['Chinese']);
+    const [selectedValue, setSelectedValue] = useState();
 
     function onSelectedItemsChange(value) {
         setSelectedValue(value)
@@ -56,7 +56,7 @@ const items = [
       children: [
         {
           name: 'African',
-          id: 'africa',
+          id: 'African',
         },
         {
           name: 'United States',
@@ -64,24 +64,48 @@ const items = [
         },
         {
           name: 'Brazilian',
-          id: 'brazillian',
+          id: 'Brazilian',
         },
         {
           name: 'British',
-          id: 'uk',
+          id: 'British',
         },
         {
           name: 'Chinese',
-          id: 'china',
+          id: 'Chinese',
         },
         {
           name: 'French',
-          id: 'french',
+          id: 'French',
+        },
+        {
+          name: 'German',
+          id: 'German'
+        },
+        {
+          name: 'Indian',
+          id: 'Indian'
         },
         {
           name: 'Italian',
-          id: 'italy'
-        }
+          id: 'Italian'
+        },
+        {
+          name: 'Japanese',
+          id: 'Japanese'
+        },
+        {
+          name: 'Korean',
+          id: 'Korean'
+        },
+        {
+          name: 'Seafood',
+          id: 'Seafood'
+        },
+        {
+          name: 'Other',
+          id: 'Other'
+        },
       ],
     },
     {

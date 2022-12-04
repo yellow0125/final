@@ -6,7 +6,6 @@ import { AntDesign } from '@expo/vector-icons'
 import Row from './UI/Row'
 import Colors from '../constants/Colors'
 export default function NotificationManager() {
-  const name = "Test Notification"
 
   const verifyPermission = async () => {
     const permissionStatus = await Notifications.getPermissionsAsync();
@@ -30,7 +29,7 @@ export default function NotificationManager() {
       }
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: "All I Want Christmas is Iou",
+          title: "All I Want Christmas is You",
           body: 'Join our christmas event! Share your christmas recipes right now!',
           color: "red",
           data: { url: "https://www.google.com" }
