@@ -7,15 +7,13 @@ export default function Banner() {
     <View style={styles.container}>
       <Swiper
         autoplay={true}
-        paginationStyle={styles.paginationStyle}
-        dotStyle={styles.dotStyle}
-        activeDotStyle={styles.activeDotStyle}
+        showsPagination={false}
       >
-        <Image source={require('../../assets/img/banner1.jpg')} style={styles.image} />
-        <Image source={require('../../assets/img/banner1.jpg')} style={styles.image} />
-        <Image source={require('../../assets/img/banner1.jpg')} style={styles.image} />
-        <Image source={require('../../assets/img/banner1.jpg')} style={styles.image} />
-        <Image source={require('../../assets/img/banner1.jpg')} style={styles.image} />
+        <Image source={require('../../assets/img/banner0.png')} style={styles.image} />
+        <Image source={require('../../assets/img/banner2.png')} style={styles.image} />
+        <Image source={require('../../assets/img/banner3.png')} style={styles.image} />
+        <Image source={require('../../assets/img/banner4.png')} style={styles.image} />
+
       </Swiper>
     </View>
 
@@ -34,21 +32,5 @@ const styles = StyleSheet.create({
   image: {
     width: '49%',
     height: '100%',
-  },
-  paginationStyle: {
-    bottom: 6,
-  },
-  dotStyle: {
-    width: 22,
-    height: 3,
-    backgroundColor: '#fff',
-    opacity: 0.4,
-    borderRadius: 0,
-  },
-  activeDotStyle: {
-    width: 22,
-    height: 3,
-    backgroundColor: '#fff',
-    borderRadius: 0,
   },
 });
