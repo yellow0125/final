@@ -29,9 +29,9 @@ export default function NotificationManager() {
             await Notifications.scheduleNotificationAsync({
                 content: {
                     title: "You have a notification",
-                    body: 'This is my firt local notification ${name}',
+                    body: 'click here to see more vedios',
                     color: "red",
-                    data: {url: "https://www.google"}
+                    data: {url: "https://www.google.com"}
                 },
                 trigger: {
                     seconds: 5
@@ -46,7 +46,7 @@ export default function NotificationManager() {
 
   return (
     <View>
-        <MainButton onPress={scheduleNotificationHandler}>send a local notification</MainButton>
+        <MainButton onPress={scheduleNotificationHandler}>Invite you to watch vedios</MainButton>
     </View>
   )
 }
