@@ -30,7 +30,7 @@ export class Main extends Component {
             headerTitleAlign: 'center',
           }
         }}
-        initialRouteName="All"
+        initialRouteName="Locations"
       >
         <Tab.Screen name="All" component={AllRecipes}
           options={{
