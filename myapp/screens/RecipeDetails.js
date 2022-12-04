@@ -165,15 +165,25 @@ export default function RecipeDetails({ navigation, route }) {
                     <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
                     <Text style={styles.pickerLabel}>Prepare Step </Text>
                 </Row>
-                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre1}</Text>
-                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre2}</Text>
+                <View style={styles.stepC}>
+                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre1}</Text>
+                </View>
+                <View style={styles.stepC}>
+                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre2}</Text>
+                </View>
                 <Row style={styles.row}>
                     <MaterialCommunityIcons name="pot-steam-outline" size={24} color={Colors.Black} />
                     <Text style={styles.pickerLabel}>Cook Step </Text>
                 </Row>
-                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step1}</Text>
-                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step2}</Text>
-                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
+                <View style={styles.stepC}>
+                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step1}</Text>
+                </View>
+                <View style={styles.stepC}>
+                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step2}</Text>
+                </View>
+                <View style={styles.stepC}>
+                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
+                </View>
             </View>
 
 
@@ -213,6 +223,8 @@ const styles = StyleSheet.create({
     },
     row: {
         marginVertical: 10,
+        borderBottomWidth: 2,
+        borderColor: Colors.LightGrey,
     },
     content: {
         marginVertical: 5,
@@ -220,18 +232,18 @@ const styles = StyleSheet.create({
 
     },
     step: {
-        marginVertical: 3,
         fontSize: 16,
+    },
+    stepC: {
+        marginVertical: 5,
         marginHorizontal: 10,
         paddingVertical: 10,
-
-        borderRadius: 6,
+        backgroundColor:Colors.White,
+        borderRadius: 5,
         elevation: 3,
-        shadowColor: Colors.BgDarkGreen,
         shadowRadius: 4,
         shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.4
-
+        shadowOpacity: 0.2
     },
     buttonsContainer: {
         justifyContent: 'center',

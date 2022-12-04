@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         color: Colors.lightpurple,
     },
     inputL: {
-        minHeight: 150,
+        minHeight: 50,
         textAlignVertical: 'top'
     },
 });

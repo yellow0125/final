@@ -111,7 +111,7 @@ export default function AddRecipes(props) {
             setIsValid({ bool: true, boolSnack: true, message: "Please add a picture" })
             return;
         }
-        if (title.length == 0 || step1.length == 0 || step2.length == 0 || pre1.length == 0 || pre2.length == 0|| step3.length == 0) {
+        if (title.length == 0 || step1.length == 0 || step2.length == 0 || pre1.length == 0 || pre2.length == 0 || step3.length == 0) {
             setIsValid({ bool: true, boolSnack: true, message: "Please fill out everything" })
             return;
         }
@@ -162,12 +162,32 @@ export default function AddRecipes(props) {
             </Snackbar>
 
             <Column>
-
                 <Input
                     label="Title"
                     f_onChange={(newText) => { setTitle(newText) }}
-                    value={title} />
+                    value={title}
+                />
+                <MultipleInput
+                    label="Prepare 1"
+                    f_onChange={(newText) => { setPre1(newText) }}
+                    value={pre1} />
+                <MultipleInput
+                    label="Prepare 2"
+                    f_onChange={(newText) => { setPre2(newText) }}
+                    value={pre2} />
 
+                <MultipleInput
+                    label="Step 1"
+                    f_onChange={(newText) => { setStep1(newText) }}
+                    value={step1} />
+                <MultipleInput
+                    label="Step 2"
+                    f_onChange={(newText) => { setStep2(newText) }}
+                    value={step2} />
+                <MultipleInput
+                    label="Step 3"
+                    f_onChange={(newText) => { setStep3(newText) }}
+                    value={step3} />
                 <View style={styles.pickerContainer}>
                     <Text style={styles.pickerLabel}>
                         <MaterialCommunityIcons name="map-marker-radius" size={20} color={Colors.Black} />
@@ -210,13 +230,14 @@ export default function AddRecipes(props) {
                         }
                     >
                         <Picker.Item label="Please Select" value="defaultCS" />
+                        <Picker.Item label="Boil" value="Boil" />
                         <Picker.Item label="Bake" value="Bake" />
                         <Picker.Item label="Deep-Fry" value="Deep-Fry" />
-                        <Picker.Item label="Steam" value="Steam" />
                         <Picker.Item label="Grill" value="Grill" />
                         <Picker.Item label="Pan Fry" value="Pan Fry" />
                         <Picker.Item label="Mashup" value="Mashup" />
                         <Picker.Item label="Drinks" value="Drinks" />
+                        <Picker.Item label="Steam" value="Steam" />
                         <Picker.Item label="Other" value="Other" />
                     </Picker>
                 </View>
@@ -241,44 +262,7 @@ export default function AddRecipes(props) {
                         <Picker.Item label="More than 1 hour" value="More than 1 hour" />
                     </Picker>
                 </View>
-
-                <Spacer style={styles.inputWrapper}>
-                    <Input
-                        label="Prepare 1"
-                        f_onChange={(newText) => { setPre1(newText) }}
-                        value={pre1} />
-                    <Input
-                        label="Prepare 2"
-                        f_onChange={(newText) => { setPre2(newText) }}
-                        value={pre2} />
-                    <Input
-                        label="Step 1"
-                        f_onChange={(newText) => { setStep1(newText) }}
-                        value={step1} />
-                    <Input
-                        label="Step 2"
-                        f_onChange={(newText) => { setStep2(newText) }}
-                        value={step2} />
-                    <Input
-                        label="Step 3"
-                        f_onChange={(newText) => { setStep3(newText) }}
-                        value={step3} />
-
-                    {/* <MultipleInput
-                        label="Prepare Step"
-                        value={step1}
-                        f_onChange={(newText) => { setStep1(newText) }}
-                        mode="long" />
-                    <MultipleInput
-                        label="Cook Step"
-                        value={step2}
-                        f_onChange={(newText) => { setStep2(newText) }}
-                        mode="long" 
-                        numberOfLines={4}/> */}
-
-                </Spacer>
             </Column>
-
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={resetHandler} mode='light'>Reset</MainButton>
                 <MainButton style={styles.buttons} onPress={submitHandler} mode='light'>Submit</MainButton>
@@ -328,8 +312,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold'
     },
-    inputWrapper: {
-        backgroundColor: Colors.Black,
-        padding: 20
+    step: {
+        minHeight: 30,
     },
 });

@@ -183,7 +183,8 @@ const form = StyleSheet.create({
     imageR:{
         width:'100%',
         height:'100%',
-        borderRadius:10
+        borderRadius:5,
+        
     },
     selectToggle: {
         paddingHorizontal: 10,
