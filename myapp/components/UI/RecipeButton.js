@@ -14,7 +14,7 @@ export default function RecipeButton(props) {
             }
         }}
             onPress={props.onPress}
-            android_ripple={{ color: Colors.Grey }}>
+            android_ripple={{ color: Colors.LightGrey }}>
             {props.children}
         </Pressable>
     )

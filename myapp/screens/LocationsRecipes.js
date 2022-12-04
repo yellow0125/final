@@ -17,7 +17,7 @@ export default function LocationsRecipes({ navigation }) {
 
     return (
         <View style={container.container}>
-            <NotificationManager />
+            
             <SectionedMultiSelect
                 items={items}
                 IconRenderer={Icon}

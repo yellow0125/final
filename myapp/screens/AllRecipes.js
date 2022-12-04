@@ -8,9 +8,8 @@ import RecipeButton from '../components/UI/RecipeButton';
 import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import Banner from '../components/UI/Banner';
-import { auth } from '../firebase/firebase-setup';
 import { FontAwesome5 } from '@expo/vector-icons';
-
+import NotificationManager from '../components/NotificationManager';
 export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
     const [imageURL, setImageURL] = useState("");
@@ -67,6 +66,7 @@ export default function AllRecipes({ navigation }) {
             <View>
                 <Banner />
             </View>
+            <NotificationManager />
             <View>
                 <Row style={styles.headContainer}>
                     <AntDesign name="staro" size={20} color={Colors.Orange} />
