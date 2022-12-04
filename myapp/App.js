@@ -14,7 +14,6 @@ import AddPicture from "./screens/AddPicture";
 import EditProfile from "./screens/EditProfile";
 import NearBy from "./screens/NearBy";
 import { Linking } from "react-native";
-
 import MyRecipes from "./screens/MyRecipes";
 import RecipeDetails from "./screens/RecipeDetails";
 import Colors from "./constants/Colors";
@@ -22,6 +21,8 @@ import Map from "./screens/Map";
 import AboutMe from "./components/auth/AboutMe";
 import * as Notifications from 'expo-notifications'
 import { storeData, getItemFor } from "./helpers/storageHelper"
+import Christmas from "./components/event/Christmas";
+import Welcome from "./components/event/Welcome";
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
 
@@ -41,6 +42,19 @@ Notifications.setNotificationHandler({
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
   const [hasLaunched, setHasLaunched] = useState(false)
+
+  useEffect(() => {
+    const getData = async () => {
+      const hasLaunched = await getItemFor(HAS_LAUNCHED);
+      if (hasLaunched) {
+        setHasLaunched(true)
+      }
+      else {
+        await storeData(HAS_LAUNCHED, "true");
+      }
+    };
+    getData().catch((err) => { console.log(err) })
+  }, [])
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -90,10 +104,10 @@ export default function App() {
           headerTitleAlign: "center",
         }}
       >
-        {!hasLaunched && <Stack.Screen name="AboutMe" component={AboutMe} options={{headerShown: false}}/>}
-        
-        <Stack.Screen name="Login" component={Login} options={{ headerTitle: "Log in your account" }}/>
-        <Stack.Screen name="Register" component={Register} options={{ headerTitle: "Create a new account" }}/>
+        {!hasLaunched && <Stack.Screen name="AboutMe" component={AboutMe} options={{ headerShown: false }} />}
+
+        <Stack.Screen name="Login" component={Login} options={{ headerTitle: "Log in your account" }} />
+        <Stack.Screen name="Register" component={Register} options={{ headerTitle: "Create a new account" }} />
       </Stack.Navigator>
     );
   };
@@ -114,6 +128,8 @@ export default function App() {
           <Stack.Screen name="RecipeDetails" component={RecipeDetails} options={{ headerTitle: "Recipe Details" }} />
           <Stack.Screen name="Map" component={Map} options={{ headerTitle: "Pick up your location" }} />
           <Stack.Screen name="NearBy" component={NearBy} options={{ headerTitle: "NearBy" }} />
+          <Stack.Screen name="Christmas" component={Christmas} options={{ headerTitle: "Christmas Event" }} />
+          <Stack.Screen name="Welcome" component={Welcome} options={{ headerTitle: "About Me" }} />
         </Stack.Navigator>
       </Provider>
     );
