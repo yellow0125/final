@@ -172,9 +172,8 @@ const form = StyleSheet.create({
     },
     imageInDetail: {
         justifyContent: 'center',
-        width: '90%',
-        height: 400,
-        borderRadius: 10,
+        width: '100%',
+        height: 300,
     },
     pictureButton: {
         width: 100,
