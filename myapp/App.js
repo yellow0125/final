@@ -23,6 +23,7 @@ import AboutMe from "./components/auth/AboutMe";
 import * as Notifications from 'expo-notifications'
 import { storeData, getItemFor } from "./helpers/storageHelper"
 import Christmas from "./components/event/Christmas";
+import Welcome from "./components/event/Welcome";
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
 
@@ -116,6 +117,7 @@ export default function App() {
           <Stack.Screen name="Map" component={Map} options={{ headerTitle: "Pick up your location" }} />
           <Stack.Screen name="NearBy" component={NearBy} options={{ headerTitle: "NearBy" }} />
           <Stack.Screen name="Christmas" component={Christmas} options={{ headerTitle: "Christmas Event" }} />
+          <Stack.Screen name="Welcome" component={Welcome} options={{ headerTitle: "About Me" }} />
         </Stack.Navigator>
       </Provider>
     );
