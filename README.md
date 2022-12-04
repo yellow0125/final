@@ -63,12 +63,16 @@ In the first week, we plan to do these work below:
 2. implement picker function in LocaitonRecipes.js
 3. others: modify styles
 
-#### 12/2/2022 Upgrad picker to multiple selector
+#### 12/2/2022 Upgrade picker to multiple selector
 1. implement multiple selector to allow user select different recipes in LocationRecipes.js
 2. Modify filter function in RecipeList.js to allow user customize recipesList.
 3. Implement NearBy function in Header of LocationRecipes.js
 4. Create new Screen NearBy which show all recipes in user's current country
 5. Adjust the UI of multiple selector.
+  
+#### 12/3/2022 Modify RecipeList & Notification function
+1. implment guidingPage if no recipe in selected locations
+2. set up notification configuration and permission in ios.
 
 
 ### Yichao Wu
