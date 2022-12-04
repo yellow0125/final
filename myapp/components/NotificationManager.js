@@ -30,8 +30,8 @@ export default function NotificationManager() {
       }
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: "You have a notification",
-          body: 'click here to see more vedios',
+          title: "All I Want Christmas is Iou",
+          body: 'Join our christmas event! Share your christmas recipes right now!',
           color: "red",
           data: { url: "https://www.google.com" }
         },
@@ -44,7 +44,6 @@ export default function NotificationManager() {
       console.log("error in NotificationManager with erro type: ", error)
     }
   }
-
 
   return (
     <Pressable

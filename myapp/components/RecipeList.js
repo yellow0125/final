@@ -1,8 +1,8 @@
-import { View, Text, Dimensions, Pressable } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
-import { collection, onSnapshot, query, where } from "firebase/firestore"
+import { collection, onSnapshot} from "firebase/firestore"
 import { FlatList } from 'react-native';
 import RecipeButton from './UI/RecipeButton';
 import { StyleSheet } from 'react-native';
@@ -12,9 +12,6 @@ import RecipeImage from './UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { form } from '../constants/Style';
 import { Image } from 'react-native';
-import MainButton from './UI/MainButton';
-
-
 
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState([]);
@@ -73,7 +70,6 @@ export default function RecipeList(props) {
             android_ripple={{ color: Colors.LightGrey, foreground: true }}
             onPress={() => props.navigation.navigate("RecipeDetails", { item })}
         >
-
             <View style={styles.imgcontainer}>
                 <RecipeImage uri={item.uri} style={form.imageInPost2} />
             </View>

@@ -19,7 +19,6 @@ Geocoder.init("AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY", { language: "en" });
 
 export default function Profile({ navigation }) {
     const [userData, setUserData] = useState([]);
-    // const navigation = useNavigation();
     const route = useRoute();
     const [permissionResponse, requestPermission] = Location.useForegroundPermissions();
     const userLocation = userData.location
