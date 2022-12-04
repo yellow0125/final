@@ -255,11 +255,8 @@ export default function AddRecipes(props) {
                 <MainButton style={styles.buttons} onPress={submitHandler} mode='light'>Submit</MainButton>
             </Row>
         </ScrollView>
-
-
     );
 }
-
 const styles = StyleSheet.create({
     snackbar: {
         marginBottom: 520

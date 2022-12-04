@@ -14,32 +14,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
     const [imageURL, setImageURL] = useState("");
-    const [likedRecipes, setLikedRecipes] = useState([]);
     const [weeklyRecipes, setWeeklyRecipes] = useState([]);
-
-    useEffect(() => {
-        const unsubsribe = onSnapshot(
-            query(
-                collection(db, "recipes"),
-                where("likedUser", "array-contains", auth.currentUser.uid)),
-
-            (QuerySnapshot) => {
-                if (QuerySnapshot.empty) {
-                    setLikedRecipes([]);
-                    return;
-                }
-                setLikedRecipes(
-                    QuerySnapshot.docs.map((snapDoc) => {
-                        let data = snapDoc.id;
-                        return data;
-                    })
-                );
-            });
-        return () => {
-            unsubsribe();
-        }
-    }, [],);
-
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -133,18 +108,15 @@ export default function AllRecipes({ navigation }) {
                             onPress={() => navigation.navigate("RecipeDetails", { item })}
                         >
                             <Row>
-                                <View style={styles.weekImg}>
+                                <View style={styles.popularImg}>
                                     <RecipeImage uri={item.uri} />
                                 </View>
 
                                 <View>
-                                    <Text style={styles.popularText}>{item.title}</Text>
-                                    <Text style={styles.popularText}>{item.selectedCuisine}222</Text>
-                                    <Row style={styles.popularText}>
-                                        {likedRecipes.includes(item.key) ? (
-                                            <AntDesign name="like1" size={20} color={Colors.Red} />) : (
-                                            <AntDesign name="like2" size={20} color={Colors.Red} />
-                                        )}
+                                    <Text style={styles.popularText1}>{item.title}</Text>
+                                    <Text style={styles.popularText2}>{item.selectedCuisine}</Text>
+                                    <Row style={styles.popularText2}>
+                                        <AntDesign name="heart" size={20} color={Colors.Red} />
                                         <Text style={styles.likeText}>{item.like}</Text>
                                     </Row>
                                 </View>
@@ -192,36 +164,46 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
 
     },
+    popularImg: {
+        width: Dimensions.get('window').width * 0.4,
+        height: Dimensions.get('window').height * 0.25,
+        borderWidth: 0.5,
+        borderRadius: 2,
+        borderColor: Colors.BgDarkGreen,
+        marginHorizontal: 5,
+    },
     weekTextC: {
         alignItems: 'center'
     },
     weekText: {
         fontSize: 16,
     },
-    wholeContainer: {
-        flex: 1,
-        height: 230,
-        borderRadius: 5,
-        marginTop: 4,
-        marginRight: 6,
-    },
-    popularText: {
+    popularText1: {
         color: Colors.DescriptionText,
         width: 120,
         marginLeft: 12,
         fontSize: 18,
+        marginBottom:5,
+    },
+    popularText2: {
+        color: Colors.DescriptionText,
+        width: 120,
+        marginLeft: 12,
+        fontSize: 14,
+        marginBottom:5,
     },
     likeText: {
         color: Colors.Red,
         marginLeft: 5,
         fontSize: 16,
+        fontWeight:'bold'
 
     },
     button: {
         color: Colors.Orange,
     },
     buttonC: {
-        alignItems:'center',
-        padding:5,
+        alignItems: 'center',
+        padding: 5,
     },
 });
