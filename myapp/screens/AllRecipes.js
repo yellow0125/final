@@ -85,9 +85,6 @@ export default function AllRecipes({ navigation }) {
                             <View style={styles.weekImg}>
                                 <RecipeImage uri={item.uri} />
                             </View>
-                            <View style={styles.weekTextC}>
-                                <Text style={styles.weekText}>{item.selectedCuisine}: {item.title}</Text>
-                            </View>
                         </RecipeButton>
                     )}
                 />
