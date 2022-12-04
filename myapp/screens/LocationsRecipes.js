@@ -11,6 +11,7 @@ import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import NotificationManager from '../components/NotificationManager';
 
 
 export default function LocationsRecipes({ navigation }) {    
@@ -22,6 +23,7 @@ export default function LocationsRecipes({ navigation }) {
 
     return (
         <View style={container.container}>
+            <NotificationManager />
             <SectionedMultiSelect
                 items={items}
                 IconRenderer={Icon}

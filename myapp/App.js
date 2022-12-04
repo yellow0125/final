@@ -13,17 +13,30 @@ import Main from "./components/Main";
 import AddPicture from "./screens/AddPicture";
 import EditProfile from "./screens/EditProfile";
 import NearBy from "./screens/NearBy";
+import { Linking } from "react-native";
 
 import MyRecipes from "./screens/MyRecipes";
 import RecipeDetails from "./screens/RecipeDetails";
 import Colors from "./constants/Colors";
 import Map from "./screens/Map";
 import AboutMe from "./components/auth/AboutMe";
+import * as Notifications from 'expo-notifications'
 import { storeData, getItemFor } from "./helpers/storageHelper"
 const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
 
 const HAS_LAUNCHED = 'HAS_LAUNCHED';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: true,
+    };
+  },
+});
+
 
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
@@ -38,6 +51,36 @@ export default function App() {
       }
     });
   });
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationReceivedListener(
+      (notificaftion) => {
+        console.log("notification received ", notificaftion);
+      }
+    );
+    const subscription2 = Notifications.addNotificationResponseReceivedListener(
+      async (notificationResponse) => {
+        console.log(
+          "notification interacted ",
+          notificationResponse.notification.request.content.data
+        );
+        if (notificationResponse.notification.request.content.data.url) {
+          try {
+            await Linking.openURL(
+              notificationResponse.notification.request.content.data.url
+            );
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      }
+    );
+    return () => {
+      subscription.remove();
+      subscription2.remove();
+    };
+  });
+
   const AuthStack = () => {
     return (
       <Stack.Navigator
