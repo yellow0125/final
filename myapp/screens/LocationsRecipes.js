@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 
 export default function LocationsRecipes({ navigation }) {    
-    const [selectedValue, setSelectedValue] = useState(['United States','Chinese']);
+    const [selectedValue, setSelectedValue] = useState(['United States','china']);
 
     function onSelectedItemsChange(value) {
         setSelectedValue(value)

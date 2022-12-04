@@ -11,6 +11,11 @@ import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { form } from '../constants/Style';
+import { Image } from 'react-native';
+import MainButton from './UI/MainButton';
+
+
+
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState([]);
   
@@ -44,7 +49,20 @@ export default function RecipeList(props) {
       unsubsribe();
     }
   }, [],);
-  return (
+  return (<>
+    { props.location && filteredRecipes.length === 0 ? (
+        <>
+        <View style={styles.imageContainer}>
+            <Image
+                source={require('../assets/img/collect.jpg')}
+                style={styles.image}
+                resizeMode="cover"
+            />
+        </View>
+        <Text style={styles.text}>Opps, there is no recipes in this location. Select another location or create
+        one!</Text>
+    </>
+    ) : (
     <FlatList
     data={props.location? filteredRecipes: recipes}
     numColumns={2}
@@ -69,8 +87,8 @@ export default function RecipeList(props) {
         </RecipeButton>
 
     )}
-/>
-  )
+/> )}
+</>)
 }
 
 const styles = StyleSheet.create({
@@ -95,4 +113,40 @@ const styles = StyleSheet.create({
       width: 140,
       fontWeight: 'bold',
   },
+  imageContainer: {
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: Dimensions.get('window').width * 0.7 / 2,
+    borderWidth: 2,
+    borderColor: Colors.BgDarkGreen,
+    overflow: "hidden",
+    marginVertical: Dimensions.get('window').height / 30,
+    alignSelf: 'center'
+
+},
+imgcontainer: {
+    width: Dimensions.get('window').width,
+},
+wholeContainer: {
+    flex: 1,
+    height: 230,
+    borderRadius: 5,
+    marginTop: 4,
+    marginRight: 6,
+},
+titleText: {
+    color: Colors.DescriptionText,
+    marginLeft: 12,
+    width: 140,
+    fontWeight: 'bold',
+},
+image: {
+    width: "100%",
+    height: "100%"
+},
+text: {
+    fontSize: 16,
+    alignSelf: 'center',
+    margin: 5
+}
 });
