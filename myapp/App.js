@@ -43,7 +43,7 @@ export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
   const [hasLaunched, setHasLaunched] = useState(false)
 
-    useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       const hasLaunched = await getItemFor(HAS_LAUNCHED);
       if (hasLaunched) {
@@ -104,10 +104,10 @@ export default function App() {
           headerTitleAlign: "center",
         }}
       >
-        {!hasLaunched && <Stack.Screen name="AboutMe" component={AboutMe} options={{headerShown: false}}/>}
-        
-        <Stack.Screen name="Login" component={Login} options={{ headerTitle: "Log in your account" }}/>
-        <Stack.Screen name="Register" component={Register} options={{ headerTitle: "Create a new account" }}/>
+        {!hasLaunched && <Stack.Screen name="AboutMe" component={AboutMe} options={{ headerShown: false }} />}
+
+        <Stack.Screen name="Login" component={Login} options={{ headerTitle: "Log in your account" }} />
+        <Stack.Screen name="Register" component={Register} options={{ headerTitle: "Create a new account" }} />
       </Stack.Navigator>
     );
   };
