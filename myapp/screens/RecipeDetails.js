@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Alert} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Alert, FlatList } from 'react-native';
 import { firestore as db } from '../firebase/firebase-setup'
-import { container, form } from '../constants/Style';
+import { form } from '../constants/Style';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { updateLikesRecipeToDB, updateUnLikesRecipeToDB, deleteRecipeToDB } from '../firebase/firestore';
 import { collection, onSnapshot, query, where, collectionGroup } from "firebase/firestore";
 import { auth } from '../firebase/firebase-setup';
-
+import { AntDesign } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
-import Column from '../components/UI/Column';
-
 import RecipeImage from '../components/UI/RecipeImage';
-
+import { Entypo } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 export default function RecipeDetails({ navigation, route }) {
     const recipe = route.params.item;
     const [liked, setLiked] = useState(false);
@@ -26,10 +25,10 @@ export default function RecipeDetails({ navigation, route }) {
 
             (QuerySnapshot) => {
                 QuerySnapshot.docs.map((snapDoc) => {
-                    if (snapDoc.id == recipe.key){
+                    if (snapDoc.id == recipe.key) {
                         setLiked(true);
                         console.log(auth.currentUser.uid, "liked", recipe.key);
-                    } 
+                    }
                 })
             });
         return () => {
@@ -67,18 +66,19 @@ export default function RecipeDetails({ navigation, route }) {
             ]);
         }
         else {
-        try {
-            const currentLikes = recipe.like + 1;
-            await updateLikesRecipeToDB({
-                recipe,
-                currentLikes
-            });
-            console.log('update likes', currentLikes);
-            navigation.goBack();
+            try {
+                const currentLikes = recipe.like + 1;
+                await updateLikesRecipeToDB({
+                    recipe,
+                    currentLikes
+                });
+                console.log('update likes', currentLikes);
+                navigation.goBack();
 
-        } catch (err) {
-            console.log("update likes ", err);
-        }}
+            } catch (err) {
+                console.log("update likes ", err);
+            }
+        }
     };
 
     const unLikeOperation = async () => {
@@ -87,25 +87,26 @@ export default function RecipeDetails({ navigation, route }) {
                 { text: "ok", style: "cancel", onPress: nothingHappenOperation }
             ]);
         } else {
-        try {
-            const currentLikes = recipe.like - 1;
-            await updateUnLikesRecipeToDB({
-                recipe,
-                currentLikes
-            });
-            console.log('update unlikes', currentLikes);
-            navigation.goBack();
+            try {
+                const currentLikes = recipe.like - 1;
+                await updateUnLikesRecipeToDB({
+                    recipe,
+                    currentLikes
+                });
+                console.log('update unlikes', currentLikes);
+                navigation.goBack();
 
-        } catch (err) {
-            console.log("update unlikes ", err);
-        }}
+            } catch (err) {
+                console.log("update unlikes ", err);
+            }
+        }
     };
 
     const deleteOperation = async () => {
 
         if (liked) {
             unLikeOperation();
-        } 
+        }
         try {
             const key = recipe.key;
             await deleteRecipeToDB(key);
@@ -115,7 +116,7 @@ export default function RecipeDetails({ navigation, route }) {
         } catch (err) {
             console.log("delete recipe ", err);
         }
-        
+
     };
 
     function comebackOperation() {
@@ -128,66 +129,53 @@ export default function RecipeDetails({ navigation, route }) {
 
 
     return (
-        <ScrollView style={container.containerAdd}>
+        <ScrollView>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>{recipe.title}</Text>
+                <Text >featured in <Text style={styles.redText}>5 Hearty Slow Cooker Recipes</Text></Text>
+                <Row style={{ marginTop: 15 }}>
+                    <AntDesign name="like2" size={22} color={Colors.Black} />
+                    <Text style={styles.boldText}>{recipe.like}</Text>
+                    <Text> people like this recipe</Text>
+                </Row>
+                <Row style={{ marginTop: 15 }}>
+                    <Entypo name="back-in-time" size={22} color={Colors.Black} />
+                    <Text> Ready in </Text>
+                    <Text style={styles.boldText}>{recipe.selectedDiff}</Text>
+                </Row>
+            </View>
 
-
-            <Column>
-
-
-                <View style={styles.pickerContainer}>
-                    <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
-
-                </View>
-
-                <View >
-                    <Text style={styles.title}>{recipe.title}</Text>
-
-                </View>
-
-
-                <View style={styles.pickerContainer}>
-
-                    <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="map-marker-radius" size={20} color={Colors.Black} />
-                        Cuisine</Text>
-                    <Text style={styles.content}>{recipe.selectedCuisine}</Text>
-                </View>
-
-                <View style={styles.pickerContainer}>
-
-                    <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="food-turkey" size={24} color={Colors.Black} />
-                        Cook Style</Text>
+            <View>
+                <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
+            </View>
+            <View>
+                <Row style={styles.row}>
+                    <MaterialCommunityIcons name="map-marker-radius" size={24} color={Colors.Black} />
+                    <Text style={styles.pickerLabel}>Cuisine: </Text>
+                    <Text style={[styles.content, { paddingRight: 22 }]}>{recipe.selectedCuisine}</Text>
+                </Row>
+                <Row style={styles.row}>
+                    <MaterialCommunityIcons name="food-turkey" size={24} color={Colors.Black} />
+                    <Text style={styles.pickerLabel}>Cook Style: </Text>
                     <Text style={styles.content}>{recipe.selectedCookStyle}</Text>
-                </View>
+                </Row>
+            </View>
+            <View>
+                <Row style={styles.row}>
+                    <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
+                    <Text style={styles.pickerLabel}>Prepare Step </Text>
+                </Row>
+                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre1}</Text>
+                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre2}</Text>
+                <Row style={styles.row}>
+                    <MaterialCommunityIcons name="pot-steam-outline" size={24} color={Colors.Black} />
+                    <Text style={styles.pickerLabel}>Cook Step </Text>
+                </Row>
+                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step1}</Text>
+                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step2}</Text>
+                <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
+            </View>
 
-                <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>
-                        <Ionicons name="timer-outline" size={20} color={Colors.Black} />
-                        Difficulty</Text>
-                    <Text style={styles.content}>{recipe.selectedDiff}</Text>
-
-                </View>
-
-                <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
-                        Prepare Step</Text>
-                    <Text style={styles.content}>{recipe.step1}</Text>
-
-                </View>
-
-                <View style={styles.pickerContainer}>
-                    <Text style={styles.pickerLabel}>
-                        <MaterialCommunityIcons name="pot-steam-outline" size={24} color={Colors.Black} />
-                        Cook Step</Text>
-                    <Text style={styles.content}>{recipe.step2}</Text>
-
-                </View>
-
-
-                
-            </Column>
 
             <Row style={styles.buttonsContainer}>
                 <MainButton style={styles.buttons} onPress={LikeHandler} mode='light'>Like</MainButton>
@@ -201,13 +189,49 @@ export default function RecipeDetails({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    titleContainer: {
         flex: 1,
-        backgroundColor: Colors.lightpurple,
-        alignItems: 'flex-start',
+        padding: 20,
     },
-    pickerContainer: {
-        marginLeft: 20
+    title: {
+        color: Colors.Black,
+        fontWeight: 'bold',
+        fontSize: 36,
+    },
+    redText: {
+        fontWeight: 'bold',
+        color: Colors.Red
+    },
+    boldText: {
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    pickerLabel: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginVertical: 5,
+    },
+    row: {
+        marginVertical: 10,
+    },
+    content: {
+        marginVertical: 5,
+        fontSize: 16,
+
+    },
+    step: {
+        marginVertical: 3,
+        fontSize: 16,
+        marginHorizontal: 10,
+        paddingVertical: 10,
+
+        borderRadius: 6,
+        elevation: 3,
+        shadowColor: Colors.BgDarkGreen,
+        shadowRadius: 4,
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.4
+
     },
     buttonsContainer: {
         justifyContent: 'center',
@@ -225,19 +249,5 @@ const styles = StyleSheet.create({
         marginRight: 5,
         minWidth: 100,
     },
-    pickerLabel: {
-        fontSize: 14,
-        fontWeight: 'bold'
-    },
-    title: {
-        textAlign: 'center',
-        color: Colors.Black,
-        fontWeight: 'bold',
-        fontSize: 24,
-    },
-    content: {
-        marginLeft: 30,
-        marginVertical: 5,
-        fontSize: 17,
-    }
+
 });

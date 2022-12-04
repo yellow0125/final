@@ -7,7 +7,7 @@ import Input from '../components/UI/Input';
 import MultipleInput from '../components/UI/MultipleInput';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
-import { container} from '../constants/Style';
+import { container } from '../constants/Style';
 import ImageManager from './ImageManager';
 import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";
@@ -23,8 +23,11 @@ export default function AddRecipes(props) {
     };
 
     const [title, setTitle] = useState('');
+    const [pre1, setPre1] = useState('');
+    const [pre2, setPre2] = useState('');
     const [step1, setStep1] = useState('');
     const [step2, setStep2] = useState('');
+    const [step3, setStep3] = useState('');
     const [selectedCuisine, setSelectedCuisine] = useState('');
     const [selectedDiff, setSelectedDiff] = useState('');
     const [selectedCookStyle, setSelectedCookStyle] = useState('');
@@ -50,17 +53,20 @@ export default function AddRecipes(props) {
                 const imageRef = await ref(storage, `images/${imageName}`);
                 const uploadResult = await uploadBytes(imageRef, imageBlob);
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
-                
+
             }
             await uploadRecipeToDB({
                 title,
                 selectedCuisine,
                 selectedCookStyle,
                 selectedDiff,
+                pre1,
+                pre2,
                 step1,
                 step2,
+                step3,
                 uri,
-                likedUser:[],
+                likedUser: [],
             });
             props.navigation.navigate('MyRecipes')
             console.log('image upload success')
@@ -105,7 +111,7 @@ export default function AddRecipes(props) {
             setIsValid({ bool: true, boolSnack: true, message: "Please add a picture" })
             return;
         }
-        if (title.length == 0 || step1.length == 0 || step2.length == 0) {
+        if (title.length == 0 || step1.length == 0 || step2.length == 0 || pre1.length == 0 || pre2.length == 0|| step3.length == 0) {
             setIsValid({ bool: true, boolSnack: true, message: "Please fill out everything" })
             return;
         }
@@ -132,8 +138,11 @@ export default function AddRecipes(props) {
 
     function resetOperation() {
         setTitle('');
+        setPre1('');
+        setPre2('');
         setStep1('');
         setStep2('');
+        setStep3('');
         setSelectedCuisine('defaultC')
         setSelectedCookStyle('defaultCS')
         setSelectedDiff('defaultD')
@@ -234,8 +243,28 @@ export default function AddRecipes(props) {
                 </View>
 
                 <Spacer style={styles.inputWrapper}>
+                    <Input
+                        label="Prepare 1"
+                        f_onChange={(newText) => { setPre1(newText) }}
+                        value={pre1} />
+                    <Input
+                        label="Prepare 2"
+                        f_onChange={(newText) => { setPre2(newText) }}
+                        value={pre2} />
+                    <Input
+                        label="Step 1"
+                        f_onChange={(newText) => { setStep1(newText) }}
+                        value={step1} />
+                    <Input
+                        label="Step 2"
+                        f_onChange={(newText) => { setStep2(newText) }}
+                        value={step2} />
+                    <Input
+                        label="Step 3"
+                        f_onChange={(newText) => { setStep3(newText) }}
+                        value={step3} />
 
-                    <MultipleInput
+                    {/* <MultipleInput
                         label="Prepare Step"
                         value={step1}
                         f_onChange={(newText) => { setStep1(newText) }}
@@ -245,7 +274,7 @@ export default function AddRecipes(props) {
                         value={step2}
                         f_onChange={(newText) => { setStep2(newText) }}
                         mode="long" 
-                        numberOfLines={4}/>
+                        numberOfLines={4}/> */}
 
                 </Spacer>
             </Column>
@@ -259,7 +288,7 @@ export default function AddRecipes(props) {
 }
 const styles = StyleSheet.create({
     snackbar: {
-        marginBottom: 520
+        marginBottom: 590
     },
     title: {
         textAlign: 'center',
@@ -271,7 +300,7 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         justifyContent: 'center',
         marginTop: 20,
-        marginBottom:40,
+        marginBottom: 40,
     },
     buttons: {
         marginHorizontal: 8,
@@ -300,7 +329,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     inputWrapper: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: Colors.Black,
         padding: 20
-      },
+    },
 });
