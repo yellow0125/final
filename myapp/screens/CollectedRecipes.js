@@ -13,7 +13,6 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
-import Loading from '../components/UI/Loading';
 
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);

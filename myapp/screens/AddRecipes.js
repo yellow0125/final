@@ -1,14 +1,13 @@
-import { StyleSheet, Alert, TextInput, ScrollView, Text, View } from 'react-native';
+import { StyleSheet, Alert, ScrollView, Text, View } from 'react-native';
 import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
-import DropDownPicker from 'react-native-dropdown-picker';
 import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
 import Input from '../components/UI/Input';
 import MultipleInput from '../components/UI/MultipleInput';
 import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
-import { container, form } from '../constants/Style';
+import { container} from '../constants/Style';
 import ImageManager from './ImageManager';
 import { uploadRecipeToDB, deleteFromDB } from "../firebase/firestore";
 import { firestore, auth, storage } from "../firebase/firebase-setup";

@@ -1,12 +1,11 @@
 
 import { StyleSheet, View, Image, } from 'react-native';
-import React, { useState } from "react";
+import React from "react";
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import MainButton from '../components/UI/MainButton';
 import Colors from '../constants/Colors';
 import { form } from '../constants/Style';
 import { LogBox } from 'react-native';
-import Row from '../components/UI/Row';
 
 LogBox.ignoreLogs(['Non-serializable values were found in the navigation state',]);
 export default function ImageManager({ navigation, imageHandler, imageUri }) {

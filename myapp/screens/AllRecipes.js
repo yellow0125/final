@@ -9,7 +9,6 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import Banner from '../components/UI/Banner';
 import { auth } from '../firebase/firebase-setup';
-import { Button } from 'react-native-paper';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function AllRecipes({ navigation }) {
@@ -150,10 +149,7 @@ export default function AllRecipes({ navigation }) {
                                     </Row>
                                 </View>
                             </Row>
-
-
                         </RecipeButton>
-
                     )}
                 />
             </View>
@@ -162,7 +158,6 @@ export default function AllRecipes({ navigation }) {
                     <Text style={styles.button}>View More Recipes</Text>
                     <FontAwesome5 name="hand-point-left" size={24} color={Colors.Orange} />
                 </Row>
-
             </TouchableOpacity>
         </ScrollView>
     );

@@ -8,8 +8,7 @@ import Column from '../components/UI/Column';
 import Colors from '../constants/Colors';
 import { container } from '../constants/Style';
 import { writeUserProfileToDB } from '../firebase/firestore';
-import { MAPS_API_KEY } from "react-native-dotenv";
-// MAPS_API_KEY ="AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY"
+
 export default function EditProfile({ navigation, route }) {
     const currentUserData = route.params.userData;
     const key = currentUserData.key;

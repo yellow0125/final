@@ -1,12 +1,6 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, StatusBar } from 'react-native';
-import { firestore } from '../firebase/firebase-setup';
-import { collection, onSnapshot } from 'firebase/firestore';
-import { Picker } from '@react-native-picker/picker';
+import { useState } from 'react';
+import { StyleSheet, View, } from 'react-native';
 import { container, form } from '../constants/Style';
-import { useWindowDimensions } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
-
 import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
