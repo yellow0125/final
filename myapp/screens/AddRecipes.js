@@ -111,7 +111,7 @@ export default function AddRecipes(props) {
             setIsValid({ bool: true, boolSnack: true, message: "Please add a picture" })
             return;
         }
-        if (title.length == 0 || step1.length == 0 || step2.length == 0 || pre1.length == 0 || pre2.length == 0 || step3.length == 0) {
+        if (title.length == 0 || step1.length == 0 || pre1.length == 0) {
             setIsValid({ bool: true, boolSnack: true, message: "Please fill out everything" })
             return;
         }

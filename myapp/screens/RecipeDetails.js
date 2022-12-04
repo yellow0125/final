@@ -165,25 +165,26 @@ export default function RecipeDetails({ navigation, route }) {
                     <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
                     <Text style={styles.pickerLabel}>Prepare Step </Text>
                 </Row>
-                <View style={styles.stepC}>
+                {recipe.pre1.length > 1 && <View style={styles.stepC}>
                     <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre1}</Text>
-                </View>
-                <View style={styles.stepC}>
+                </View>}
+                {recipe.pre2.length > 1 && <View style={styles.stepC}>
                     <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre2}</Text>
-                </View>
+                </View>}
                 <Row style={styles.row}>
                     <MaterialCommunityIcons name="pot-steam-outline" size={24} color={Colors.Black} />
                     <Text style={styles.pickerLabel}>Cook Step </Text>
                 </Row>
-                <View style={styles.stepC}>
+                {recipe.step1.length > 1 && <View style={styles.stepC}>
                     <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step1}</Text>
-                </View>
-                <View style={styles.stepC}>
+                </View>}
+                {recipe.step2.length > 1 && <View style={styles.stepC}>
                     <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step2}</Text>
-                </View>
-                <View style={styles.stepC}>
+                </View>}
+                {recipe.step3.length > 1 && <View style={styles.stepC}>
                     <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
-                </View>
+                </View>}
+
             </View>
 
 
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 10,
         paddingVertical: 10,
-        backgroundColor:Colors.White,
+        backgroundColor: Colors.White,
         borderRadius: 5,
         elevation: 3,
         shadowRadius: 4,
