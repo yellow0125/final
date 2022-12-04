@@ -184,7 +184,6 @@ export default function RecipeDetails({ navigation, route }) {
                 {recipe.step3.length > 1 && <View style={styles.stepC}>
                     <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
                 </View>}
-
             </View>
 
 

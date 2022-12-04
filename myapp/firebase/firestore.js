@@ -65,7 +65,7 @@ export const uploadRecipeToDB = async (recipe) => {
         await addDoc(collection(firestore, "recipes"), {
             ...recipe,
             user: auth.currentUser.uid,
-            like: 99,
+            like: 52,
 
         });
     } catch (error) {
