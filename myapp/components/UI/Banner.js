@@ -9,7 +9,9 @@ export default function Banner({ navigation }) {
         autoplay={true}
         showsPagination={false}
       >
-        <Image source={require('../../assets/img/banner0.png')} style={styles.image} />
+        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+          <Image source={require('../../assets/img/banner0.png')} style={styles.image} />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Christmas")}>
           <Image
             source={require('../../assets/img/banner2.png')}
