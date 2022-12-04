@@ -237,7 +237,7 @@ export default function AddRecipes(props) {
                         <Picker.Item label="Grill" value="Grill" />
                         <Picker.Item label="Pan Fry" value="Pan Fry" />
                         <Picker.Item label="Mashup" value="Mashup" />
-                        <Picker.Item label="Drinks" value="Drinks" />
+                        <Picker.Item label="Drinks/Dessert" value="Drinks/Dessert" />
                         <Picker.Item label="Simmer" value="Simmer" />
                         <Picker.Item label="Steam" value="Steam" />
                         <Picker.Item label="Other" value="Other" />

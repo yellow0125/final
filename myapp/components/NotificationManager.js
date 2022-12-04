@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor:Colors.Orange
   },
   text: {
-    fontSize:18,
+    fontSize:16,
     color:Colors.White,
     fontWeight:'bold'
   },
