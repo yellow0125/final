@@ -173,7 +173,7 @@ export default function AddRecipes(props) {
                     >
                         <Picker.Item label="Please Select" value="defaultC" />
                         <Picker.Item label="African" value="African" />
-                        <Picker.Item label="American" value="American" />
+                        <Picker.Item label="United States" value="United States" />
                         <Picker.Item label="Brazilian" value="Brazilian" />
                         <Picker.Item label="British" value="British" />
                         <Picker.Item label="Chinese" value="Chinese" />
