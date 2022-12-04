@@ -173,12 +173,19 @@ export default function AddRecipes(props) {
                         }
                     >
                         <Picker.Item label="Please Select" value="defaultC" />
-                        <Picker.Item label="China" value="Chinese" />
-                        <Picker.Item label="Japan" value="Japan" />
-                        <Picker.Item label="Italy" value="Italy" />
-                        <Picker.Item label="America" value="America" />
+                        <Picker.Item label="African" value="African" />
+                        <Picker.Item label="American" value="American" />
+                        <Picker.Item label="Brazilian" value="Brazilian" />
                         <Picker.Item label="British" value="British" />
-                        <Picker.Item label="Franch" value="Franch" />
+                        <Picker.Item label="Chinese" value="Chinese" />
+                        <Picker.Item label="French" value="French" />
+                        <Picker.Item label="German" value="German" />
+                        <Picker.Item label="Indian" value="Indian" />
+                        <Picker.Item label="Italian" value="Italian" />
+                        <Picker.Item label="Japanese" value="Japanese" />
+                        <Picker.Item label="Korean" value="Korean" />
+                        <Picker.Item label="Seafood" value="Seafood" />
+                        <Picker.Item label="Other" value="Other" />
                     </Picker>
                 </View>
 
@@ -195,12 +202,14 @@ export default function AddRecipes(props) {
                         }
                     >
                         <Picker.Item label="Please Select" value="defaultCS" />
-                        <Picker.Item label="Bake" value="bake" />
-                        <Picker.Item label="Deep-Fry" value="deepfry" />
-                        <Picker.Item label="Steam" value="steam" />
-                        <Picker.Item label="Grill" value="grill" />
-                        <Picker.Item label="Pan Fry" value="panfry" />
-                        <Picker.Item label="Mashup" value="mashup" />
+                        <Picker.Item label="Bake" value="Bake" />
+                        <Picker.Item label="Deep-Fry" value="Deep-Fry" />
+                        <Picker.Item label="Steam" value="Steam" />
+                        <Picker.Item label="Grill" value="Grill" />
+                        <Picker.Item label="Pan Fry" value="Pan Fry" />
+                        <Picker.Item label="Mashup" value="Mashup" />
+                        <Picker.Item label="Drinks" value="Drinks" />
+                        <Picker.Item label="Other" value="Other" />
                     </Picker>
                 </View>
                 <View style={styles.pickerContainer}>
@@ -217,10 +226,11 @@ export default function AddRecipes(props) {
                         }
                     >
                         <Picker.Item label="Please Select" value="defaultD" />
-                        <Picker.Item label="Under 15 minutes" value="15min" />
-                        <Picker.Item label="Under 30 minutes" value="30min" />
-                        <Picker.Item label="Under 45 minutes" value="45min" />
-                        <Picker.Item label="Under 1 hour" value="60min" />
+                        <Picker.Item label="Under 15 minutes" value="Under 15 minutes" />
+                        <Picker.Item label="Under 30 minutes" value="Under 30 minutes" />
+                        <Picker.Item label="Under 45 minutes" value="Under 45 minutes" />
+                        <Picker.Item label="Under 1 hour" value="Under 1 hour" />
+                        <Picker.Item label="More than 1 hour" value="More than 1 hour" />
                     </Picker>
                 </View>
 

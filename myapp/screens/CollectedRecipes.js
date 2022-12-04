@@ -13,6 +13,7 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
+import Loading from '../components/UI/Loading';
 
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
@@ -100,7 +101,7 @@ export default function MyRecipes({ navigation }) {
                         </View>
                         <View>
                             <Row>
-                                <Text style={styles.titleText}>{item.title}</Text>                                
+                                <Text style={styles.titleText}>{item.title}</Text>
                                 {likedRecipes.includes(item.key) ? (
                                     <AntDesign name="like1" size={20} color={Colors.Black} />) : (
                                     <AntDesign name="like2" size={20} color={Colors.Black} />

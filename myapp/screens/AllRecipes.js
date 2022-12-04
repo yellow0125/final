@@ -1,8 +1,7 @@
-import { View, Text, Dimensions, Pressable, StyleSheet, FlatList } from 'react-native'
+import { View, Text, Dimensions, Pressable, StyleSheet, FlatList, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { firestore as db } from '../firebase/firebase-setup'
-import { collection, onSnapshot, query, where, limit } from "firebase/firestore"
-import { form } from '../constants/Style';
+import { collection, onSnapshot, query, where, limit, orderBy } from "firebase/firestore"
 import Colors from '../constants/Colors';
 import Row from '../components/UI/Row';
 import RecipeButton from '../components/UI/RecipeButton';
@@ -10,6 +9,9 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import Banner from '../components/UI/Banner';
 import { auth } from '../firebase/firebase-setup';
+import { Button } from 'react-native-paper';
+import { FontAwesome5 } from '@expo/vector-icons';
+
 export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
     const [imageURL, setImageURL] = useState("");
@@ -39,9 +41,13 @@ export default function AllRecipes({ navigation }) {
         }
     }, [],);
 
+
     useEffect(() => {
         const unsubsribe = onSnapshot(
-            collection(db, "recipes"),
+            query(
+                collection(db, "recipes"),
+                orderBy("like", "desc"),
+                limit(6)),
             (QuerySnapshot) => {
                 if (QuerySnapshot.empty) {
                     setRecipes([]);
@@ -83,24 +89,22 @@ export default function AllRecipes({ navigation }) {
         }
     }, [],);
     return (
-        <>
+        <ScrollView>
             <View>
                 <Banner />
             </View>
-
             <View>
                 <Row style={styles.headContainer}>
-                    <AntDesign name="staro" size={20} color="black" />
+                    <AntDesign name="staro" size={20} color={Colors.Orange} />
                     <Text style={styles.headtext}> Weekly Recommend</Text>
                 </Row>
-
                 <FlatList
                     data={weeklyRecipes}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={item => item.key}
                     renderItem={({ item }) => (
-                        <Pressable
+                        <RecipeButton
                             android_ripple={{ color: Colors.LightGrey, foreground: true }}
                             onPress={() => navigation.navigate("RecipeDetails", { item })}
                         >
@@ -110,46 +114,57 @@ export default function AllRecipes({ navigation }) {
                             <View style={styles.weekTextC}>
                                 <Text style={styles.weekText}>{item.selectedCuisine}: {item.title}</Text>
                             </View>
-                        </Pressable>
-
+                        </RecipeButton>
                     )}
                 />
             </View>
             <View>
                 <Row style={styles.headContainer}>
-                    <AntDesign name="staro" size={20} color="black" />
-                    <Text style={styles.headtext}> All Recipes</Text>
+                    <AntDesign name="staro" size={20} color={Colors.Orange} />
+                    <Text style={styles.headtext}> Most Popular</Text>
                 </Row>
-
                 <FlatList
                     data={recipes}
-                    numColumns={2}
+                    horizontal={true}
                     keyExtractor={item => item.key}
                     renderItem={({ item }) => (
                         <RecipeButton
-                            style={styles.wholeContainer}
+                            style={styles.container}
                             android_ripple={{ color: Colors.LightGrey, foreground: true }}
                             onPress={() => navigation.navigate("RecipeDetails", { item })}
                         >
-                            <View style={styles.imgcontainer}>
-                                <RecipeImage uri={item.uri} style={form.imageInPost2} />
-                            </View>
-                            <View>
-                                <Row>
-                                    <Text style={styles.titleText}>{item.title}</Text>
-                                    {likedRecipes.includes(item.key) ? (
-                                        <AntDesign name="like1" size={20} color={Colors.Black} />) : (
-                                        <AntDesign name="like2" size={20} color={Colors.Black} />
-                                    )}
-                                    <Text>{item.like}</Text>
-                                </Row>
-                            </View>
+                            <Row>
+                                <View style={styles.weekImg}>
+                                    <RecipeImage uri={item.uri} />
+                                </View>
+
+                                <View>
+                                    <Text style={styles.popularText}>{item.title}</Text>
+                                    <Text style={styles.popularText}>{item.selectedCuisine}222</Text>
+                                    <Row style={styles.popularText}>
+                                        {likedRecipes.includes(item.key) ? (
+                                            <AntDesign name="like1" size={20} color={Colors.Red} />) : (
+                                            <AntDesign name="like2" size={20} color={Colors.Red} />
+                                        )}
+                                        <Text style={styles.likeText}>{item.like}</Text>
+                                    </Row>
+                                </View>
+                            </Row>
+
+
                         </RecipeButton>
 
                     )}
                 />
             </View>
-        </>
+            <TouchableOpacity style={styles.buttonC} onPress={() => navigation.navigate("Locations")}>
+                <Row>
+                    <Text style={styles.button}>View More Recipes</Text>
+                    <FontAwesome5 name="hand-point-left" size={24} color={Colors.Orange} />
+                </Row>
+
+            </TouchableOpacity>
+        </ScrollView>
     );
 }
 
@@ -157,17 +172,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.White,
-        alignItems: 'center',
+        marginBottom: 10,
+
     },
     headtext: {
         fontSize: 18,
-
+        color: Colors.Orange,
+        fontWeight: 'bold',
     },
     headContainer: {
-        justifyContent: 'center',
         padding: 5,
-        margin: 5,
-
+        margin: 10,
+        borderRadius: 5,
     },
     imgcontainer: {
         width: Dimensions.get('window').width,
@@ -194,10 +210,23 @@ const styles = StyleSheet.create({
         marginTop: 4,
         marginRight: 6,
     },
-    titleText: {
+    popularText: {
         color: Colors.DescriptionText,
-        width: 140,
+        width: 120,
         marginLeft: 12,
-        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    likeText: {
+        color: Colors.Red,
+        marginLeft: 5,
+        fontSize: 16,
+
+    },
+    button: {
+        color: Colors.Orange,
+    },
+    buttonC: {
+        alignItems:'center',
+        padding:5,
     },
 });
