@@ -1,8 +1,8 @@
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
+import { View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Swiper from 'react-native-swiper';
 
-export default function Banner() {
+export default function Banner({ navigation }) {
   return (
     <View style={styles.container}>
       <Swiper
@@ -10,13 +10,15 @@ export default function Banner() {
         showsPagination={false}
       >
         <Image source={require('../../assets/img/banner0.png')} style={styles.image} />
-        <Image source={require('../../assets/img/banner2.png')} style={styles.image} />
+        <TouchableOpacity onPress={() => navigation.navigate("Christmas")}>
+          <Image
+            source={require('../../assets/img/banner2.png')}
+            style={styles.image} />
+        </TouchableOpacity>
         <Image source={require('../../assets/img/banner3.png')} style={styles.image} />
         <Image source={require('../../assets/img/banner4.png')} style={styles.image} />
-
       </Swiper>
     </View>
-
   )
 }
 

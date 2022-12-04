@@ -10,6 +10,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Banner from '../components/UI/Banner';
 import { FontAwesome5 } from '@expo/vector-icons';
 import NotificationManager from '../components/NotificationManager';
+
 export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
     const [imageURL, setImageURL] = useState("");
@@ -65,7 +66,7 @@ export default function AllRecipes({ navigation }) {
     return (
         <ScrollView>
             <View>
-                <Banner />
+                <Banner navigation={navigation}/>
             </View>
             <NotificationManager />
             <View>
