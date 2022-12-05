@@ -13,6 +13,7 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
+import NoRecipePage from '../components/UI/NoRecipePage';
 
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
@@ -69,17 +70,12 @@ export default function MyRecipes({ navigation }) {
         <>
             {recipes.length == 0 ? (
                 <>
-                    <View style={styles.imageContainer}>
-                        <Image
-                            source={require('../assets/img/collect.jpg')}
-                            style={styles.image}
-                            resizeMode="cover"
-                        />
-                    </View>
-                    <Text style={styles.text}>You do not have any collected recipes! Find one!</Text>
-                    <View style={{ marginHorizontal: 50 }}>
-                        <MainButton onPress={() => navigation.navigate("All")}>Find More Recipes</MainButton>
-                    </View>
+                    <NoRecipePage>
+                        <Text style={styles.text}>You do not have any collected recipes! Find one!</Text>
+                        <View style={{ marginHorizontal: 50 }}>
+                            <MainButton onPress={() => navigation.navigate("All")}>Find More Recipes</MainButton>
+                        </View>
+                    </NoRecipePage>
                 </>
 
 

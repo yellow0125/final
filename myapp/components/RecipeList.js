@@ -12,6 +12,7 @@ import RecipeImage from './UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import { form } from '../constants/Style';
 import { Image } from 'react-native';
+import NoRecipePage from './UI/NoRecipePage';
 
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState([]);
@@ -46,18 +47,16 @@ export default function RecipeList(props) {
       unsubsribe();
     }
   }, [],);
-  return (<>
+
+  return (
+  <>
     { props.location && filteredRecipes.length === 0 ? (
         <>
-        <View style={styles.imageContainer}>
-            <Image
-                source={require('../assets/img/collect.jpg')}
-                style={styles.image}
-                resizeMode="cover"
-            />
-        </View>
-        <Text style={styles.text}>Opps, there is no recipes in this location. Select another location or create
-        one!</Text>
+        <NoRecipePage>
+          <Text style={styles.text}>
+            Opps, there is no recipes in this location. Select another location or create one!
+          </Text>
+        </NoRecipePage>
     </>
     ) : (
     <FlatList

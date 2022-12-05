@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native'
 import Colors from './Colors'
+import {Dimensions } from 'react-native'
+
 
 const container = StyleSheet.create({
     container: {
@@ -112,6 +114,20 @@ const container = StyleSheet.create({
         width: "100%",
         marginTop: 10,
     },
+    imageContainer: {
+        width: Dimensions.get('window').width * 0.7,
+        height: Dimensions.get('window').width * 0.7,
+        borderRadius: Dimensions.get('window').width * 0.7 / 2,
+        borderWidth: 2,
+        borderColor: Colors.BgDarkGreen,
+        overflow: "hidden",
+        marginVertical: Dimensions.get('window').height / 30,
+        alignSelf: 'center'
+    },
+    NoRecipeImage: {
+        width: "100%",
+        height: "100%"
+    }
 
 
 })
