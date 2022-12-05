@@ -1,4 +1,4 @@
-import { StyleSheet, Alert, ScrollView, Text, View } from 'react-native';
+import { StyleSheet, Alert, ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
 import MainButton from '../components/UI/MainButton';
@@ -14,7 +14,7 @@ import { firestore, auth, storage } from "../firebase/firebase-setup";
 import { ref, uploadBytes } from "firebase/storage";
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Snackbar } from 'react-native-paper';
-import Spacer from "react-native-spacer";
+import LottieView from "lottie-react-native";
 
 export default function AddRecipes(props) {
     const [imageUri, setImageUri] = useState('');
@@ -33,6 +33,7 @@ export default function AddRecipes(props) {
     const [selectedCookStyle, setSelectedCookStyle] = useState('');
     const [isValid, setIsValid] = useState(true);
     const [likedUser, setLikedUser] = useState({});
+
     const getImage = async (uri) => {
         try {
             const response = await fetch(uri);
@@ -44,7 +45,6 @@ export default function AddRecipes(props) {
     };
 
     const submitOperation = async () => {
-
         let uri = props.route.params.image;
         try {
             if (uri) {
@@ -53,7 +53,6 @@ export default function AddRecipes(props) {
                 const imageRef = await ref(storage, `images/${imageName}`);
                 const uploadResult = await uploadBytes(imageRef, imageBlob);
                 uri = uploadResult.metadata.fullPath; //replaced the uri with reference to the storage location
-
             }
             await uploadRecipeToDB({
                 title,
@@ -150,7 +149,6 @@ export default function AddRecipes(props) {
     }
 
     return (
-
         <ScrollView style={container.containerAdd}>
             <ImageManager navigation={props.navigation} imageHandler={imageHandler} imageUri={imageUri} />
             <Snackbar
