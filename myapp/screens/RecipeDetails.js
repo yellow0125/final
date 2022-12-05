@@ -1,5 +1,6 @@
+import React from "react";
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Alert, FlatList } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Alert, FlatList, TouchableOpacity, Dimensions } from 'react-native';
 import { firestore as db } from '../firebase/firebase-setup'
 import { form } from '../constants/Style';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -12,17 +13,18 @@ import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
 import RecipeImage from '../components/UI/RecipeImage';
 import { Entypo } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+import LottieView from "lottie-react-native";
 export default function RecipeDetails({ navigation, route }) {
-    const recipe = route.params.item;
+    const [recipe, setRecipe] = useState(route.params.item)
     const [liked, setLiked] = useState(false);
+    const animation = React.useRef(null);
+    const isFirstRun = React.useRef(true);
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
             query(
                 collection(db, "recipes"),
                 where("likedUser", "array-contains", auth.currentUser.uid)),
-
             (QuerySnapshot) => {
                 QuerySnapshot.docs.map((snapDoc) => {
                     if (snapDoc.id == recipe.key) {
@@ -36,34 +38,37 @@ export default function RecipeDetails({ navigation, route }) {
         }
     }, [],);
 
+    React.useEffect(() => {
+        if (isFirstRun.current) {
+            if (liked) {
+                animation.current.play(66, 66);
+            } else {
+                animation.current.play(19, 19);
+            }
+            isFirstRun.current = false;
+        } else if (liked) {
+            animation.current.play(19, 50);
+        } else {
+            animation.current.play(0, 19);
+        }
+    }, [liked]);
 
-    function LikeHandler() {
-        Alert.alert("Like", "Are you sure to like this recipe?", [
-            { text: "No", style: "cancel", onPress: nothingHappenOperation },
-            { text: "Yes", style: "default", onPress: likeOperation }
-        ]);
-    }
-
-    function UnLikeHandler() {
-        Alert.alert("Unlike", "Are you sure to unlike your recipe?", [
-            { text: "No", style: "cancel", onPress: nothingHappenOperation },
-            { text: "Yes", style: "default", onPress: unLikeOperation }
-        ]);
-    }
-
-    function DeleteHandler() {
-        Alert.alert("Delete", "Are you sure to Delete your recipe? It cannot be recovered after deletion!", [
-            { text: "No", style: "cancel", onPress: nothingHappenOperation },
-            { text: "Yes", style: "default", onPress: deleteOperation }
-        ]);
-    }
 
 
     const likeOperation = async () => {
         if (liked) {
-            Alert.alert("Already Liked", "You already liked this recipe", [
-                { text: "ok", style: "cancel", onPress: nothingHappenOperation }
-            ]);
+            try {
+                const currentLikes = recipe.like - 1;
+                await updateUnLikesRecipeToDB({
+                    recipe,
+                    currentLikes
+                });
+                setLiked(false)
+                recipe.like = currentLikes
+                console.log('update unlikes', currentLikes);
+            } catch (err) {
+                console.log("update unlikes ", err);
+            }
         }
         else {
             try {
@@ -72,40 +77,29 @@ export default function RecipeDetails({ navigation, route }) {
                     recipe,
                     currentLikes
                 });
+                setLiked(true)
+                recipe.like = currentLikes
                 console.log('update likes', currentLikes);
-                navigation.goBack();
-
             } catch (err) {
                 console.log("update likes ", err);
             }
         }
     };
 
-    const unLikeOperation = async () => {
-        if (!liked) {
-            Alert.alert("Already unliked", "You didn't like this recipe", [
-                { text: "ok", style: "cancel", onPress: nothingHappenOperation }
-            ]);
-        } else {
-            try {
-                const currentLikes = recipe.like - 1;
-                await updateUnLikesRecipeToDB({
-                    recipe,
-                    currentLikes
-                });
-                console.log('update unlikes', currentLikes);
-                navigation.goBack();
+    function DeleteHandler() {
+        Alert.alert("Delete", "Are you sure to Delete your recipe? It cannot be recovered after deletion!", [
+            { text: "No", style: "cancel", onPress: nothingHappenOperation },
+            { text: "Yes", style: "default", onPress: deleteOperation }
+        ]);
+    }
 
-            } catch (err) {
-                console.log("update unlikes ", err);
-            }
-        }
-    };
+    function nothingHappenOperation() {
+        return;
+    }
 
     const deleteOperation = async () => {
-
         if (liked) {
-            unLikeOperation();
+            likeOperation();
         }
         try {
             const key = recipe.key;
@@ -118,15 +112,6 @@ export default function RecipeDetails({ navigation, route }) {
         }
 
     };
-
-    function comebackOperation() {
-        navigation.goBack();
-    }
-
-    function nothingHappenOperation() {
-        return;
-    }
-
 
     return (
         <ScrollView>
@@ -185,12 +170,17 @@ export default function RecipeDetails({ navigation, route }) {
                     <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
                 </View>}
             </View>
-
-
-            <Row style={styles.buttonsContainer}>
-                <MainButton style={styles.buttons} onPress={LikeHandler} mode='light'>Like</MainButton>
-                <MainButton style={styles.buttons} onPress={UnLikeHandler} mode='light'>Unlike</MainButton>
-            </Row>
+            <View style={styles.actions}>
+                <TouchableOpacity onPress={likeOperation}>
+                    <LottieView
+                        ref={animation}
+                        style={styles.heartLottie}
+                        source={require("../assets/lottie/like.json")}
+                        autoPlay={false}
+                        loop={false}
+                    />
+                </TouchableOpacity>
+            </View>
             <Row style={styles.buttonsContainer2}>
                 <MainButton style={styles.buttons} onPress={DeleteHandler} mode='light'>Delete</MainButton>
             </Row>
@@ -260,6 +250,27 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         minWidth: 100,
+    },
+    heartLottie: {
+        width: 100,
+        height: 100,
+    },
+    actions: {
+        position: 'absolute',
+        marginLeft: 300,
+        marginTop: 110,
+        flexDirection: "row",
+        height: 20,
+    },
+    heartLottieL: {
+        width: 300,
+        height: 300,
+    },
+    actionsL: {
+        position: 'absolute',
+        alignSelf: 'center',
+        flexDirection: "row",
+        height: 20,
     },
 
 });
