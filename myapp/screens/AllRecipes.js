@@ -116,7 +116,7 @@ export default function AllRecipes({ navigation }) {
         const unsubsribe = onSnapshot(
             query(
                 collection(db, "recipes"),
-                where("selectedDiff", "==", "Under 30 minutes")),
+                where("selectedDiff", "==", "Under 15 minutes")),
             (QuerySnapshot) => {
                 if (QuerySnapshot.empty) {
                     setEasyRecipes([]);
@@ -192,7 +192,9 @@ export default function AllRecipes({ navigation }) {
                             <View style={styles.weekImg}>
                                 <RecipeImage uri={item.uri} />
                             </View>
-                            <Text style={styles.weekText}>{item.title}</Text>
+                            <View style={styles.weekTextContainer}>
+                                <Text style={styles.weekText}>{item.title}</Text>
+                            </View>
                         </RecipeButton>
                     )}
                 />
@@ -216,7 +218,9 @@ export default function AllRecipes({ navigation }) {
                             <View style={styles.weekImg}>
                                 <RecipeImage uri={item.uri} />
                             </View>
-                            <Text style={styles.weekText}>{item.title}</Text>
+                            <View style={styles.weekTextContainer}>
+                                <Text style={styles.weekText}>{item.title}</Text>
+                            </View>
                         </RecipeButton>
                     )}
                 />
@@ -240,7 +244,9 @@ export default function AllRecipes({ navigation }) {
                             <View style={styles.weekImg}>
                                 <RecipeImage uri={item.uri} />
                             </View>
-                            <Text style={styles.weekText}>{item.title}</Text>
+                            <View style={styles.weekTextContainer}>
+                                <Text style={styles.weekText}>{item.title}</Text>
+                            </View>
                         </RecipeButton>
                     )}
                 />
@@ -263,8 +269,13 @@ export default function AllRecipes({ navigation }) {
                         >
                             <View style={styles.weekImg}>
                                 <RecipeImage uri={item.uri} />
+
                             </View>
-                            <Text style={styles.weekText}>{item.title}</Text>
+                            <View style={styles.weekTextContainer}>
+                                <Text style={styles.weekText}>{item.title}</Text>
+                            </View>
+
+
                         </RecipeButton>
                     )}
                 />
@@ -321,6 +332,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'center',
+    },
+    weekTextContainer:{
+        width: Dimensions.get('window').width * 0.43,
     },
     popularText1: {
         color: Colors.DescriptionText,
