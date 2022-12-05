@@ -98,10 +98,12 @@ export default function RecipeList(props) {
                 <View>
                     <Column>
                         <Text style={form.RecipeListTitle}>{item.title}</Text>
-                        <Row>
-                          <Text>{userName.find(element=>element[0] == item.user )[1]}</Text>
-                          <AntDesign name="like2" size={20} color={Colors.Black} />
-                          <Text>{item.like}</Text>
+                        <Row style={{marginLeft: 5, justifyContent: 'space-between'}}>
+                          <Text>{userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}</Text>
+                          <Row>
+                            <AntDesign name="like2" size={20} color={Colors.Black} />
+                            <Text>{item.like}</Text>
+                          </Row>
                         </Row>
                     </Column>
                 </View>
