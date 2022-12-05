@@ -14,10 +14,12 @@ import { container, form } from '../constants/Style';
 import { Image } from 'react-native';
 import NoRecipePage from './UI/NoRecipePage';
 import Column from './UI/Column';
+import useUserName from './Hook/useUserName';
 
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState([]);
-  const [userName, setUserName] = useState([]);
+  // const [userName, setUserName] = useState([]);
+  const userName = useUserName();
   
   let filteredRecipes = [];
   if (props.location && recipes.length != 0) {
@@ -50,26 +52,26 @@ export default function RecipeList(props) {
     }
   }, [],);
 
-  useEffect(() => {
-    const unsubsribe = onSnapshot(
-      collection(db, "users"),
-      (QuerySnapshot) => {
-        if (QuerySnapshot.empty) {
-          userName([]);
-          return;
-        }
-        setUserName(
-          QuerySnapshot.docs.map((snapDoc) => {
-            let data = snapDoc.data();
-            data = [snapDoc.id, data.username];
-            return data;
-          })
-        );
-      });
-    return () => {
-      unsubsribe();
-    }
-  }, [],);
+  // useEffect(() => {
+  //   const unsubsribe = onSnapshot(
+  //     collection(db, "users"),
+  //     (QuerySnapshot) => {
+  //       if (QuerySnapshot.empty) {
+  //         userName([]);
+  //         return;
+  //       }
+  //       setUserName(
+  //         QuerySnapshot.docs.map((snapDoc) => {
+  //           let data = snapDoc.data();
+  //           data = [snapDoc.id, data.username];
+  //           return data;
+  //         })
+  //       );
+  //     });
+  //   return () => {
+  //     unsubsribe();
+  //   }
+  // }, [],);
 
   return (
   <>
