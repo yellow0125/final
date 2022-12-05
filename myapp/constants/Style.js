@@ -127,7 +127,14 @@ const container = StyleSheet.create({
     NoRecipeImage: {
         width: "100%",
         height: "100%"
-    }
+    },
+    wholeContainer: {
+        flex: 1,
+        height: 280,
+        borderRadius: 5,
+        marginTop: 4,
+        marginRight: 6,
+    },
 
 
 })
@@ -209,6 +216,11 @@ const form = StyleSheet.create({
         borderWidth: 2,
         margin:5,
       },
+      RecipeListTitle: {
+        color: Colors.DescriptionText,
+        marginLeft: 5,
+        fontWeight: 'bold',
+    },
 
 })
 
