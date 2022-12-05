@@ -5,10 +5,6 @@ import { auth } from "./firebase/firebase-setup";
 import { onAuthStateChanged } from "firebase/auth";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
-import { Provider } from "react-redux";
-import { applyMiddleware, legacy_createStore as createStore } from 'redux';
-import rootReducer from './redux/reducers'
-import thunk from "redux-thunk";
 import Main from "./components/Main";
 import AddPicture from "./screens/AddPicture";
 import EditProfile from "./screens/EditProfile";
@@ -23,7 +19,6 @@ import * as Notifications from 'expo-notifications'
 import { storeData, getItemFor } from "./helpers/storageHelper"
 import Christmas from "./components/event/Christmas";
 import Welcome from "./components/event/Welcome";
-const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createNativeStackNavigator()
 
 const HAS_LAUNCHED = 'HAS_LAUNCHED';
@@ -114,7 +109,6 @@ export default function App() {
 
   const AppStack = () => {
     return (
-      <Provider store={store}>
         <Stack.Navigator
           screenOptions={{
             headerStyle: { backgroundColor: Colors.BgDarkGreen },
@@ -131,7 +125,6 @@ export default function App() {
           <Stack.Screen name="Christmas" component={Christmas} options={{ headerTitle: "Christmas Event" }} />
           <Stack.Screen name="Welcome" component={Welcome} options={{ headerTitle: "About Me" }} />
         </Stack.Navigator>
-      </Provider>
     );
   };
 

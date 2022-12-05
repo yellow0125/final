@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Entypo, Ionicons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Colors from "../constants/Colors";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LocationsRecipes from "../screens/LocationsRecipes";
@@ -13,9 +11,9 @@ import LocateMe from './UI/LocateMe';
 
 
 const Tab = createBottomTabNavigator();
-export class Main extends Component {
 
-  render() {
+export default function Main() {
+
     return (
       <Tab.Navigator
         screenOptions={({ navigation, route }) => {
@@ -71,14 +69,3 @@ export class Main extends Component {
       </Tab.Navigator>
     )
   }
-}
-
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser
-})
-const mapDispatchProps = (dispatch) => bindActionCreators({
-
-}, dispatch);
-
-
-export default connect(mapStateToProps, mapDispatchProps)(Main);
