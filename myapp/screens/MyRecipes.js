@@ -51,6 +51,16 @@ export default function MyRecipes({ navigation }) {
         navigation.navigate("RecipeDetails");
     }
 
+    function findUserName(authid) {
+        let authName = "";
+        for (let i = 0; i < userName.length; i ++) {
+          if (authid === userName[i][0]) {
+            authName = userName[i][1]
+            return authName
+          }
+        }
+      }
+
     return (
         <>
             {recipes.length == 0 ? (
@@ -83,7 +93,7 @@ export default function MyRecipes({ navigation }) {
                                   <Row style={{marginTop: 5}}>
                                   <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
                                   <Text style={{color:Colors.darkGrey, marginLeft: 2}}>
-                                    {userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}
+                                     {findUserName(item.user)}
                                   </Text>
                                   </Row>
                                   <Row style={{marginTop: 5}}>
