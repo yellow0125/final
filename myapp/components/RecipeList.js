@@ -1,22 +1,18 @@
 import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
-import { useState, useEffect } from "react";
-import { firestore as db } from '../firebase/firebase-setup'
-import { collection, onSnapshot} from "firebase/firestore"
 import { FlatList } from 'react-native';
 import RecipeButton from './UI/RecipeButton';
-import { StyleSheet } from 'react-native';
 import Row from './UI/Row';
 import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign,Entypo, FontAwesome } from '@expo/vector-icons';
 import { container, form } from '../constants/Style';
-import { Image } from 'react-native';
 import NoRecipePage from './UI/NoRecipePage';
 import Column from './UI/Column';
 import useUserName from './Hook/useUserName';
 import useUserLike from './Hook/useUserLike';
 import useRecipe from './Hook/useRecipe';
+import { Col } from 'react-native-table-component';
 
 export default function RecipeList(props) {
   const recipes = useRecipe();
@@ -61,15 +57,18 @@ export default function RecipeList(props) {
                     <Column>
                         <Text style={form.RecipeListTitle}>{item.title}</Text>
                         <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
-                          <Text>
+                          <Row>
+                          <FontAwesome name="user-circle-o" size={20} color={Colors.Black} />
+                          <Text style={{color:Colors.Black, marginLeft: 2}}>
                             {userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}
                           </Text>
+                          </Row>
                           <Row>
                           {likedRecipes.includes(item.key) ? (
-                                    <AntDesign name="like1" size={20} color={Colors.Black} />) : (
-                                    <AntDesign name="like2" size={20} color={Colors.Black} />
+                                    <AntDesign name="like1" size={20} color={Colors.Red} />) : (
+                                    <AntDesign name="like2" size={20} color={Colors.Red} />
                                 )}
-                            <Text>{item.like}</Text>
+                            <Text style={{color: Colors.Red}}>{item.like}</Text>
                           </Row>
                         </Row>
                     </Column>
