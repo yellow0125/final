@@ -57,18 +57,18 @@ export default function RecipeList(props) {
                     <Column>
                         <Text style={form.RecipeListTitle}>{item.title}</Text>
                         <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
-                          <Row>
-                          <FontAwesome name="user-circle-o" size={20} color={Colors.Black} />
-                          <Text style={{color:Colors.Black, marginLeft: 2}}>
-                            {userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}
+                          <Row style={{marginTop: 5}}>
+                          <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
+                          <Text style={{color:Colors.darkGrey, marginLeft: 5}}>
+                            {userName.length == 0 ? "" : userName.find(element=>element[0] == item.user )[1]}
                           </Text>
                           </Row>
-                          <Row>
+                          <Row style={{marginTop: 5}}>
                           {likedRecipes.includes(item.key) ? (
                                     <AntDesign name="like1" size={20} color={Colors.Red} />) : (
-                                    <AntDesign name="like2" size={20} color={Colors.Red} />
+                                    <AntDesign name="like2" size={20} color={Colors.RdarkGreyed} />
                                 )}
-                            <Text style={{color: Colors.Red}}>{item.like}</Text>
+                            <Text style={{color: Colors.darkGrey}}>{item.like}</Text>
                           </Row>
                         </Row>
                     </Column>

@@ -5,41 +5,23 @@ import { firestore as db } from '../firebase/firebase-setup'
 import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { FlatList } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { form } from '../constants/Style';
 import Row from '../components/UI/Row';
+import Column from '../components/UI/Column';
 import RecipeButton from '../components/UI/RecipeButton';
 import Colors from '../constants/Colors';
 import RecipeImage from '../components/UI/RecipeImage';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
 import NoRecipePage from '../components/UI/NoRecipePage';
+import { container, form } from '../constants/Style';
+import useUserName from '../components/Hook/useUserName';
+import useUserLike from '../components/Hook/useUserLike';
+
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
-    const [likedRecipes, setLikedRecipes] = useState([]);
-
-    useEffect(() => {
-        const unsubsribe = onSnapshot(
-            query(
-                collection(db, "recipes"),
-                where("likedUser", "array-contains", auth.currentUser.uid)),
-
-            (QuerySnapshot) => {
-                if (QuerySnapshot.empty) {
-                    setLikedRecipes([]);
-                    return;
-                }
-                setLikedRecipes(
-                    QuerySnapshot.docs.map((snapDoc) => {
-                        let data = snapDoc.id;
-                        return data;
-                    })
-                );
-            });
-        return () => {
-            unsubsribe();
-        }
-    }, [],);
+    const userName = useUserName();
+    const likedRecipes = useUserLike();
 
     useEffect(() => {
         const unsubsribe = onSnapshot(
@@ -80,33 +62,44 @@ export default function MyRecipes({ navigation }) {
                         </View>
                     </NoRecipePage>
                 </>
-            ) : (<FlatList
+            ) : (
+                <FlatList
                 data={recipes}
                 numColumns={2}
                 keyExtractor={item => item.key}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                     <RecipeButton
-                        style={styles.wholeContainer}
+                        style={container.wholeContainer}
                         android_ripple={{ color: Colors.LightGrey, foreground: true }}
-                        onPress={() => navigation.navigate("RecipeDetails", { item })}
+                        onPress={() => navigation.navigate("RecipeDetails", {item})}
                     >
-
-                        <View style={styles.imgcontainer}>
+                        <View style={{width: Dimensions.get('window').width}}>
                             <RecipeImage uri={item.uri} style={form.imageInPost2} />
                         </View>
                         <View>
-                            <Row>
-                                <Text style={styles.titleText}>{item.title}</Text>
-                                {likedRecipes.includes(item.key) ? (
-                                    <AntDesign name="like1" size={20} color={Colors.Black} />) : (
-                                    <AntDesign name="like2" size={20} color={Colors.Black} />
-                                )}
-                                <Text>{item.like}</Text>
-                            </Row>
+                            <Column>
+                                <Text style={form.RecipeListTitle}>{item.title}</Text>
+                                <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
+                                  <Row style={{marginTop: 5}}>
+                                  <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
+                                  <Text style={{color:Colors.darkGrey, marginLeft: 2}}>
+                                    {userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}
+                                  </Text>
+                                  </Row>
+                                  <Row style={{marginTop: 5}}>
+                                  {likedRecipes.includes(item.key) ? (
+                                            <AntDesign name="like1" size={20} color={Colors.Red} />) : (
+                                            <AntDesign name="like2" size={20} color={Colors.darkGrey} />
+                                        )}
+                                    <Text style={{color: Colors.darkGrey}}>{item.like}</Text>
+                                  </Row>
+                                </Row>
+                            </Column>
                         </View>
                     </RecipeButton>
+        
+            )}
 
-                )}
             />
             )}
         </>
