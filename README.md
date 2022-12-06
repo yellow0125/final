@@ -106,20 +106,58 @@ In the first week, we plan to do these work below:
 
 
 ## Structure of the App
-### 1. Login and Register page
+### 1. Welcome page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+### 2. Login and Register page
 - allow users to register and login
 - if the user is not login, they can only see these two page, and can do nothing.
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+    
+### 3. All Recipes page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+### 4. Location Recipes Page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+### 5. Add Recipes page and Image Upload Page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>  
 
-### 2. Profile page and Edit Profile page
+### 6. Collected Recipes page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+
+### 7. Profile page and Edit Profile page
 - allow users check their information and edit them update to database
 - allow users to locate himself by **google map API**
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
+  
+### 8. My Recipes page and Edit Profile page
+- allow users check their information and edit them update to database
+- allow users to locate himself by **google map API**
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
+  
 
+  
+  
 ### 3. My Recipes page and Add a Recipes page
 - allow users add a new recipe to db, and all user can see.
 - allow users see all of their recipes they have upload
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+  
+  
 ## Install dependencies
 In order to install, clone this repository and run:
 
