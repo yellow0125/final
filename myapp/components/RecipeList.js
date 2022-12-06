@@ -18,7 +18,6 @@ import useUserName from './Hook/useUserName';
 
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState([]);
-  // const [userName, setUserName] = useState([]);
   const userName = useUserName();
   
   let filteredRecipes = [];
@@ -52,27 +51,6 @@ export default function RecipeList(props) {
     }
   }, [],);
 
-  // useEffect(() => {
-  //   const unsubsribe = onSnapshot(
-  //     collection(db, "users"),
-  //     (QuerySnapshot) => {
-  //       if (QuerySnapshot.empty) {
-  //         userName([]);
-  //         return;
-  //       }
-  //       setUserName(
-  //         QuerySnapshot.docs.map((snapDoc) => {
-  //           let data = snapDoc.data();
-  //           data = [snapDoc.id, data.username];
-  //           return data;
-  //         })
-  //       );
-  //     });
-  //   return () => {
-  //     unsubsribe();
-  //   }
-  // }, [],);
-
   return (
   <>
     {props.location && filteredRecipes.length === 0 ? (
@@ -100,8 +78,10 @@ export default function RecipeList(props) {
                 <View>
                     <Column>
                         <Text style={form.RecipeListTitle}>{item.title}</Text>
-                        <Row style={{marginLeft: 5, justifyContent: 'space-between'}}>
-                          <Text>{userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}</Text>
+                        <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
+                          <Text>
+                            {userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}
+                          </Text>
                           <Row>
                             <AntDesign name="like2" size={20} color={Colors.Black} />
                             <Text>{item.like}</Text>

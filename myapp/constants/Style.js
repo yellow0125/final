@@ -129,11 +129,12 @@ const container = StyleSheet.create({
         height: "100%"
     },
     wholeContainer: {
-        flex: 1,
-        height: 280,
         borderRadius: 5,
         marginTop: 4,
-        marginRight: 6,
+        marginRight: 5,
+        marginBottom:5,
+
+        width: Dimensions.get('window').width * 0.5,
     },
 
 
