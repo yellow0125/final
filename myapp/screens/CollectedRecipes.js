@@ -93,7 +93,7 @@ export default function MyRecipes({ navigation }) {
                         </View>
                         <View>
                             <Row>
-                                <Text style={styles.titleText}>{item.title}</Text>
+                                <Text numberOfLines={1} style={styles.titleText}>{item.title}</Text>
                                 <AntDesign name="heart" size={18} color={Colors.Red} />
                             </Row>
                         </View>

@@ -64,7 +64,7 @@ export default function RecipeList(props) {
                 </View>
                 <View>
                     <Column>
-                        <Text style={form.RecipeListTitle}>{item.title}</Text>
+                        <Text numberOfLines={1} style={form.RecipeListTitle}>{item.title}</Text>
                         <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
                           <Row style={{marginTop: 8}}>
                           <AntDesign name="user" size={18} color={Colors.darkGrey} />

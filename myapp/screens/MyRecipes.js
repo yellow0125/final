@@ -88,7 +88,7 @@ export default function MyRecipes({ navigation }) {
                         </View>
                         <View>
                             <Column>
-                                <Text style={form.RecipeListTitle}>{item.title}</Text>
+                                <Text numberOfLines={1} style={form.RecipeListTitle}>{item.title}</Text>
                                 <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
                                   <Row style={{marginTop: 5}}>
                                   <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />

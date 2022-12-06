@@ -14,13 +14,20 @@ import Row from '../components/UI/Row';
 import RecipeImage from '../components/UI/RecipeImage';
 import { Entypo } from '@expo/vector-icons';
 import LottieView from "lottie-react-native";
+import { FAB } from "react-native-elements";
+import Column from "../components/UI/Column";
+
 export default function RecipeDetails({ navigation, route }) {
     const [recipe, setRecipe] = useState(route.params.item)
     const [liked, setLiked] = useState(false);
+    const [deletable, setDeletable] = useState(false);
     const animation = React.useRef(null);
     const isFirstRun = React.useRef(true);
 
     useEffect(() => {
+        if (recipe.user == auth.currentUser.uid) {
+            setDeletable(true);
+        }
         const unsubsribe = onSnapshot(
             query(
                 collection(db, "recipes"),
@@ -111,77 +118,103 @@ export default function RecipeDetails({ navigation, route }) {
     };
 
     return (
-        <ScrollView>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>{recipe.title}</Text>
-                <Text >featured in <Text style={styles.redText}>5 Hearty Slow Cooker Recipes</Text></Text>
-                <Row style={{ marginTop: 15 }}>
-                    <AntDesign name="like2" size={22} color={Colors.Black} />
-                    <Text style={styles.boldText}> {recipe.like}</Text>
-                    <Text> people like this recipe</Text>
-                </Row>
-                <Row style={{ marginTop: 15 }}>
-                    <Entypo name="back-in-time" size={22} color={Colors.Black} />
-                    <Text> Ready in </Text>
-                    <Text style={styles.boldText}>{recipe.selectedDiff}</Text>
-                </Row>
-            </View>
+        <View>
+            
+            <ScrollView style={styles.ScrollView}>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>{recipe.title}</Text>
+                    <Text >featured in <Text style={styles.redText}>5 Hearty Slow Cooker Recipes</Text></Text>
+                    <Row style={{ marginTop: 15 }}>
+                        {/* <AntDesign name="like2" size={22} color={Colors.Black} /> */}
+                        <View style={styles.lottieContainer}>
+                            <LottieView
+                                ref={animation}
+                                style={styles.heartLottie2}
+                                source={require("../assets/lottie/58909-like.json")}
+                                autoPlay
+                                loop
+                                speed={0.5}
+                            />
+                        </View>
+                        <Text style={styles.boldText}> {recipe.like}</Text>
+                        <Text> people like this recipe</Text>
+                    </Row>
+                    <Row style={{ marginTop: 15 }}>
+                        <Entypo name="back-in-time" size={22} color={Colors.Black} />
+                        <Text> Ready in </Text>
+                        <Text style={styles.boldText}>{recipe.selectedDiff}</Text>
+                    </Row>
+                </View>
 
-            <View>
-                <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
+                <View>
+                    <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
+                </View>
+                <View>
+                    <Row style={styles.row}>
+                        <MaterialCommunityIcons name="map-marker-radius" size={24} color={Colors.Black} />
+                        <Text style={styles.pickerLabel}>Cuisine: </Text>
+                        <Text style={[styles.content, { paddingRight: 22 }]}>{recipe.selectedCuisine}</Text>
+                    </Row>
+                    <Row style={styles.row}>
+                        <MaterialCommunityIcons name="food-turkey" size={24} color={Colors.Black} />
+                        <Text style={styles.pickerLabel}>Cook Style: </Text>
+                        <Text style={styles.content}>{recipe.selectedCookStyle}</Text>
+                    </Row>
+                </View>
+                <View>
+                    <Row style={styles.row}>
+                        <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
+                        <Text style={styles.pickerLabel}>Prepare Step </Text>
+                    </Row>
+                    {recipe.pre1.length > 1 && <View style={styles.stepC}>
+                        <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre1}</Text>
+                    </View>}
+                    {recipe.pre2.length > 1 && <View style={styles.stepC}>
+                        <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre2}</Text>
+                    </View>}
+                    <Row style={styles.row}>
+                        <MaterialCommunityIcons name="pot-steam-outline" size={24} color={Colors.Black} />
+                        <Text style={styles.pickerLabel}>Cook Step </Text>
+                    </Row>
+                    {recipe.step1.length > 1 && <View style={styles.stepC}>
+                        <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step1}</Text>
+                    </View>}
+                    {recipe.step2.length > 1 && <View style={styles.stepC}>
+                        <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step2}</Text>
+                    </View>}
+                    {recipe.step3.length > 1 && <View style={styles.stepC}>
+                        <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
+                    </View>}
+                </View>
+                <Row style={styles.buttonsContainer2}>
+                </Row>
+            </ScrollView>
+            <Column>
+            <View style={styles.floatingButton}>
+                <FAB
+                    visible={deletable}
+                    placement="right"
+                    icon={{ name: 'delete', color: 'white' }}
+                    color={Colors.Grey}
+                    onPress={DeleteHandler}
+                />
             </View>
-            <View>
-                <Row style={styles.row}>
-                    <MaterialCommunityIcons name="map-marker-radius" size={24} color={Colors.Black} />
-                    <Text style={styles.pickerLabel}>Cuisine: </Text>
-                    <Text style={[styles.content, { paddingRight: 22 }]}>{recipe.selectedCuisine}</Text>
-                </Row>
-                <Row style={styles.row}>
-                    <MaterialCommunityIcons name="food-turkey" size={24} color={Colors.Black} />
-                    <Text style={styles.pickerLabel}>Cook Style: </Text>
-                    <Text style={styles.content}>{recipe.selectedCookStyle}</Text>
-                </Row>
-            </View>
-            <View>
-                <Row style={styles.row}>
-                    <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
-                    <Text style={styles.pickerLabel}>Prepare Step </Text>
-                </Row>
-                {recipe.pre1.length > 1 && <View style={styles.stepC}>
-                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre1}</Text>
-                </View>}
-                {recipe.pre2.length > 1 && <View style={styles.stepC}>
-                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.pre2}</Text>
-                </View>}
-                <Row style={styles.row}>
-                    <MaterialCommunityIcons name="pot-steam-outline" size={24} color={Colors.Black} />
-                    <Text style={styles.pickerLabel}>Cook Step </Text>
-                </Row>
-                {recipe.step1.length > 1 && <View style={styles.stepC}>
-                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step1}</Text>
-                </View>}
-                {recipe.step2.length > 1 && <View style={styles.stepC}>
-                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step2}</Text>
-                </View>}
-                {recipe.step3.length > 1 && <View style={styles.stepC}>
-                    <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
-                </View>}
-            </View>
-            <View style={styles.actions}>
-                <TouchableOpacity onPress={likeOperation}>
+            <View style={styles.floatingButton2}>
+                <TouchableOpacity 
+                    onPress={likeOperation}
+                    style={styles.buttonsContainer2}
+                    >
                     <LottieView
                         ref={animation}
                         style={styles.heartLottie}
-                        source={require("../assets/lottie/like.json")}
+                        source={require("../assets/lottie/like5.json")}
                         autoPlay={false}
                         loop={false}
                     />
                 </TouchableOpacity>
             </View>
-            <Row style={styles.buttonsContainer2}>
-                <MainButton style={styles.buttons} onPress={DeleteHandler} mode='light'>Delete</MainButton>
-            </Row>
-        </ScrollView>
+            </Column>
+        </View>
     );
 }
 
@@ -193,7 +226,7 @@ const styles = StyleSheet.create({
     title: {
         color: Colors.Black,
         fontWeight: 'bold',
-        fontSize: 36,
+        fontSize: 28,
     },
     redText: {
         fontWeight: 'bold',
@@ -239,8 +272,8 @@ const styles = StyleSheet.create({
     },
     buttonsContainer2: {
         justifyContent: 'center',
-        marginTop: 0,
-        marginBottom: 100,
+        width: 50,
+        height: 200,
     },
     buttons: {
         marginHorizontal: 8,
@@ -249,15 +282,18 @@ const styles = StyleSheet.create({
         minWidth: 100,
     },
     heartLottie: {
-        width: 100,
-        height: 100,
+        width: 75,
+        height: 55,
+        backgroundColor: Colors.Grey,
+        color:Colors.White,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        borderRadius:50,
     },
-    actions: {
-        position: 'absolute',
-        marginLeft: 300,
-        marginTop: 110,
-        flexDirection: "row",
-        height: 20,
+    heartLottie2: {
+        width: 50,
     },
     heartLottieL: {
         width: 300,
@@ -269,5 +305,24 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         height: 20,
     },
+    floatingButton:{
+
+        paddingVertical: 5,
+        flexGrow: 1,
+        right:15,
+        bottom: 80,
+    },
+    floatingButton2: {
+        width:20,
+        left:304,
+        bottom: 300,
+    },
+    lottieContainer: {
+        right:12,
+        bottom:20,
+        height:20,
+        width:30,
+
+    }
 
 });
