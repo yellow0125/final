@@ -25,6 +25,7 @@ export default function Profile({ navigation }) {
     const [location, setLocation] = useState(userLocation);
     const [country, setCountry] = useState(userData.country)
     const [isLoading, setIsLoading] = useState(false);
+    const MAPS_API_KEY = "AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY";
 
     useEffect(() => {
         setIsLoading(true)
@@ -48,7 +49,13 @@ export default function Profile({ navigation }) {
                 latitude: route.params.currentLocation.latitude,
                 longitude: route.params.currentLocation.longitude,
             });
-
+            Geocoder.from(route.params.currentLocation.latitude, route.params.currentLocation.longitude)
+                .then(async json => {
+                    // console.log(json.results[0].address_components.slice(-2)[0])
+                    var addressComponent = json.results[0].address_components.slice(-2)[0];
+                    setCountry(addressComponent.long_name)
+                })
+                .catch(error => console.warn(error));
         }
     }, [route]);
 
@@ -189,7 +196,7 @@ export default function Profile({ navigation }) {
                 </View>
                 <View style={styles.part}>
                     <MainButton mode='light' onPress={locateUserHandler}>
-                        <Text>Where am I?   </Text>
+                        <Text>Locate Me   </Text>
                         <FontAwesome5 name="location-arrow" size={22} color={Colors.White} />
                     </MainButton>
                     {isLoading && <>
@@ -282,7 +289,7 @@ const styles = StyleSheet.create({
         marginTop:-25
     },
     part: {
-        marginVertical:10,
+        marginVertical:30,
         marginHorizontal: 10,
         paddingBottom: 10,
         backgroundColor: Colors.White,
