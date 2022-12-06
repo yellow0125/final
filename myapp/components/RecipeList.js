@@ -15,10 +15,12 @@ import { Image } from 'react-native';
 import NoRecipePage from './UI/NoRecipePage';
 import Column from './UI/Column';
 import useUserName from './Hook/useUserName';
+import useUserLike from './Hook/useUserLike';
 
 export default function RecipeList(props) {
   const [recipes, setRecipes] = useState([]);
   const userName = useUserName();
+  const likedRecipes = useUserLike();
   
   let filteredRecipes = [];
   if (props.location && recipes.length != 0) {
@@ -83,7 +85,10 @@ export default function RecipeList(props) {
                             {userName.length == 0 ? "":userName.find(element=>element[0] == item.user )[1]}
                           </Text>
                           <Row>
-                            <AntDesign name="like2" size={20} color={Colors.Black} />
+                          {likedRecipes.includes(item.key) ? (
+                                    <AntDesign name="like1" size={20} color={Colors.Black} />) : (
+                                    <AntDesign name="like2" size={20} color={Colors.Black} />
+                                )}
                             <Text>{item.like}</Text>
                           </Row>
                         </Row>
