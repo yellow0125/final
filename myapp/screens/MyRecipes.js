@@ -92,16 +92,16 @@ export default function MyRecipes({ navigation }) {
                                 <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
                                   <Row style={{marginTop: 5}}>
                                   <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
-                                  <Text style={{color:Colors.darkGrey, marginLeft: 2}}>
+                                  <Text style={{color:Colors.darkGrey, marginLeft: 3}}>
                                      {findUserName(item.user)}
                                   </Text>
                                   </Row>
                                   <Row style={{marginTop: 5}}>
                                   {likedRecipes.includes(item.key) ? (
-                                            <AntDesign name="like1" size={20} color={Colors.Red} />) : (
-                                            <AntDesign name="like2" size={20} color={Colors.darkGrey} />
+                                            <AntDesign name="heart" size={20} color={Colors.Red} />) : (
+                                            <AntDesign name="hearto" size={20} color={Colors.darkGrey} />
                                         )}
-                                    <Text style={{color: Colors.darkGrey}}>{item.like}</Text>
+                                    <Text style={{color: Colors.darkGrey, marginLeft: 2}}>{item.like}</Text>
                                   </Row>
                                 </Row>
                             </Column>
