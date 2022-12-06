@@ -5,14 +5,13 @@ import RecipeButton from './UI/RecipeButton';
 import Row from './UI/Row';
 import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
-import { AntDesign,Entypo, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { container, form } from '../constants/Style';
 import NoRecipePage from './UI/NoRecipePage';
 import Column from './UI/Column';
-import useUserName from './Hook/useUserName';
-import useUserLike from './Hook/useUserLike';
-import useRecipe from './Hook/useRecipe';
-import { Col } from 'react-native-table-component';
+import useUserName from './hook/useUserName';
+import useUserLike from './hook/useUserLike';
+import useRecipe from './hook/useRecipe';
 
 export default function RecipeList(props) {
   const recipes = useRecipe();
