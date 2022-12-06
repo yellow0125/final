@@ -8,7 +8,7 @@ export const createUserToDB = async (data) => {
             username: data.username,
             email: data.email,
             gender: "Click edit to add your gender",
-            country: "null",
+            country: "Pick your country below",
             location: "null",
 
         });

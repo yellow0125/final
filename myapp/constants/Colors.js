@@ -1,7 +1,7 @@
 export default {
 	BgDarkGreen: '#419972',
 	BgLighterYellow: '#f7fcb9',
-	Grey: '#9f9f9f',
+	Grey: '#999999',
 	LightGrey:'#d3d7d4',
 	White: '#fff7ff',
 	BgLightGreen: '#5cc7b5',
@@ -9,9 +9,9 @@ export default {
 	Black: '#111112',
 	transparent: 'transparent',
 	ShadowBg: '#dfe1e0',
-	Red:'#ef5b9c',
+	Red:'#db3e00',
 	Orange:'#f47920',
-	Red:'#f05b72',
+	Red1:'#f05b72',
 	darkGrey: `#696969`,
 
 }
