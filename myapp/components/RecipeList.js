@@ -16,9 +16,10 @@ import NoRecipePage from './UI/NoRecipePage';
 import Column from './UI/Column';
 import useUserName from './Hook/useUserName';
 import useUserLike from './Hook/useUserLike';
+import useRecipe from './Hook/useRecipe';
 
 export default function RecipeList(props) {
-  const [recipes, setRecipes] = useState([]);
+  const recipes = useRecipe();
   const userName = useUserName();
   const likedRecipes = useUserLike();
   
@@ -32,33 +33,12 @@ export default function RecipeList(props) {
       }
     }
 
-  useEffect(() => {
-    const unsubsribe = onSnapshot(
-      collection(db, "recipes"),
-      (QuerySnapshot) => {
-        if (QuerySnapshot.empty) {
-          setRecipes([]);
-          return;
-        }
-        setRecipes(
-          QuerySnapshot.docs.map((snapDoc) => {
-            let data = snapDoc.data();
-            data = { ...data, key: snapDoc.id };
-            return data;
-          })
-        );
-      });
-    return () => {
-      unsubsribe();
-    }
-  }, [],);
-
   return (
   <>
     {props.location && filteredRecipes.length === 0 ? (
       <>
         <NoRecipePage>
-          <Text style={styles.text}>
+          <Text style={form.NoRecipePagetext}>
             Opps, there is no recipes in this location. Select another location or create one!
           </Text>
         </NoRecipePage>
@@ -100,11 +80,3 @@ export default function RecipeList(props) {
 /> )}
 </>)
 }
-
-const styles = StyleSheet.create({
-text: {
-    fontSize: 16,
-    alignSelf: 'center',
-    margin: 5
-}
-});

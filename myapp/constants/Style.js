@@ -217,11 +217,16 @@ const form = StyleSheet.create({
         borderWidth: 2,
         margin:5,
       },
-      RecipeListTitle: {
+    RecipeListTitle: {
         color: Colors.DescriptionText,
         marginLeft: 5,
         fontWeight: 'bold',
     },
+    NoRecipePagetext: {
+        fontSize: 16,
+        alignSelf: 'center',
+        margin: 5
+    }
 
 })
 
