@@ -15,8 +15,8 @@ import { auth } from '../firebase/firebase-setup';
 import MainButton from '../components/UI/MainButton';
 import NoRecipePage from '../components/UI/NoRecipePage';
 import { container, form } from '../constants/Style';
-import useUserName from '../components/Hook/useUserName';
-import useUserLike from '../components/Hook/useUserLike';
+import useUserName from '../components/hook/useUserName';
+import useUserLike from '../components/hook/useUserLike';
 
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
