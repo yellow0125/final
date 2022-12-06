@@ -14,7 +14,7 @@ import Row from '../components/UI/Row';
 import RecipeImage from '../components/UI/RecipeImage';
 import { Entypo } from '@expo/vector-icons';
 import LottieView from "lottie-react-native";
-import { FAB } from "react-native-elements";
+// import { FAB } from "react-native-elements";
 import Column from "../components/UI/Column";
 
 export default function RecipeDetails({ navigation, route }) {
@@ -190,7 +190,7 @@ export default function RecipeDetails({ navigation, route }) {
                 </Row>
             </ScrollView>
             <Column>
-            <View style={styles.floatingButton}>
+            {/* <View style={styles.floatingButton}>
                 <FAB
                     visible={deletable}
                     placement="right"
@@ -198,7 +198,7 @@ export default function RecipeDetails({ navigation, route }) {
                     color={Colors.Grey}
                     onPress={DeleteHandler}
                 />
-            </View>
+            </View> */}
             <View style={styles.floatingButton2}>
                 <TouchableOpacity 
                     onPress={likeOperation}
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     buttonsContainer2: {
         justifyContent: 'center',
         width: 50,
-        height: 200,
+        height: 150,
     },
     buttons: {
         marginHorizontal: 8,
