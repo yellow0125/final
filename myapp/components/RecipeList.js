@@ -12,10 +12,11 @@ import Column from './UI/Column';
 import useUserName from './hook/useUserName';
 import useUserLike from './hook/useUserLike';
 import useRecipe from './hook/useRecipe';
+import { deleteNotificationChannelGroupAsync } from 'expo-notifications';
 
 export default function RecipeList(props) {
   const recipes = useRecipe();
-  const userName = useUserName();
+  const userName = useUserName()
   const likedRecipes = useUserLike();
   
   let filteredRecipes = [];
@@ -27,6 +28,16 @@ export default function RecipeList(props) {
         }
       }
     }
+
+  function findUserName(authid) {
+    let authName = "";
+    for (let i = 0; i < userName.length; i ++) {
+      if (authid === userName[i][0]) {
+        authName = userName[i][1]
+        return authName
+      }
+    }
+  }
 
   return (
   <>
@@ -59,7 +70,7 @@ export default function RecipeList(props) {
                           <Row style={{marginTop: 5}}>
                           <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
                           <Text style={{color:Colors.darkGrey, marginLeft: 5}}>
-                            {userName.length == 0 ? "" : userName.find(element=>element[0] == item.user )[1]}
+                            {findUserName(item.user)}
                           </Text>
                           </Row>
                           <Row style={{marginTop: 5}}>
