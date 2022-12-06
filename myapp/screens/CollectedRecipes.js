@@ -1,8 +1,8 @@
-import { View, Text, Dimensions, Image } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
-import { collection, onSnapshot, query, where, collectionGroup } from "firebase/firestore"
+import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { FlatList } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { form } from '../constants/Style';
@@ -77,9 +77,6 @@ export default function MyRecipes({ navigation }) {
                         </View>
                     </NoRecipePage>
                 </>
-
-
-
             ) : (<FlatList
                 data={recipes}
                 numColumns={2}
@@ -97,11 +94,7 @@ export default function MyRecipes({ navigation }) {
                         <View>
                             <Row>
                                 <Text style={styles.titleText}>{item.title}</Text>
-                                {likedRecipes.includes(item.key) ? (
-                                    <AntDesign name="like1" size={20} color={Colors.Black} />) : (
-                                    <AntDesign name="like2" size={20} color={Colors.Black} />
-                                )}
-                                <Text>{item.like}</Text>
+                                <AntDesign name="heart" size={18} color={Colors.Red} />
                             </Row>
                         </View>
                     </RecipeButton>
@@ -129,6 +122,7 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         width: 140,
         fontWeight: 'bold',
+        marginRight:11,
     },
     imageContainer: {
         width: Dimensions.get('window').width * 0.7,

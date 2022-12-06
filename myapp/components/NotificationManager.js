@@ -1,7 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 import * as Notifications from "expo-notifications"
-import MainButton from './UI/MainButton'
 import { AntDesign } from '@expo/vector-icons'
 import Row from './UI/Row'
 import Colors from '../constants/Colors'
@@ -31,7 +30,7 @@ export default function NotificationManager() {
         content: {
           title: "All I Want Christmas is You",
           body: 'Join our christmas event! Share your christmas recipes right now!',
-          color: "red",
+          color: Colors.Red,
           data: { url: "https://www.google.com" }
         },
         trigger: {

@@ -12,7 +12,6 @@ import Column from './UI/Column';
 import useUserName from './hook/useUserName';
 import useUserLike from './hook/useUserLike';
 import useRecipe from './hook/useRecipe';
-import { deleteNotificationChannelGroupAsync } from 'expo-notifications';
 
 export default function RecipeList(props) {
   const recipes = useRecipe();
@@ -67,18 +66,18 @@ export default function RecipeList(props) {
                     <Column>
                         <Text style={form.RecipeListTitle}>{item.title}</Text>
                         <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
-                          <Row style={{marginTop: 5}}>
-                          <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
-                          <Text style={{color:Colors.darkGrey, marginLeft: 3}}>
+                          <Row style={{marginTop: 8}}>
+                          <AntDesign name="user" size={18} color={Colors.darkGrey} />
+                          <Text style={{color:Colors.darkGrey, marginLeft: 3, fontSize:14}}>
                             {findUserName(item.user)}
                           </Text>
                           </Row>
-                          <Row style={{marginTop: 5}}>
+                          <Row style={{marginTop: 8}}>
                           {likedRecipes.includes(item.key) ? (
-                                    <AntDesign name="heart" size={20} color={Colors.Red} />) : (
-                                    <AntDesign name="hearto" size={20} color={Colors.darkGrey} />
+                                    <AntDesign name="heart" size={18} color={Colors.Red} />) : (
+                                    <AntDesign name="hearto" size={18} color={Colors.darkGrey} />
                                 )}
-                            <Text style={{color:Colors.darkGrey, marginLeft: 3}}>{item.like}</Text>
+                            <Text style={{color:Colors.darkGrey, marginLeft: 3,fontSize:13}}>{item.like}</Text>
                           </Row>
                         </Row>
                     </Column>

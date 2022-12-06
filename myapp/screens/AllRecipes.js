@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Pressable, StyleSheet, FlatList, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, Dimensions, StyleSheet, FlatList, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { firestore as db } from '../firebase/firebase-setup'
 import { collection, onSnapshot, query, where, limit, orderBy } from "firebase/firestore"
@@ -13,7 +13,6 @@ import NotificationManager from '../components/NotificationManager';
 
 export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
-    const [imageURL, setImageURL] = useState("");
     const [weeklyRecipes, setWeeklyRecipes] = useState([]);
     const [drinkRecipes, setDrinkRecipes] = useState([]);
     const [japanRecipes, setJapanRecipes] = useState([]);

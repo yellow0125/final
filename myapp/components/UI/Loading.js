@@ -1,5 +1,4 @@
 import { StyleSheet, View, Text, ActivityIndicator } from 'react-native'
-import Color from '../../constants/Colors';
 import React from 'react'
 import Row from './Row';
 import Colors from '../../constants/Colors';

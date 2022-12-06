@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Entypo, Ionicons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import React from 'react'
+import { Entypo, Ionicons, FontAwesome } from '@expo/vector-icons';
 import Colors from "../constants/Colors";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LocationsRecipes from "../screens/LocationsRecipes";
@@ -11,7 +11,6 @@ import LocateMe from './UI/LocateMe';
 
 
 const Tab = createBottomTabNavigator();
-
 export default function Main() {
 
     return (

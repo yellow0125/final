@@ -1,18 +1,16 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import * as Location from "expo-location";
-import { Entypo, Ionicons, FontAwesome5,FontAwesome } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import MainButton from './MainButton';
 import Geocoder from 'react-native-geocoding';
 Geocoder.init("AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY", { language: "en" });
-import { useRoute } from "@react-navigation/native";
 import { useState } from 'react';
 import Colors from '../../constants/Colors';
 
-export default function LocateMe({navigation}) {
+export default function LocateMe({ navigation }) {
     const [userData, setUserData] = useState([]);
 
-    const route = useRoute();
     const [permissionResponse, requestPermission] = Location.useForegroundPermissions();
     const userLocation = userData.location
     const [location, setLocation] = useState(userLocation);
@@ -29,14 +27,14 @@ export default function LocateMe({navigation}) {
 
     const getCountryFromGeocoderAndNavigate = async (currentPosition) => {
         Geocoder.from(currentPosition.coords.latitude, currentPosition.coords.longitude)
-        .then(async json => {
-            var addressComponent = json.results[0].address_components.slice(-2)[0];
-            const countryFromGeocoder = addressComponent.long_name
-            setCountry(countryFromGeocoder)
-            setIsLoading(false)
-            navigation.navigate('NearBy', {p: countryFromGeocoder})
-        })
-        .catch(error => console.warn(error));
+            .then(async json => {
+                var addressComponent = json.results[0].address_components.slice(-2)[0];
+                const countryFromGeocoder = addressComponent.long_name
+                setCountry(countryFromGeocoder)
+                setIsLoading(false)
+                navigation.navigate('NearBy', { p: countryFromGeocoder })
+            })
+            .catch(error => console.warn(error));
     };
 
     const locateUserHandler = async () => {
@@ -47,9 +45,7 @@ export default function LocateMe({navigation}) {
                 console.log("no premission allowed")
                 return;
             }
-
             const currentPosition = await Location.getCurrentPositionAsync();
-
             setLocation({
                 latitude: currentPosition.coords.latitude,
                 longitude: currentPosition.coords.longitude,
@@ -60,16 +56,16 @@ export default function LocateMe({navigation}) {
         }
 
     };
-  return (
+    return (
         (isLoading) ? (
-            <View style={{margin: 10}}>
-                <Text style={{fontSize:16, color: Colors.White}}>Loading</Text>
+            <View style={{ margin: 10 }}>
+                <Text style={{ fontSize: 16, color: Colors.White }}>Loading</Text>
             </View>
         ) : (
-        <MainButton mode='light' onPress={locateUserHandler}>
-            <FontAwesome5 name="location-arrow" size={20} color={Colors.White} />
-            <Text style={{fontSize:10}}>nearby</Text>
-        </MainButton>
+            <MainButton mode='light' onPress={locateUserHandler}>
+                <FontAwesome5 name="location-arrow" size={20} color={Colors.White} />
+                <Text style={{ fontSize: 10 }}>nearby</Text>
+            </MainButton>
         )
-  )
+    )
 }
