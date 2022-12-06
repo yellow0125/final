@@ -104,6 +104,10 @@ In the first week, we plan to do these work below:
 2. adjust the step1 and step2 to multiplelines in AddRecipes and RecipeDetail
 3. optimze features about collected/like, show solid icon when liked and hollow icon when unliked.
 
+#### 12/6/2022 optimize like and delete buttons recipe detials page and finalize App
+1. adjust like and delete buttons to floating action button so they have fixed position and user can access them anytime.
+2. change the thumb to animation.
+3. finalize the App, did some other little adjustment.
 
 ## Structure of the App
 ### 1. Welcome page
