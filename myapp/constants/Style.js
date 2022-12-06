@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native'
 import Colors from './Colors'
+import {Dimensions } from 'react-native'
+
 
 const container = StyleSheet.create({
     container: {
@@ -112,6 +114,28 @@ const container = StyleSheet.create({
         width: "100%",
         marginTop: 10,
     },
+    imageContainer: {
+        width: Dimensions.get('window').width * 0.7,
+        height: Dimensions.get('window').width * 0.7,
+        borderRadius: Dimensions.get('window').width * 0.7 / 2,
+        borderWidth: 2,
+        borderColor: Colors.BgDarkGreen,
+        overflow: "hidden",
+        marginVertical: Dimensions.get('window').height / 30,
+        alignSelf: 'center'
+    },
+    NoRecipeImage: {
+        width: "100%",
+        height: "100%"
+    },
+    wholeContainer: {
+        borderRadius: 5,
+        marginTop: 4,
+        marginRight: 5,
+        marginBottom:5,
+
+        width: Dimensions.get('window').width * 0.5,
+    },
 
 
 })
@@ -193,6 +217,16 @@ const form = StyleSheet.create({
         borderWidth: 2,
         margin:5,
       },
+    RecipeListTitle: {
+        color: Colors.DescriptionText,
+        marginLeft: 5,
+        fontWeight: 'bold',
+    },
+    NoRecipePagetext: {
+        fontSize: 16,
+        alignSelf: 'center',
+        margin: 5
+    }
 
 })
 

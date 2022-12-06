@@ -11,6 +11,7 @@ export default {
 	ShadowBg: '#dfe1e0',
 	Red:'#ef5b9c',
 	Orange:'#f47920',
-	Red:'#f05b72'
+	Red:'#f05b72',
+	darkGrey: `#696969`,
 
 }

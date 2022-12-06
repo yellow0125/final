@@ -1,20 +1,23 @@
 import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
-import { useState, useEffect } from "react";
-import { firestore as db } from '../firebase/firebase-setup'
-import { collection, onSnapshot} from "firebase/firestore"
 import { FlatList } from 'react-native';
 import RecipeButton from './UI/RecipeButton';
-import { StyleSheet } from 'react-native';
 import Row from './UI/Row';
 import Colors from '../constants/Colors';
 import RecipeImage from './UI/RecipeImage';
-import { AntDesign } from '@expo/vector-icons';
-import { form } from '../constants/Style';
-import { Image } from 'react-native';
+import { AntDesign,Entypo, FontAwesome } from '@expo/vector-icons';
+import { container, form } from '../constants/Style';
+import NoRecipePage from './UI/NoRecipePage';
+import Column from './UI/Column';
+import useUserName from './Hook/useUserName';
+import useUserLike from './Hook/useUserLike';
+import useRecipe from './Hook/useRecipe';
+import { Col } from 'react-native-table-component';
 
 export default function RecipeList(props) {
-  const [recipes, setRecipes] = useState([]);
+  const recipes = useRecipe();
+  const userName = useUserName();
+  const likedRecipes = useUserLike();
   
   let filteredRecipes = [];
   if (props.location && recipes.length != 0) {
@@ -26,123 +29,53 @@ export default function RecipeList(props) {
       }
     }
 
-  useEffect(() => {
-    const unsubsribe = onSnapshot(
-      collection(db, "recipes"),
-      (QuerySnapshot) => {
-        if (QuerySnapshot.empty) {
-          setRecipes([]);
-          return;
-        }
-        setRecipes(
-          QuerySnapshot.docs.map((snapDoc) => {
-            let data = snapDoc.data();
-            data = { ...data, key: snapDoc.id };
-            return data;
-          })
-        );
-      });
-    return () => {
-      unsubsribe();
-    }
-  }, [],);
-  return (<>
-    { props.location && filteredRecipes.length === 0 ? (
-        <>
-        <View style={styles.imageContainer}>
-            <Image
-                source={require('../assets/img/collect.jpg')}
-                style={styles.image}
-                resizeMode="cover"
-            />
-        </View>
-        <Text style={styles.text}>Opps, there is no recipes in this location. Select another location or create
-        one!</Text>
-    </>
-    ) : (
-    <FlatList
-    data={props.location? filteredRecipes: recipes}
-    numColumns={2}
-    keyExtractor={item => item.key}
-    renderItem={({ item }) => (
-        <RecipeButton
-            style={styles.wholeContainer}
-            android_ripple={{ color: Colors.LightGrey, foreground: true }}
-            onPress={() => props.navigation.navigate("RecipeDetails", { item })}
-        >
-            <View style={styles.imgcontainer}>
-                <RecipeImage uri={item.uri} style={form.imageInPost2} />
-            </View>
-            <View>
-                <Row>
-                    <Text style={styles.titleText}>{item.title}</Text>
-                    <AntDesign name="like2" size={20} color={Colors.Black} />
-                    <Text>{item.like}</Text>
-                </Row>
-            </View>
-        </RecipeButton>
+  return (
+  <>
+    {props.location && filteredRecipes.length === 0 ? (
+      <>
+        <NoRecipePage>
+          <Text style={form.NoRecipePagetext}>
+            Opps, there is no recipes in this location. Select another location or create one!
+          </Text>
+        </NoRecipePage>
+     </>
+    ):(
+      <FlatList
+        data={props.location? filteredRecipes: recipes}
+        numColumns={2}
+        keyExtractor={item => item.key}
+        renderItem={({item}) => (
+            <RecipeButton
+                style={container.wholeContainer}
+                android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                onPress={() => props.navigation.navigate("RecipeDetails", {item})}
+            >
+                <View style={{width: Dimensions.get('window').width}}>
+                    <RecipeImage uri={item.uri} style={form.imageInPost2} />
+                </View>
+                <View>
+                    <Column>
+                        <Text style={form.RecipeListTitle}>{item.title}</Text>
+                        <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
+                          <Row style={{marginTop: 5}}>
+                          <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
+                          <Text style={{color:Colors.darkGrey, marginLeft: 5}}>
+                            {userName.length == 0 ? "" : userName.find(element=>element[0] == item.user )[1]}
+                          </Text>
+                          </Row>
+                          <Row style={{marginTop: 5}}>
+                          {likedRecipes.includes(item.key) ? (
+                                    <AntDesign name="like1" size={20} color={Colors.Red} />) : (
+                                    <AntDesign name="like2" size={20} color={Colors.RdarkGreyed} />
+                                )}
+                            <Text style={{color: Colors.darkGrey}}>{item.like}</Text>
+                          </Row>
+                        </Row>
+                    </Column>
+                </View>
+            </RecipeButton>
 
     )}
 /> )}
 </>)
 }
-
-const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      backgroundColor: Colors.White,
-      alignItems: 'center',
-  },
-  imgcontainer: {
-      width: Dimensions.get('window').width,
-  },
-  wholeContainer: {
-      flex: 1,
-      height: 230,
-      borderRadius: 5,
-      marginTop: 4,
-      marginRight: 6,
-  },
-  titleText: {
-      color: Colors.DescriptionText,
-      marginLeft: 12,
-      width: 140,
-      fontWeight: 'bold',
-  },
-  imageContainer: {
-    width: Dimensions.get('window').width * 0.7,
-    height: Dimensions.get('window').width * 0.7,
-    borderRadius: Dimensions.get('window').width * 0.7 / 2,
-    borderWidth: 2,
-    borderColor: Colors.BgDarkGreen,
-    overflow: "hidden",
-    marginVertical: Dimensions.get('window').height / 30,
-    alignSelf: 'center'
-
-},
-imgcontainer: {
-    width: Dimensions.get('window').width,
-},
-wholeContainer: {
-    flex: 1,
-    height: 230,
-    borderRadius: 5,
-    marginTop: 4,
-    marginRight: 6,
-},
-titleText: {
-    color: Colors.DescriptionText,
-    marginLeft: 12,
-    width: 140,
-    fontWeight: 'bold',
-},
-image: {
-    width: "100%",
-    height: "100%"
-},
-text: {
-    fontSize: 16,
-    alignSelf: 'center',
-    margin: 5
-}
-});
