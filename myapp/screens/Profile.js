@@ -112,45 +112,7 @@ export default function Profile({ navigation }) {
                         <Text style={styles.userInfo}>{userData.country}</Text>
                     </View>
                 </Row>
-                <View>
-                    <NotificationManager />
-                </View>
-                <View>
-                    <MainButton mode='light' onPress={locateUserHandler}>
-                        <Text>Where am I?   </Text>
-                        <FontAwesome5 name="location-arrow" size={22} color={Colors.White} />
-                    </MainButton>
-                    {isLoading && <>
-                        <Text style={{ color: Colors.Red, alignSelf: 'center' }} >It will take a few seconds Processing your request</Text>
-                        <Loading />
-                    </>
-                    }
-                    {!location ? (<Image
-                        source={require('../assets/locate.png')}
-                        style={{ width: "80%", height: 200, alignSelf: 'center' }}
-
-                    />) : (
-                        <Image
-                            source={{
-                                uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
-                            }}
-                            style={{ width: "100%", height: 200 }}
-                        />
-                    )}
-                    <Row style={styles.buttonsContainer}>
-                        <MainButton style={styles.buttons} onPress={locationPickerHandler} >Pick on the Map</MainButton>
-                        {country && <MainButton style={styles.buttons} onPress={saveUserLocation} >Save</MainButton>}
-                    </Row>
-                </View>
-
-                <View>
-                    <View style={styles.imageContainer2}>
-                        <Image
-                            source={require('../assets/chef.jpg')}
-                            style={styles.image}
-                            resizeMode="cover"
-                        />
-                    </View>
+                <View style={[styles.part, styles.part1]}>
                     <Row>
                         <Pressable
                             android_ripple={{ color: Colors.Grey, foreground: true }}
@@ -222,6 +184,37 @@ export default function Profile({ navigation }) {
                     </Row>
                 </View>
 
+                <View>
+                    <NotificationManager />
+                </View>
+                <View style={styles.part}>
+                    <MainButton mode='light' onPress={locateUserHandler}>
+                        <Text>Where am I?   </Text>
+                        <FontAwesome5 name="location-arrow" size={22} color={Colors.White} />
+                    </MainButton>
+                    {isLoading && <>
+                        <Text style={{ color: Colors.Red, alignSelf: 'center' }} >It will take a few seconds Processing your request</Text>
+                        <Loading />
+                    </>
+                    }
+                    {!location ? (<Image
+                        source={require('../assets/locate.png')}
+                        style={{ width: "80%", height: 200, alignSelf: 'center' }}
+
+                    />) : (
+                        <Image
+                            source={{
+                                uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
+                            }}
+                            style={{ width: "100%", height: 200 }}
+                        />
+                    )}
+                    <Row style={styles.buttonsContainer}>
+                        <MainButton style={styles.buttons} onPress={locationPickerHandler} >Pick on the Map</MainButton>
+                        {country && <MainButton style={styles.buttons} onPress={saveUserLocation} >Save</MainButton>}
+                    </Row>
+                </View>
+
             </View >
         </ScrollView >
     );
@@ -285,5 +278,19 @@ const styles = StyleSheet.create({
         marginHorizontal: 8,
         minWidth: 100,
     },
+    part1: {
+        marginTop:-25
+    },
+    part: {
+        marginVertical:10,
+        marginHorizontal: 10,
+        paddingBottom: 10,
+        backgroundColor: Colors.White,
+        borderRadius: 5,
+        elevation: 8,
+        shadowRadius: 4,
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.5
+    }
 });
 

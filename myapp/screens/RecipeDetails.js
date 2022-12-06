@@ -29,7 +29,6 @@ export default function RecipeDetails({ navigation, route }) {
                 QuerySnapshot.docs.map((snapDoc) => {
                     if (snapDoc.id == recipe.key) {
                         setLiked(true);
-                        console.log(auth.currentUser.uid, "liked", recipe.key);
                     }
                 })
             });
@@ -65,7 +64,6 @@ export default function RecipeDetails({ navigation, route }) {
                 });
                 setLiked(false)
                 recipe.like = currentLikes
-                console.log('update unlikes', currentLikes);
             } catch (err) {
                 console.log("update unlikes ", err);
             }
@@ -79,7 +77,6 @@ export default function RecipeDetails({ navigation, route }) {
                 });
                 setLiked(true)
                 recipe.like = currentLikes
-                console.log('update likes', currentLikes);
             } catch (err) {
                 console.log("update likes ", err);
             }
