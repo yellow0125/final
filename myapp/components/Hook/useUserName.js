@@ -26,5 +26,6 @@ export default function useUserName() {
           unsubsribe();
         }
       }, [],);
+      console.log(userName)
       return userName
 }
