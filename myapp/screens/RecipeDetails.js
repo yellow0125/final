@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Alert, TouchableOpacity, Dimensions, TouchableHighlight, ImageBackgroundBase } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Alert,  Dimensions, TouchableHighlight } from 'react-native';
 import { firestore as db } from '../firebase/firebase-setup'
 import { form } from '../constants/Style';
 import { MaterialCommunityIcons } from '@expo/vector-icons';

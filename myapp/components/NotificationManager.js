@@ -1,7 +1,6 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import * as Notifications from "expo-notifications"
-import { AntDesign } from '@expo/vector-icons'
 import Row from './UI/Row'
 import Colors from '../constants/Colors'
 import { TouchableHighlight } from 'react-native'

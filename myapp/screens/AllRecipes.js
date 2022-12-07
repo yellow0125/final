@@ -9,7 +9,6 @@ import RecipeImage from '../components/UI/RecipeImage';
 import { AntDesign } from '@expo/vector-icons';
 import Banner from '../components/UI/Banner';
 import { FontAwesome5 } from '@expo/vector-icons';
-import NotificationManager from '../components/NotificationManager';
 
 export default function AllRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
@@ -153,7 +152,6 @@ export default function AllRecipes({ navigation }) {
                             onPress={() => navigation.navigate("RecipeDetails", { item })}
                         >
                             <Row>
-                                <Text style={styles.rank}>1</Text>
                                 <View style={styles.popularImg}>
                                     <RecipeImage uri={item.uri} />
                                 </View>

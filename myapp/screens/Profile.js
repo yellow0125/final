@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Dimensions, Image, Pressable, } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Dimensions, Image,} from 'react-native';
 import { doc, onSnapshot } from "firebase/firestore";
 import MainButton from '../components/UI/MainButton';
 import Loading from '../components/UI/Loading';
@@ -11,7 +11,7 @@ import Colors from '../constants/Colors';
 import { Ionicons, FontAwesome5, Feather } from '@expo/vector-icons';
 import * as Location from "expo-location";
 import { useRoute } from "@react-navigation/native";
-import { getUser, saveUser } from '../firebase/firestore';
+import { saveUser } from '../firebase/firestore';
 import { MAPS_API_KEY } from "react-native-dotenv";
 import NotificationManager from '../components/NotificationManager';
 import Geocoder from 'react-native-geocoding';
@@ -137,7 +137,6 @@ export default function Profile({ navigation }) {
                         <Text style={styles.userInfo}>{userData.country}</Text>
                     </View>
                 </Row>
-
                 <TouchableHighlight
                     style={[styles.part, styles.lottieC]}
                     underlayColor={Colors.LightGrey}
@@ -284,7 +283,6 @@ const styles = StyleSheet.create({
     },
     icon: {
         justifyContent: 'center',
-
     },
     pressed: {
         opacity: 0.75,

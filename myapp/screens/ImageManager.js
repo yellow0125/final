@@ -1,7 +1,7 @@
 
 import { StyleSheet, View, Image, Text, TouchableHighlight, } from 'react-native';
 import React from "react";
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MainButton from '../components/UI/MainButton';
 import Colors from '../constants/Colors';
 import { form } from '../constants/Style';

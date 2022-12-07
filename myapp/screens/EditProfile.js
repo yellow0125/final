@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import React, { useState } from "react";
 import { Picker } from '@react-native-picker/picker';
 import MainButton from '../components/UI/MainButton';

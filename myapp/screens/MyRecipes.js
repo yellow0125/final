@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Image } from 'react-native'
+import { View, Text, Dimensions} from 'react-native'
 import React from 'react'
 import { useState, useEffect } from "react";
 import { firestore as db } from '../firebase/firebase-setup'
