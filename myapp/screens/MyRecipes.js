@@ -17,6 +17,7 @@ import NoRecipePage from '../components/UI/NoRecipePage';
 import { container, form } from '../constants/Style';
 import useUserName from '../components/hook/useUserName';
 import useUserLike from '../components/hook/useUserLike';
+import { FAB } from "react-native-elements";
 
 export default function MyRecipes({ navigation }) {
     const [recipes, setRecipes] = useState([]);
@@ -36,7 +37,7 @@ export default function MyRecipes({ navigation }) {
                 setRecipes(
                     QuerySnapshot.docs.map((snapDoc) => {
                         let data = snapDoc.data();
-                        data = { ...data, key: snapDoc.id};
+                        data = { ...data, key: snapDoc.id };
                         return data;
                     })
                 );
@@ -47,19 +48,21 @@ export default function MyRecipes({ navigation }) {
     }, [],);
 
     function detailHandler() {
-        console.log("navigate to detailRecipe Screen");
         navigation.navigate("RecipeDetails");
+    }
+    function addHandler() {
+        navigation.navigate("AddRecipe");
     }
 
     function findUserName(authid) {
         let authName = "";
-        for (let i = 0; i < userName.length; i ++) {
-          if (authid === userName[i][0]) {
-            authName = userName[i][1]
-            return authName
-          }
+        for (let i = 0; i < userName.length; i++) {
+            if (authid === userName[i][0]) {
+                authName = userName[i][1]
+                return authName
+            }
         }
-      }
+    }
 
     return (
         <>
@@ -67,51 +70,63 @@ export default function MyRecipes({ navigation }) {
                 <>
                     <NoRecipePage>
                         <Text style={styles.text}>You do not have any recipes! Create one!</Text>
-                        <View style={{marginHorizontal:50}}>
-                            <MainButton onPress={() => navigation.navigate("AddRecipe")}>Create a New Recipe</MainButton>
+                        <View style={{ marginHorizontal: 50 }}>
+                            <MainButton onPress={addHandler}>Create a New Recipe</MainButton>
                         </View>
                     </NoRecipePage>
                 </>
             ) : (
-                <FlatList
-                data={recipes}
-                numColumns={2}
-                keyExtractor={item => item.key}
-                renderItem={({item}) => (
-                    <RecipeButton
-                        style={container.wholeContainer}
-                        android_ripple={{ color: Colors.LightGrey, foreground: true }}
-                        onPress={() => navigation.navigate("RecipeDetails", {item})}
-                    >
-                        <View style={{width: Dimensions.get('window').width}}>
-                            <RecipeImage uri={item.uri} style={form.imageInPost2} />
-                        </View>
-                        <View>
-                            <Column>
-                                <Text numberOfLines={1} style={form.RecipeListTitle}>{item.title}</Text>
-                                <Row style={{marginLeft:5, marginRight:8, justifyContent: 'space-between'}}>
-                                  <Row style={{marginTop: 5}}>
-                                  <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
-                                  <Text style={{color:Colors.darkGrey, marginLeft: 3}}>
-                                     {findUserName(item.user)}
-                                  </Text>
-                                  </Row>
-                                  <Row style={{marginTop: 5}}>
-                                  {likedRecipes.includes(item.key) ? (
-                                            <AntDesign name="heart" size={20} color={Colors.Red} />) : (
-                                            <AntDesign name="hearto" size={20} color={Colors.darkGrey} />
-                                        )}
-                                    <Text style={{color: Colors.darkGrey, marginLeft: 2}}>{item.like}</Text>
-                                  </Row>
-                                </Row>
-                            </Column>
-                        </View>
-                    </RecipeButton>
-        
-            )}
+                <>
+                    <FlatList
+                        data={recipes}
+                        numColumns={2}
+                        keyExtractor={item => item.key}
+                        renderItem={({ item }) => (
+                            <View style={styles.wholeScreen}>
+                                <RecipeButton
+                                    style={container.wholeContainer}
+                                    android_ripple={{ color: Colors.LightGrey, foreground: true }}
+                                    onPress={() => navigation.navigate("RecipeDetails", { item })}
+                                >
+                                    <View style={{ width: Dimensions.get('window').width }}>
+                                        <RecipeImage uri={item.uri} style={form.imageInPost2} />
+                                    </View>
+                                    <View>
+                                        <Column>
+                                            <Text numberOfLines={1} style={form.RecipeListTitle}>{item.title}</Text>
+                                            <Row style={{ marginLeft: 5, marginRight: 8, justifyContent: 'space-between' }}>
+                                                <Row style={{ marginTop: 5 }}>
+                                                    <FontAwesome name="user-circle-o" size={20} color={Colors.darkGrey} />
+                                                    <Text style={{ color: Colors.darkGrey, marginLeft: 3 }}>
+                                                        {findUserName(item.user)}
+                                                    </Text>
+                                                </Row>
+                                                <Row style={{ marginTop: 5 }}>
+                                                    {likedRecipes.includes(item.key) ? (
+                                                        <AntDesign name="heart" size={20} color={Colors.Red} />) : (
+                                                        <AntDesign name="hearto" size={20} color={Colors.darkGrey} />
+                                                    )}
+                                                    <Text style={{ color: Colors.darkGrey, marginLeft: 2 }}>{item.like}</Text>
+                                                </Row>
+                                            </Row>
+                                        </Column>
+                                    </View>
+                                </RecipeButton>
+                            </View>
+                        )} />
+                    <View style={styles.floatingButton}>
+                        <FAB
+                            visible={true}
+                            placement="right"
+                            icon={{ name: 'add', color: Colors.White }}
+                            color={Colors.Orange}
+                            onPress={addHandler}
+                        />
+                    </View>
+                </>
 
-            />
-            )}
+            )
+            }
         </>
     );
 }
@@ -152,5 +167,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         alignSelf: 'center',
         margin: 5
-    }
+    },
+    wholeScreen: {
+        marginBottom: 80,
+    },
 })

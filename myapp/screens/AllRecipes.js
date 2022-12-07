@@ -137,8 +137,6 @@ export default function AllRecipes({ navigation }) {
     return (
         <ScrollView>
             <Banner navigation={navigation} />
-            <NotificationManager />
-
             <View style={styles.recipesContainer}>
                 <Row style={styles.headContainer}>
                     <AntDesign name="staro" size={20} color={Colors.Orange} />
@@ -155,6 +153,7 @@ export default function AllRecipes({ navigation }) {
                             onPress={() => navigation.navigate("RecipeDetails", { item })}
                         >
                             <Row>
+                                <Text style={styles.rank}>1</Text>
                                 <View style={styles.popularImg}>
                                     <RecipeImage uri={item.uri} />
                                 </View>
@@ -296,6 +295,11 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.White,
         marginBottom: 10,
 
+    },
+    rank:{
+        position:'absolute',
+        fontSize:30,
+        color:'red',
     },
     headtext: {
         fontSize: 20,

@@ -123,7 +123,6 @@ export default function RecipeDetails({ navigation, route }) {
                     <Text style={styles.title}>{recipe.title}</Text>
                     <Text >featured in <Text style={styles.redText}>5 Hearty Slow Cooker Recipes</Text></Text>
                     <Row style={{ marginTop: 15 }}>
-                        {/* <AntDesign name="like2" size={22} color={Colors.Black} /> */}
                         <View style={styles.lottieContainer}>
                             <LottieView
                                 ref={animation}
