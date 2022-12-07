@@ -3,6 +3,7 @@ export default {
 	BgLighterYellow: '#f7fcb9',
 	Grey: '#999999',
 	LightGrey:'#d3d7d4',
+	LighterGrey:'#c5c5c5',
 	White: '#fff7ff',
 	BgLightGreen: '#5cc7b5',
 	TextGreen: '#2d8172',

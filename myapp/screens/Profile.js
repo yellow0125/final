@@ -1,4 +1,4 @@
-
+import React from "react";
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Dimensions, Image, Pressable, } from 'react-native';
 import { doc, onSnapshot } from "firebase/firestore";
@@ -15,6 +15,8 @@ import { getUser, saveUser } from '../firebase/firestore';
 import { MAPS_API_KEY } from "react-native-dotenv";
 import NotificationManager from '../components/NotificationManager';
 import Geocoder from 'react-native-geocoding';
+import { TouchableHighlight } from 'react-native';
+import LottieView from "lottie-react-native";
 Geocoder.init("AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY", { language: "en" });
 
 export default function Profile({ navigation }) {
@@ -26,7 +28,24 @@ export default function Profile({ navigation }) {
     const [country, setCountry] = useState(userData.country)
     const [isLoading, setIsLoading] = useState(false);
     const MAPS_API_KEY = "AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY";
+    const animation = React.useRef(null);
+    const isFirstRun = React.useRef(true);
+    const [pressed, setPressed] = useState(false)
 
+    React.useEffect(() => {
+        if (isFirstRun.current) {
+            if (pressed) {
+                animation.current.play(86, 86);
+            } else {
+                animation.current.play(86, 86);
+            }
+            isFirstRun.current = false;
+        } else if (pressed) {
+            animation.current.play(86, 86);
+        } else {
+            animation.current.play(86, 86);
+        }
+    }, [pressed]);
     useEffect(() => {
         setIsLoading(true)
         const unsubscribe = onSnapshot(
@@ -51,8 +70,7 @@ export default function Profile({ navigation }) {
             });
             Geocoder.from(route.params.currentLocation.latitude, route.params.currentLocation.longitude)
                 .then(async json => {
-                    // console.log(json.results[0].address_components.slice(-2)[0])
-                    var addressComponent = json.results[0].address_components.slice(-2)[0];
+                    var addressComponent = json.results[0].address_components.slice(-3)[0];
                     setCountry(addressComponent.long_name)
                 })
                 .catch(error => console.warn(error));
@@ -119,111 +137,110 @@ export default function Profile({ navigation }) {
                         <Text style={styles.userInfo}>{userData.country}</Text>
                     </View>
                 </Row>
-                <View style={[styles.part, styles.part1]}>
-                    <Row>
-                        <Pressable
-                            android_ripple={{ color: Colors.Grey, foreground: true }}
-                            style={({ pressed }) => pressed && styles.pressed}
-                            onPress={() => navigation.navigate("MyRecipes", { userData })}
-                        >
-                            <View style={styles.iconContainer}>
-                                <Row style={styles.icon}>
-                                    <Ionicons
-                                        name="md-fast-food-outline"
-                                        size={36}
-                                        color={Colors.Black}
-                                    />
-                                </Row>
-                                <Row><Text>My Recipes</Text></Row>
-                            </View>
-                        </Pressable>
-                        <Pressable
-                            android_ripple={{ color: Colors.Grey, foreground: true }}
-                            style={({ pressed }) => pressed && styles.pressed}
-                            onPress={() => navigation.navigate("Collected", { userData })}
-                        >
-                            <View style={styles.iconContainer}>
-                                <Row style={styles.icon}>
-                                    <Ionicons
-                                        name="heart-circle-outline"
-                                        size={36}
-                                        color={Colors.Black}
-                                    />
-                                </Row>
-                                <Row><Text>My Favorite</Text></Row>
-                            </View>
-                        </Pressable>
-                    </Row>
-                    <Row>
-                        <Pressable
-                            android_ripple={{ color: Colors.Grey, foreground: true }}
-                            style={({ pressed }) => pressed && styles.pressed}
-                            onPress={() => navigation.navigate("EditProfile", { userData })}
-                        >
-                            <View style={styles.iconContainer}>
-                                <Row style={styles.icon}>
-                                    <Ionicons
-                                        name="ios-settings-outline"
-                                        size={36}
-                                        color={Colors.Black}
-                                    />
-                                </Row>
-                                <Row><Text>Edit Profile</Text></Row>
-                            </View>
-                        </Pressable>
 
-                        <Pressable
-                            android_ripple={{ color: Colors.LightGrey, foreground: true }}
-                            style={({ pressed }) => pressed && styles.pressed}
-                            onPress={() => signOut(auth)}
-                        >
-                            <View style={styles.iconContainer}>
-                                <Row style={styles.icon}>
-                                    <Feather
-                                        name="log-out"
-                                        size={35}
-                                        color={Colors.Black}
-                                    />
-                                </Row>
-                                <Row><Text>Click to Logout</Text></Row>
-                            </View>
-                        </Pressable>
+                <TouchableHighlight
+                    style={[styles.part, styles.lottieC]}
+                    underlayColor={Colors.LightGrey}
+                    onPress={locateUserHandler}>
+                    <Row>
+                        <View style={styles.lottieContainer}>
+                            <LottieView
+                                ref={animation}
+                                style={styles.heartLottie}
+                                source={require("../assets/lottie/recipe.json")}
+                                autoPlay={false}
+                                loop={false}
+                            />
+                        </View>
+                        <Text style={styles.text}>     All My Recipes</Text>
                     </Row>
-                </View>
-
-                <View>
+                </TouchableHighlight>
+                <View style={styles.part}>
                     <NotificationManager />
                 </View>
-                <View style={styles.part}>
-                    <MainButton mode='light' onPress={locateUserHandler}>
-                        <Text>Locate Me   </Text>
-                        <FontAwesome5 name="location-arrow" size={22} color={Colors.White} />
-                    </MainButton>
+                <TouchableHighlight
+                    style={[styles.part, styles.lottieC]}
+                    underlayColor={Colors.LightGrey}
+                    onPress={locateUserHandler}>
+                    <Row>
+                        <View style={styles.lottieContainer}>
+                            <LottieView
+                                style={styles.heartLottie}
+                                source={require("../assets/lottie/locate.json")}
+                                autoPlay={true}
+                                loop={true}
+                            />
+                        </View>
+                        <Text style={styles.text}>    Locate Me</Text>
+                    </Row>
+                </TouchableHighlight>
+                {location &&
+                    <Image
+                        source={{
+                            uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
+                        }}
+                        style={{ width: "100%", height: 200 }}
+                    />
+                }
+                <Row style={styles.buttonsContainer}>
+                    {country && <MainButton style={styles.buttons} onPress={saveUserLocation} >Save</MainButton>}
+                </Row>
+                <Row style={[styles.iconContainer, styles.part]}>
+                    <TouchableHighlight
+                        underlayColor={Colors.LightGrey}
+                        onPress={locationPickerHandler}
+                    >
+                        <View>
+                            <Row style={styles.icon}>
+                                <FontAwesome5 name="map" size={30} color="black" />
+                            </Row>
+                            <Row><Text>Open Map</Text></Row>
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        underlayColor={Colors.LightGrey}
+                        onPress={() => navigation.navigate("EditProfile", { userData })}
+                    >
+                        <View>
+                            <Row style={styles.icon}>
+                                <Ionicons
+                                    name="ios-settings-outline"
+                                    size={30}
+                                    color={Colors.Black}
+                                />
+                            </Row>
+                            <Row><Text>Edit Profile</Text></Row>
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        underlayColor={Colors.LightGrey}
+                        onPress={() => signOut(auth)}
+                    >
+                        <View>
+                            <Row style={styles.icon}>
+                                <Feather
+                                    name="log-out"
+                                    size={30}
+                                    color={Colors.Black}
+                                />
+                            </Row>
+                            <Row><Text>Click to Logout</Text></Row>
+                        </View>
+                    </TouchableHighlight>
+                </Row>
+
+                <View>
                     {isLoading && <>
                         <Text style={{ color: Colors.Red, alignSelf: 'center' }} >It will take a few seconds Processing your request</Text>
                         <Loading />
                     </>
                     }
-                    {!location ? (<Image
-                        source={require('../assets/locate.png')}
-                        style={{ width: "80%", height: 200, alignSelf: 'center' }}
-
-                    />) : (
-                        <Image
-                            source={{
-                                uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
-                            }}
-                            style={{ width: "100%", height: 200 }}
-                        />
-                    )}
-                    <Row style={styles.buttonsContainer}>
-                        <MainButton style={styles.buttons} onPress={locationPickerHandler} >Pick on the Map</MainButton>
-                        {country && <MainButton style={styles.buttons} onPress={saveUserLocation} >Save</MainButton>}
-                    </Row>
                 </View>
 
             </View >
         </ScrollView >
+
+
     );
 }
 
@@ -263,11 +280,11 @@ const styles = StyleSheet.create({
 
     },
     iconContainer: {
-        marginHorizontal: Dimensions.get('window').width / 6.5,
-        marginVertical: Dimensions.get('window').height / 21,
+        justifyContent: 'space-between',
     },
     icon: {
         justifyContent: 'center',
+
     },
     pressed: {
         opacity: 0.75,
@@ -285,19 +302,49 @@ const styles = StyleSheet.create({
         marginHorizontal: 8,
         minWidth: 100,
     },
-    part1: {
-        marginTop:-25
-    },
     part: {
-        marginVertical:30,
-        marginHorizontal: 10,
-        paddingBottom: 10,
+        marginVertical: 10,
+        marginHorizontal: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 5,
         backgroundColor: Colors.White,
         borderRadius: 5,
         elevation: 8,
         shadowRadius: 4,
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.5
-    }
+    },
+    heartLottie: {
+        alignSelf: 'center',
+        width: 70,
+        height: 70,
+        color: Colors.White,
+    },
+    heartLottieS: {
+        alignSelf: 'center',
+        width: 30,
+        height: 30,
+        color: Colors.White,
+    },
+    lottieContainer: {
+        justifyContent: 'center',
+        alignSelf: 'center',
+        width: 56,
+        height: 56,
+        backgroundColor: Colors.White
+
+    },
+    lottieC: {
+        flex: 1,
+        borderRadius: 5,
+        paddingHorizontal: 20,
+        justifyContent: 'center'
+
+    },
+    text: {
+        fontSize: 18,
+        color: Colors.Black,
+        alignSelf: 'center',
+    },
 });
 

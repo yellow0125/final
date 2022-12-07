@@ -1,21 +1,19 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Alert, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Alert, TouchableOpacity, Dimensions, TouchableHighlight, ImageBackgroundBase } from 'react-native';
 import { firestore as db } from '../firebase/firebase-setup'
 import { form } from '../constants/Style';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { updateLikesRecipeToDB, updateUnLikesRecipeToDB, deleteRecipeToDB } from '../firebase/firestore';
-import { collection, onSnapshot, query, where, collectionGroup } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { auth } from '../firebase/firebase-setup';
-import { AntDesign } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
-import MainButton from '../components/UI/MainButton';
 import Row from '../components/UI/Row';
 import RecipeImage from '../components/UI/RecipeImage';
 import { Entypo } from '@expo/vector-icons';
 import LottieView from "lottie-react-native";
-// import { FAB } from "react-native-elements";
-import Column from "../components/UI/Column";
+import { FAB } from "react-native-elements";
+import Column from "../components/UI/Column"
 
 export default function RecipeDetails({ navigation, route }) {
     const [recipe, setRecipe] = useState(route.params.item)
@@ -119,18 +117,17 @@ export default function RecipeDetails({ navigation, route }) {
 
     return (
         <View>
-            
+
             <ScrollView style={styles.ScrollView}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{recipe.title}</Text>
                     <Text >featured in <Text style={styles.redText}>5 Hearty Slow Cooker Recipes</Text></Text>
                     <Row style={{ marginTop: 15 }}>
-                        {/* <AntDesign name="like2" size={22} color={Colors.Black} /> */}
                         <View style={styles.lottieContainer}>
                             <LottieView
                                 ref={animation}
                                 style={styles.heartLottie2}
-                                source={require("../assets/lottie/58909-like.json")}
+                                source={require("../assets/lottie/like-thumb.json")}
                                 autoPlay
                                 loop
                                 speed={0.5}
@@ -145,7 +142,6 @@ export default function RecipeDetails({ navigation, route }) {
                         <Text style={styles.boldText}>{recipe.selectedDiff}</Text>
                     </Row>
                 </View>
-
                 <View>
                     <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
                 </View>
@@ -161,7 +157,7 @@ export default function RecipeDetails({ navigation, route }) {
                         <Text style={styles.content}>{recipe.selectedCookStyle}</Text>
                     </Row>
                 </View>
-                <View>
+                <View style={styles.allSteps}>
                     <Row style={styles.row}>
                         <MaterialCommunityIcons name="food-variant" size={24} color={Colors.Black} />
                         <Text style={styles.pickerLabel}>Prepare Step </Text>
@@ -186,33 +182,31 @@ export default function RecipeDetails({ navigation, route }) {
                         <Text style={styles.step}><Entypo name="dot-single" size={20} color={Colors.Black} />{recipe.step3}</Text>
                     </View>}
                 </View>
-                <Row style={styles.buttonsContainer2}>
-                </Row>
             </ScrollView>
             <Column>
-            {/* <View style={styles.floatingButton}>
-                <FAB
-                    visible={deletable}
-                    placement="right"
-                    icon={{ name: 'delete', color: 'white' }}
-                    color={Colors.Grey}
-                    onPress={DeleteHandler}
-                />
-            </View> */}
-            <View style={styles.floatingButton2}>
-                <TouchableOpacity 
-                    onPress={likeOperation}
-                    style={styles.buttonsContainer2}
-                    >
-                    <LottieView
-                        ref={animation}
-                        style={styles.heartLottie}
-                        source={require("../assets/lottie/like5.json")}
-                        autoPlay={false}
-                        loop={false}
+                <View style={styles.floatingButton}>
+                    <FAB
+                        visible={deletable}
+                        placement="right"
+                        icon={{ name: 'delete', color: Colors.White }}
+                        color={Colors.Orange}
+                        onPress={DeleteHandler}
                     />
-                </TouchableOpacity>
-            </View>
+                </View>
+                <View style={styles.floatingButton2}>
+                    <TouchableHighlight
+                        onPress={likeOperation}
+                        style={styles.buttonsContainer2}
+                    >
+                        <LottieView
+                            ref={animation}
+                            style={styles.heartLottie}
+                            source={require("../assets/lottie/like.json")}
+                            autoPlay={false}
+                            loop={false}
+                        />
+                    </TouchableHighlight>
+                </View>
             </Column>
         </View>
     );
@@ -265,6 +259,9 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.2
     },
+    allSteps: {
+        marginBottom: 80,
+    },
     buttonsContainer: {
         justifyContent: 'center',
         marginTop: 20,
@@ -272,8 +269,13 @@ const styles = StyleSheet.create({
     },
     buttonsContainer2: {
         justifyContent: 'center',
-        width: 50,
-        height: 150,
+        alignSelf: 'center',
+        width: 56,
+        height: 56,
+        borderRadius: 30,
+        borderWidth: 3,
+        borderColor: Colors.Orange,
+        backgroundColor: Colors.White
     },
     buttons: {
         marginHorizontal: 8,
@@ -282,47 +284,31 @@ const styles = StyleSheet.create({
         minWidth: 100,
     },
     heartLottie: {
-        width: 75,
-        height: 55,
-        backgroundColor: Colors.Grey,
-        color:Colors.White,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        borderBottomLeftRadius: 50,
-        borderBottomRightRadius: 50,
-        borderRadius:50,
+        alignSelf: 'center',
+        width: 80,
+        height: 80,
+        color: Colors.White,
+        borderRadius: 50,
     },
     heartLottie2: {
         width: 50,
     },
-    heartLottieL: {
-        width: 300,
-        height: 300,
-    },
-    actionsL: {
-        position: 'absolute',
-        alignSelf: 'center',
-        flexDirection: "row",
-        height: 20,
-    },
-    floatingButton:{
-
+    floatingButton: {
         paddingVertical: 5,
         flexGrow: 1,
-        right:15,
-        bottom: 80,
+        right: Dimensions.get('window').width * 0.01,
+        bottom: Dimensions.get('window').height * 0.2,
+
     },
     floatingButton2: {
-        width:20,
-        left:304,
-        bottom: 300,
+        width: 20,
+        left: Dimensions.get('window').width * 0.85,
+        bottom: Dimensions.get('window').height * 0.38,
     },
     lottieContainer: {
-        right:12,
-        bottom:20,
-        height:20,
-        width:30,
-
-    }
-
+        right: 12,
+        bottom: 20,
+        height: 20,
+        width: 30,
+    },
 });
