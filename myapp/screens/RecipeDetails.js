@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Alert, TouchableOpacity, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Alert, TouchableOpacity, Dimensions, TouchableHighlight, ImageBackgroundBase } from 'react-native';
 import { firestore as db } from '../firebase/firebase-setup'
 import { form } from '../constants/Style';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -189,7 +189,7 @@ export default function RecipeDetails({ navigation, route }) {
                     <FAB
                         visible={deletable}
                         placement="right"
-                        icon={{ name: 'delete', color: Colors.White}}
+                        icon={{ name: 'delete', color: Colors.White }}
                         color={Colors.Orange}
                         onPress={DeleteHandler}
                     />
@@ -260,8 +260,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.2
     },
-    allSteps:{
-        marginBottom:100,
+    allSteps: {
+        marginBottom: 80,
     },
     buttonsContainer: {
         justifyContent: 'center',
@@ -274,8 +274,8 @@ const styles = StyleSheet.create({
         width: 56,
         height: 56,
         borderRadius: 30,
-        borderWidth:2.5,
-        borderColor:Colors.Orange,
+        borderWidth: 3,
+        borderColor: Colors.Orange,
         backgroundColor: Colors.White
     },
     buttons: {
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
         minWidth: 100,
     },
     heartLottie: {
-        alignSelf:'center',
+        alignSelf: 'center',
         width: 80,
         height: 80,
         color: Colors.White,
@@ -294,32 +294,22 @@ const styles = StyleSheet.create({
     heartLottie2: {
         width: 50,
     },
-    heartLottieL: {
-        width: 300,
-        height: 300,
-    },
-    actionsL: {
-        position: 'absolute',
-        alignSelf: 'center',
-        flexDirection: "row",
-        height: 20,
-    },
     floatingButton: {
         paddingVertical: 5,
         flexGrow: 1,
-        right: 15,
-        bottom: 80,
+        right: Dimensions.get('window').width * 0.01,
+        bottom: Dimensions.get('window').height * 0.2,
+
     },
     floatingButton2: {
         width: 20,
-        left: 324,
-        bottom: 220,
+        left: Dimensions.get('window').width * 0.85,
+        bottom: Dimensions.get('window').height * 0.38,
     },
     lottieContainer: {
         right: 12,
         bottom: 20,
         height: 20,
         width: 30,
-    }
-
+    },
 });
