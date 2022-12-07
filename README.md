@@ -72,7 +72,16 @@ In the first week, we plan to do these work below:
   
 #### 12/3/2022 Modify RecipeList & Notification function
 1. implment guidingPage if no recipe in selected locations
-2. set up notification configuration and permission in ios.
+2. set up notification configuration and permission in all platform.
+  
+#### 12/5/2022 Modify syle of Recipe
+1. Componentize the customized hook to reduce redundant codes.
+2. Modify the style of like in Location & myRecipe. Like will be red if user liked.
+3. Show the authors name in location & myRecipe.
+  
+####12/7/2022 Upgrade picker in Location Page
+1. Allow user select the recipes with different difficulty.
+2. change the logic of showing recipes: when user deleted all requirements, the page will show all recipes.
 
 
 ### Yichao Wu
