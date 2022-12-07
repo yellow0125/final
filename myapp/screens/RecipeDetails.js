@@ -118,7 +118,7 @@ export default function RecipeDetails({ navigation, route }) {
     return (
         <View>
 
-            <ScrollView style={styles.ScrollView}>
+            <ScrollView>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{recipe.title}</Text>
                     <Text >featured in <Text style={styles.redText}>5 Hearty Slow Cooker Recipes</Text></Text>
@@ -145,7 +145,7 @@ export default function RecipeDetails({ navigation, route }) {
                 <View>
                     <RecipeImage uri={recipe.uri} style={form.imageInDetail} />
                 </View>
-                <View>
+                <View style={styles.allcuisine}>
                     <Row style={styles.row}>
                         <MaterialCommunityIcons name="map-marker-radius" size={24} color={Colors.Black} />
                         <Text style={styles.pickerLabel}>Cuisine: </Text>
@@ -191,6 +191,7 @@ export default function RecipeDetails({ navigation, route }) {
                         icon={{ name: 'delete', color: Colors.White }}
                         color={Colors.Orange}
                         onPress={DeleteHandler}
+                        size='small'
                     />
                 </View>
                 <View style={styles.floatingButton2}>
@@ -254,13 +255,17 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         backgroundColor: Colors.White,
         borderRadius: 5,
-        elevation: 3,
+        elevation: 2,
         shadowRadius: 4,
         shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.2
+        shadowOpacity: 0.1
+    },
+    allcuisine: {
+        marginLeft:12,
     },
     allSteps: {
         marginBottom: 80,
+        marginLeft:12,
     },
     buttonsContainer: {
         justifyContent: 'center',
@@ -270,12 +275,13 @@ const styles = StyleSheet.create({
     buttonsContainer2: {
         justifyContent: 'center',
         alignSelf: 'center',
-        width: 56,
-        height: 56,
-        borderRadius: 30,
-        borderWidth: 3,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        borderWidth: 1.5,
         borderColor: Colors.Orange,
-        backgroundColor: Colors.White
+        backgroundColor: Colors.White,
+        opacity:0.99
     },
     buttons: {
         marginHorizontal: 8,
@@ -285,8 +291,8 @@ const styles = StyleSheet.create({
     },
     heartLottie: {
         alignSelf: 'center',
-        width: 80,
-        height: 80,
+        width: 60,
+        height: 60,
         color: Colors.White,
         borderRadius: 50,
     },
@@ -297,13 +303,13 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         flexGrow: 1,
         right: Dimensions.get('window').width * 0.01,
-        bottom: Dimensions.get('window').height * 0.2,
-
+        bottom: Dimensions.get('window').height * 0.34,
+        opacity:0.95
     },
     floatingButton2: {
         width: 20,
-        left: Dimensions.get('window').width * 0.85,
-        bottom: Dimensions.get('window').height * 0.38,
+        left: Dimensions.get('window').width * 0.87,
+        bottom: Dimensions.get('window').height * 0.47,
     },
     lottieContainer: {
         right: 12,
