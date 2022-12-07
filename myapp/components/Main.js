@@ -33,11 +33,11 @@ export default function Main() {
             headerTitle: "Fooriend",
           }}
         />
-        <Tab.Screen name="Locations" component={LocationsRecipes}
+        <Tab.Screen name="Discover" component={LocationsRecipes}
           options={({ navigation }) => {
             return {
               tabBarIcon: ({ color, size }) => <Entypo name="location" size={size} color={color} />,
-              headerTitle: "All Locations",
+              headerTitle: "Discover",
               headerLeft: () => (
                 <LocateMe navigation={navigation} />
               ),
