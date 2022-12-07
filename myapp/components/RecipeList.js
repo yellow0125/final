@@ -17,12 +17,12 @@ export default function RecipeList(props) {
   const recipes = useRecipe();
   const userName = useUserName()
   const likedRecipes = useUserLike();
-  
+
   let filteredRecipes = [];
   if (props.location && recipes.length != 0) {
      for (let i = 0; i < recipes.length; i++) {
         let recipe = recipes[i];
-        if (props.location.includes(recipe.selectedCuisine)) {
+        if (props.location.includes(recipe.selectedCuisine) || props.location.includes(recipe.selectedDiff)) {
           filteredRecipes.push(recipe);
         }
       }
@@ -40,7 +40,7 @@ export default function RecipeList(props) {
 
   return (
   <>
-    {props.location && filteredRecipes.length === 0 ? (
+    {props.location && (filteredRecipes.length === 0 && props.location.length != 0) ? (
       <>
         <NoRecipePage>
           <Text style={form.NoRecipePagetext}>
@@ -50,7 +50,7 @@ export default function RecipeList(props) {
      </>
     ):(
       <FlatList
-        data={props.location? filteredRecipes: recipes}
+        data={props.location && props.location.length != 0 ? filteredRecipes: recipes}
         numColumns={2}
         keyExtractor={item => item.key}
         renderItem={({item}) => (
