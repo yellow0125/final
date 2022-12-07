@@ -12,6 +12,7 @@ export default function useRecipe() {
               setRecipes([]);
               return;
             }
+            
             setRecipes(
               QuerySnapshot.docs.map((snapDoc) => {
                 let data = snapDoc.data();
