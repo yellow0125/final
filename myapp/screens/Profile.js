@@ -140,7 +140,7 @@ export default function Profile({ navigation }) {
                 <TouchableHighlight
                     style={[styles.part, styles.lottieC]}
                     underlayColor={Colors.LightGrey}
-                    onPress={locateUserHandler}>
+                    onPress={() => navigation.navigate("MyRecipes", { userData })}>
                     <Row>
                         <View style={styles.lottieContainer}>
                             <LottieView
