@@ -27,7 +27,6 @@ export default function AboutMe({ navigation }) {
   )
 }
 
-
 const styles = StyleSheet.create({
   slide: {
     flex: 1,

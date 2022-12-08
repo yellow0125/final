@@ -27,7 +27,7 @@ export default function Banner({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width * 2,
-    height: Dimensions.get('window').height * 0.25,
+    height: Dimensions.get('window').height * 0.42,
     overflow: "hidden",
     marginVertical: 5,
     marginHorizontal: 4,

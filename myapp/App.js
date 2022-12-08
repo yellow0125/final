@@ -33,7 +33,6 @@ Notifications.setNotificationHandler({
   },
 });
 
-
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(true);
   const [hasLaunched, setHasLaunched] = useState(false)
