@@ -277,7 +277,7 @@ export default function AllRecipes({ navigation }) {
                 />
             </View>
 
-            <TouchableOpacity style={styles.buttonC} onPress={() => navigation.navigate("Locations")}>
+            <TouchableOpacity style={styles.buttonC} onPress={() => navigation.navigate("Discover")}>
                 <Row>
                     <Text style={styles.button}>-View More-</Text>
                     <FontAwesome5 name="hand-point-left" size={24} color={Colors.Orange} />
