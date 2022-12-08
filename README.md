@@ -45,45 +45,37 @@ This starts the Metro Bundler. You can simulate the app in an Android emulator (
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
   
 ### 3. All Recipes page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home1.jpg" height="300" alt="loginpage" style="margin: 100px;"/><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home2.jpg" height="300" alt="loginpage" style="margin: 100px;"/><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home3.jpg" height="300" alt="loginpage" style="margin: 100px;"/>
-
-
-
+- allow users add a new recipe to db, and all users can see.
+- allow users see all of their recipes they have uploaded.
+ 
+<pre> 
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home1.jpg" height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home2.jpg" height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home3.jpg" height="300" alt="loginpage"/>
+</pre>
   
 ### 4. Location Recipes Page
 - allow users add a new recipe to db, and all user can see.
 - allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
-  
+
+<pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Disover1.jpg"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Discover2.png"  height="300" alt="loginpage"/></pre>
+
 ### 5. Add Recipes page and Image Upload Page
 - allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>  
+- allow users see all of their recipes they have upload.
+
+<pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Add1.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Add2.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Add3.png"  height="300" alt="loginpage"/></pre>
+ 
 
 ### 6. Collected Recipes page
 - allow users add a new recipe to db, and all user can see.
 - allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/collected.jpg" height="300" alt="loginpage"/>
   
 
 ### 7. Profile page and Edit Profile page
 - allow users check their information and edit them update to database
 - allow users to locate himself by **google map API**
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
-  
-### 8. My Recipes page and Edit Profile page
-- allow users check their information and edit them update to database
-- allow users to locate himself by **google map API**
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
-  
- 
-### 9. My Recipes page and Add a Recipes page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+
+<pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Profile1.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Edit.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/MyRecipe.jpg"  height="300" alt="loginpage"/>     </pre>
   
 ## Iterations
 ### Iteration 1
