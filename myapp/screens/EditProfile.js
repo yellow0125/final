@@ -30,7 +30,7 @@ export default function EditProfile({ navigation, route }) {
             { text: "Yes", style: "default", onPress: resetOperation }
         ]);
     }
-    // store all the information into firebase
+
     function submitOperation() {
         if (username.length > 0) {
             writeUserProfileToDB({ username, gender, key })

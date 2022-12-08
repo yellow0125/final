@@ -43,7 +43,6 @@ export default function ({ route, navigation }) {
 
 const styles = StyleSheet.create({
   map: {
-    // flex: 1,
     height: "80%",
   },
 });

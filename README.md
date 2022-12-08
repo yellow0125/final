@@ -8,14 +8,85 @@ The React Native - Firebase Project Mobile App
   - 🧙‍♂️ Xilan Wu <wu.xiaol@northeastern.edu>
   - 🧙🏻‍♀️ Yichao Wu <wu.yicha@northeastern.edu>
 
-## Iterations
+## Install dependencies
+In order to install, clone this repository and run:
+> npm install  
 
+Set up .env file
+>REACT_APP_api_key= "AIzaSyAccitAphJm637huwnPR9eDE_V_UIsj4xY"
+>authDomain = "project-1100779858743235788.firebaseapp.com"
+>projectId = "project-1100779858743235788"
+>storageBucket = "project-1100779858743235788.appspot.com"
+>messagingSenderId = "926625345465"
+>appId = "1:926625345465:web:a9a2b9d42e3e7882779068"
+>measurementId = "G-8W81QC9GCW"
+>MAPS_API_KEY ="AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY"
+
+This was made with Expo, so you need it to run. To do it, run:
+> npm start  
+ //OR  
+> npm expo start --tunnel
+
+Test Account and Password
+>test@gmail.com
+>123123
+
+This starts the Metro Bundler. You can simulate the app in an Android emulator (such as in Android Studio) or in your own device, Android or iOS powered, by downloading the Expo App.
+
+## Structure of the App
+### 1. Welcome page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+### 2. Login and Register page
+- allow users to register and login
+- if the user is not login, they can only see these two page, and can do nothing.
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+### 3. All Recipes page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+### 4. Location Recipes Page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+### 5. Add Recipes page and Image Upload Page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>  
+
+### 6. Collected Recipes page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+
+### 7. Profile page and Edit Profile page
+- allow users check their information and edit them update to database
+- allow users to locate himself by **google map API**
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
+  
+### 8. My Recipes page and Edit Profile page
+- allow users check their information and edit them update to database
+- allow users to locate himself by **google map API**
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
+  
+ 
+### 9. My Recipes page and Add a Recipes page
+- allow users add a new recipe to db, and all user can see.
+- allow users see all of their recipes they have upload
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
+  
+## Iterations
 ### Iteration 1
 In the first week, we plan to do these work below:
 - Create React Native components to represent the functionality we will be building,
 - Get the overall structure of our app. 
 - Establish Navigation and the basis of CRUD operations to Firestore
-
 
 ## Update & Progress
 ### CuitingHuang
@@ -117,70 +188,3 @@ In the first week, we plan to do these work below:
 1. adjust like and delete buttons to floating action button so they have fixed position and user can access them anytime.
 2. change the thumb to animation.
 3. finalize the App, did some other little adjustment.
-
-## Structure of the App
-### 1. Welcome page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
-  
-### 2. Login and Register page
-- allow users to register and login
-- if the user is not login, they can only see these two page, and can do nothing.
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
-  
-    
-### 3. All Recipes page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
-  
-### 4. Location Recipes Page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
-  
-### 5. Add Recipes page and Image Upload Page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>  
-
-### 6. Collected Recipes page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
-  
-
-### 7. Profile page and Edit Profile page
-- allow users check their information and edit them update to database
-- allow users to locate himself by **google map API**
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
-  
-### 8. My Recipes page and Edit Profile page
-- allow users check their information and edit them update to database
-- allow users to locate himself by **google map API**
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/UI-recipe/myapp/assets/img/profile2.png" height="300" alt="profile"/>
-  
-
-  
-  
-### 3. My Recipes page and Add a Recipes page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
-<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
-  
-  
-  
-## Install dependencies
-In order to install, clone this repository and run:
-
-> npm install  
-//OR  
->yarn install
-
-This was made with Expo, so you need it to run. To do it, run:
-> npm start  
- //OR  
-> npm expo start --tunnel
-
-This starts the Metro Bundler. You can simulate the app in an Android emulator (such as in Android Studio) or in your own device, Android or iOS powered, by downloading the Expo App.

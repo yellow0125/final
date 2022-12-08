@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, } from 'react-native';
+import {  View } from 'react-native';
 import { container, form } from '../constants/Style';
 import Colors from '../constants/Colors';
 import RecipeList from '../components/RecipeList';
@@ -33,21 +33,6 @@ export default function LocationsRecipes({ navigation }) {
         
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.lightpurple,
-        alignItems: 'center',
-    },
-    wholeContainer: {
-        flex: 1,
-        height: 230,
-        borderRadius: 5,
-        marginTop: 230,
-        marginRight: 6,
-    },
-});
 
 const items = [
     {

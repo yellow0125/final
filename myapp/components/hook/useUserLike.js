@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { firestore as db } from '../../firebase/firebase-setup'
-import { collection, onSnapshot, query, where, collectionGroup } from "firebase/firestore"
+import { collection, onSnapshot, query, where } from "firebase/firestore"
 import { auth } from '../../firebase/firebase-setup';
-
-
 
 export default function useUserLike() {
     const [likedRecipes, setLikedRecipes] = useState([]);

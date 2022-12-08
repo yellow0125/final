@@ -9,10 +9,8 @@ import CollectedRecipes from "../screens/CollectedRecipes";
 import Profile from "../screens/Profile";
 import LocateMe from './UI/LocateMe';
 
-
 const Tab = createBottomTabNavigator();
 export default function Main() {
-
     return (
       <Tab.Navigator
         screenOptions={({ navigation, route }) => {

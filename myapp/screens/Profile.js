@@ -5,7 +5,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import MainButton from '../components/UI/MainButton';
 import Loading from '../components/UI/Loading';
 import { signOut } from "firebase/auth";
-import { firestore, auth, storage } from '../firebase/firebase-setup';
+import { firestore, auth } from '../firebase/firebase-setup';
 import Row from '../components/UI/Row';
 import Colors from '../constants/Colors';
 import { Ionicons, FontAwesome5, Feather } from '@expo/vector-icons';
@@ -27,7 +27,6 @@ export default function Profile({ navigation }) {
     const [location, setLocation] = useState(userLocation);
     const [country, setCountry] = useState(userData.country)
     const [isLoading, setIsLoading] = useState(false);
-    const MAPS_API_KEY = "AIzaSyDKkvQrpqR0iWNrXSOjsHjllFgwpnAB7aY";
     const animation = React.useRef(null);
     const isFirstRun = React.useRef(true);
     const [pressed, setPressed] = useState(false)
