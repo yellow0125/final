@@ -78,7 +78,7 @@ This starts the Metro Bundler. You can simulate the app in an Android emulator (
 - allow users check their information and edit them update to database
 - allow users to locate himself by **google map API**
 
-<pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Profile1.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Edit.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/MyRecipe.jpg"  height="300" alt="loginpage"/>     </pre>
+<pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Profile1.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/map_notification.jpg"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Edit.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/MyRecipe.jpg"  height="300" alt="loginpage"/>     </pre>
   
 ## Iterations
 ### Iteration 1
