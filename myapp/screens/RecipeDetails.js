@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, Alert,  Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Alert, Dimensions, TouchableHighlight } from 'react-native';
 import { firestore as db } from '../firebase/firebase-setup'
 import { form } from '../constants/Style';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -56,8 +56,6 @@ export default function RecipeDetails({ navigation, route }) {
             animation.current.play(0, 19);
         }
     }, [liked]);
-
-
 
     const likeOperation = async () => {
         if (liked) {
@@ -117,7 +115,6 @@ export default function RecipeDetails({ navigation, route }) {
 
     return (
         <View>
-
             <ScrollView>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{recipe.title}</Text>
@@ -261,11 +258,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1
     },
     allcuisine: {
-        marginLeft:12,
+        marginLeft: 12,
     },
     allSteps: {
         marginBottom: 80,
-        marginLeft:12,
+        marginLeft: 12,
     },
     buttonsContainer: {
         justifyContent: 'center',
@@ -281,7 +278,7 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderColor: Colors.Orange,
         backgroundColor: Colors.White,
-        opacity:0.99
+        opacity: 0.99
     },
     buttons: {
         marginHorizontal: 8,
@@ -304,7 +301,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         right: Dimensions.get('window').width * 0.01,
         bottom: Dimensions.get('window').height * 0.34,
-        opacity:0.95
+        opacity: 0.95
     },
     floatingButton2: {
         width: 20,
