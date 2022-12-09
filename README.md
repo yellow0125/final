@@ -79,7 +79,7 @@ This starts the Metro Bundler. You can simulate the app in an Android emulator (
 - allow users like or unlike current recipe.
 - allow users to delete their recipes.(if current recipe is other's, the delete button won't be visible)
 
-<pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/detail3.jpg" height="300" alt="loginpage"/>
+<pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/details3.jpg" height="300" alt="loginpage"/>
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Detail1.jpg" height="300" alt="loginpage"/></pre>
 
 ### 8. Profile page, Edit Profile page and My Recipe Page
