@@ -64,19 +64,27 @@ This starts the Metro Bundler. You can simulate the app in an Android emulator (
 
 ### 5. Add Recipes page and Image Upload Page
 - allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload.
+- allow users upload a picture from album or take a photo.
 
 <pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Add1.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Add2.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Add3.png"  height="300" alt="loginpage"/></pre>
  
 
 ### 6. Collected Recipes page
 - allow users see recipes they liked.
+- 
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/collected.jpg" height="300" alt="loginpage"/>
-  
 
-### 7. Profile page and Edit Profile page
+### 7. Detail Recipe page
+- allow users see recipes content.
+- allow users like or unlike current recipe.
+- allow users to delete their recipes.
+
+<img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/collected.jpg" height="300" alt="loginpage"/>
+
+### 7. Profile page, Edit Profile page and My Recipe Page
 - allow users check their information and edit them update to database
 - allow users to locate himself by **google map API**
+- allow users see all of their recipes they have upload.
 
 <pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Profile1.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/map_notification.jpg"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Edit.png"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/MyRecipe.jpg"  height="300" alt="loginpage"/>     </pre>
   
