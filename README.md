@@ -35,8 +35,8 @@ This starts the Metro Bundler. You can simulate the app in an Android emulator (
 
 ## Structure of the App
 ### 1. Welcome page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload.
+- show users the basic feature and beautiful pictures.
+- guide new users to register.
 
 <pre> 
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/welcome1.jpg" height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/welcome2.jpg" height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/welcome3.jpg" height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/welcome4.jpg" height="300" alt="loginpage"/>
@@ -48,16 +48,17 @@ This starts the Metro Bundler. You can simulate the app in an Android emulator (
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/homepage/myapp/assets/img/login.png" height="300" alt="loginpage"/>
   
 ### 3. All Recipes page
-- allow users add a new recipe to db, and all users can see.
-- allow users see all of their recipes they have uploaded.
+- first interaction between user, give user most important information.
+- show users top recipes in different kinds and hot activities invitation.
+- can place ads in the future to earn money.
  
 <pre> 
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home1.jpg" height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home2.jpg" height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Home3.jpg" height="300" alt="loginpage"/>
 </pre>
   
 ### 4. Location Recipes Page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
+- allow users to search recipes from different locations.
+- multiple selection, free combination.
 
 <pre><img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Disover1.jpg"  height="300" alt="loginpage"/>     <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/Discover2.png"  height="300" alt="loginpage"/></pre>
 
@@ -69,8 +70,7 @@ This starts the Metro Bundler. You can simulate the app in an Android emulator (
  
 
 ### 6. Collected Recipes page
-- allow users add a new recipe to db, and all user can see.
-- allow users see all of their recipes they have upload
+- allow users see recipes they liked.
 <img src="https://github.com/yellow0125/recipes-sharing-social-media/blob/main/myapp/assets/img/collected.jpg" height="300" alt="loginpage"/>
   
 
